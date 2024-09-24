@@ -1,0 +1,285 @@
+@extends('layouts.admin')
+
+@section('title', 'Manage Programs')
+
+@section('content')
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-4">Manage Programs</h1>
+
+        <!-- Success message with progress bar animation -->
+        @if (session('success'))
+            <div id="successMessage" class="relative bg-green-100 text-green-800 p-4 rounded mb-4">
+                {{ session('success') }}
+                <div class="absolute bottom-0 left-0 h-1 bg-green-600 animate-shrink"></div>
+            </div>
+        @endif
+
+        <!-- Button to open the create modal -->
+        <button id="openCreateModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4">Create New
+            Program</button>
+
+        <!-- Table displaying the programs -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="bg-gradient-to-r from-gray-200 to-gray-300 text-gray-800 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">No</th>
+                        <th class="py-3 px-6 text-left">Program Name</th>
+                        <th class="py-3 px-6 text-left">Is Active</th>
+                        <th class="py-3 px-6 text-left">Is Leads</th>
+                        <th class="py-3 px-6 text-left">Is Home</th>
+                        <th class="py-3 px-6 text-left">Description</th>
+                        <th class="py-3 px-6 text-left">Cover Image</th>
+                        <th class="py-3 px-6 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm font-light">
+                    @if ($programs->isEmpty())
+                        <tr>
+                            <td colspan="8" class="py-3 px-6 text-center text-gray-500"> <!-- Ubah colspan menjadi 8 -->
+                                Not Found
+                            </td>
+                        </tr>
+                    @else
+                        @foreach ($programs as $index => $program)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-3 px-6 text-left">{{ $index + 1 }}</td> <!-- Menampilkan nomor urut -->
+                                <td class="py-3 px-6 text-left font-medium text-gray-900">{{ $program->name_program }}</td>
+                                <td class="py-3 px-6 text-left">{{ $program->is_active }}</td>
+                                <td class="py-3 px-6 text-left">{{ $program->is_leads }}</td>
+                                <td class="py-3 px-6 text-left">{{ $program->is_home }}</td>
+                                <td class="py-3 px-6 text-left">{{ $program->description }}</td>
+                                <td class="py-3 px-6 text-left">
+                                    @if ($program->cover_image)
+                                        <img src="{{ asset('storage/' . $program->cover_image) }}" alt="Cover Image"
+                                            class="w-24 h-auto">
+                                    @else
+                                        No Image
+                                    @endif
+                                </td>
+                                <td class="py-3 px-6 text-right">
+                                    <button data-id="{{ $program->id }}" data-name="{{ $program->name_program }}"
+                                        data-is-active="{{ $program->is_active }}"
+                                        data-is-leads="{{ $program->is_leads }}" data-is-home="{{ $program->is_home }}"
+                                        data-description="{{ $program->description }}"
+                                        data-cover-image="{{ $program->cover_image }}"
+                                        class="flex items-center text-blue-500 hover:text-blue-700 btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                        <span class="ml-2">Edit</span>
+                                    </button>
+                                    <form action="{{ route('admin.programs.destroy', $program) }}" method="POST"
+                                        class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="flex items-center text-red-500 hover:text-red-700">
+                                            <i class="fas fa-trash"></i>
+                                            <span class="ml-2">Delete</span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Create Program Modal -->
+        <div id="createModal" class="fixed inset-0 hidden items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-4">
+            <div
+                class="bg-white rounded-lg p-6 w-full max-w-4xl mx-auto my-8 md:my-16 relative overflow-y-auto max-h-[90vh]">
+                <h2 class="text-xl font-semibold mb-4">Create Program</h2>
+                <form id="createForm" method="POST" action="{{ route('admin.programs.store') }}" class="space-y-4"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="mb-4">
+                            <label for="create_name_program" class="block text-gray-700 text-base">Program Name</label>
+                            <input type="text" id="create_name_program" name="name_program"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="create_is_active" class="block text-gray-700 text-base">Is Active</label>
+                            <input type="text" id="create_is_active" name="is_active"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="create_is_leads" class="block text-gray-700 text-base">Is Leads</label>
+                            <input type="text" id="create_is_leads" name="is_leads"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="create_is_home" class="block text-gray-700 text-base">Is Home</label>
+                            <input type="text" id="create_is_home" name="is_home"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="create_description" class="block text-gray-700 text-base">Description</label>
+                            <textarea id="create_description" name="description"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="create_cover_image" class="block text-gray-700 text-base">Cover Image</label>
+                            <input type="file" id="create_cover_image" name="cover_image"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500">
+                            <img id="createImagePreview" src="" alt="Image Preview"
+                                class="mt-2 max-w-xs max-h-48 hidden">
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-2">
+                        <button type="button" id="closeCreateModal"
+                            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Cancel</button>
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edit Program Modal -->
+        <div id="editModal" class="fixed inset-0 hidden items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-4">
+            <div
+                class="bg-white rounded-lg p-6 w-full max-w-4xl mx-auto my-8 md:my-16 relative overflow-y-auto max-h-[90vh]">
+                <h2 class="text-xl font-semibold mb-4">Edit Program</h2>
+                <form id="editForm" method="POST" class="space-y-4" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="mb-4">
+                            <label for="edit_name_program" class="block text-gray-700 text-base">Program Name</label>
+                            <input type="text" id="edit_name_program" name="name_program"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="edit_is_active" class="block text-gray-700 text-base">Is Active</label>
+                            <input type="text" id="edit_is_active" name="is_active"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="edit_is_leads" class="block text-gray-700 text-base">Is Leads</label>
+                            <input type="text" id="edit_is_leads" name="is_leads"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="edit_is_home" class="block text-gray-700 text-base">Is Home</label>
+                            <input type="text" id="edit_is_home" name="is_home"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="edit_description" class="block text-gray-700 text-base">Description</label>
+                            <textarea id="edit_description" name="description"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="edit_cover_image" class="block text-gray-700 text-base">Cover Image</label>
+                            <input type="file" id="edit_cover_image" name="cover_image"
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500">
+                            <img id="editImagePreview" src="" alt="Image Preview"
+                                class="mt-2 max-w-xs max-h-48 hidden">
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-2">
+                        <button type="button" id="closeEditModal"
+                            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Cancel</button>
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @push('scripts')
+        <script>
+            // Show modal function
+            function showModal(modalId) {
+                document.getElementById(modalId).classList.remove('hidden');
+                document.getElementById(modalId).classList.add('flex');
+            }
+
+            // Close modal function
+            function closeModal(modalId) {
+                document.getElementById(modalId).classList.add('hidden');
+                document.getElementById(modalId).classList.remove('flex');
+            }
+
+            // Auto-hide modal after 3 seconds and remove success message with animation
+            function autoHideModal(modalId) {
+                setTimeout(() => {
+                    closeModal(modalId);
+                }, 3000);
+            }
+
+            // Animate the success message progress bar and hide it
+            if (document.getElementById('successMessage')) {
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.add('hidden');
+                }, 3000);
+            }
+
+            // Open create modal
+            document.getElementById('openCreateModal').addEventListener('click', function() {
+                showModal('createModal');
+            });
+
+            // Close create modal
+            document.getElementById('closeCreateModal').addEventListener('click', function() {
+                closeModal('createModal');
+            });
+
+            // Open edit modal
+            document.querySelectorAll('.btn-edit').forEach(button => {
+                button.addEventListener('click', function() {
+                    const programId = this.getAttribute('data-id');
+                    const programName = this.getAttribute('data-name');
+                    const programIsActive = this.getAttribute('data-is-active');
+                    const programIsLeads = this.getAttribute('data-is-leads');
+                    const programIsHome = this.getAttribute('data-is-home');
+                    const programDescription = this.getAttribute('data-description');
+                    const programCoverImage = this.getAttribute('data-cover-image');
+
+                    const form = document.getElementById('editForm');
+                    form.action = `/admin/master/programs/${programId}`;
+                    document.getElementById('edit_name_program').value = programName;
+                    document.getElementById('edit_is_active').value = programIsActive;
+                    document.getElementById('edit_is_leads').value = programIsLeads;
+                    document.getElementById('edit_is_home').value = programIsHome;
+                    document.getElementById('edit_description').value = programDescription;
+                    const imgElement = document.getElementById('editImagePreview');
+                    imgElement.src = programCoverImage ? `/storage/${programCoverImage}` : '';
+                    imgElement.classList.toggle('hidden', !programCoverImage);
+
+                    showModal('editModal');
+                });
+            });
+
+            // Close edit modal
+            document.getElementById('closeEditModal').addEventListener('click', function() {
+                closeModal('editModal');
+            });
+
+            function previewImage(event, previewId) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.getElementById(previewId);
+                    imgElement.src = e.target.result;
+                    imgElement.classList.remove('hidden'); // Pastikan class hidden dihapus
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            // Add event listeners for image previews
+            document.getElementById('create_cover_image').addEventListener('change', function(event) {
+                previewImage(event, 'createImagePreview');
+            });
+
+            document.getElementById('edit_cover_image').addEventListener('change', function(event) {
+                previewImage(event, 'editImagePreview');
+            });
+        </script>
+    @endpush
+@endsection
