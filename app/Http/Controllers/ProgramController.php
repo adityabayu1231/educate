@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 
 class ProgramController extends Controller
@@ -15,46 +16,34 @@ class ProgramController extends Controller
         return view('admin.program', compact('programs'));
     }
 
-    // Menyimpan program baru ke database
     public function store(Request $request)
     {
         try {
-            // Validasi input
             $request->validate([
                 'name_program' => 'required|string|max:255',
-                'is_active' => 'nullable|string',
-                'is_leads' => 'nullable|string',
-                'is_home' => 'nullable|string',
+                'is_active' => 'nullable|boolean',
                 'description' => 'nullable|string',
                 'cover_image' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
             ]);
 
-            // Menyimpan gambar jika ada
             $imagePath = null;
             if ($request->hasFile('cover_image')) {
                 $imagePath = $request->file('cover_image')->store('program_images', 'public');
             }
 
-            // Menyimpan data program ke database
             Program::create([
                 'name_program' => $request->input('name_program'),
-                'is_active' => $request->input('is_active', false),
-                'is_leads' => $request->input('is_leads', false),
-                'is_home' => $request->input('is_home', false),
+                'is_active' => $request->input('is_active', false), // Default ke false jika tidak ada
                 'description' => $request->input('description'),
                 'cover_image' => $imagePath,
             ]);
 
-            // Redirect jika berhasil
             return redirect()->route('admin.programs.index')->with('success', 'Program created successfully.');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Tangani error validasi
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Illuminate\Database\QueryException $e) {
-            // Tangani error query database
             return redirect()->back()->withErrors(['error' => 'Database error: ' . $e->getMessage()])->withInput();
         } catch (\Exception $e) {
-            // Tangani error umum
             return redirect()->back()->withErrors(['error' => 'An error occurred: ' . $e->getMessage()])->withInput();
         }
     }
@@ -66,9 +55,7 @@ class ProgramController extends Controller
             // Validasi input
             $request->validate([
                 'name_program' => 'required|string|max:255',
-                'is_active' => 'nullable|string',  // String untuk mencatat status
-                'is_leads' => 'nullable|string',
-                'is_home' => 'nullable|string',
+                'is_active' => 'nullable|boolean',
                 'description' => 'nullable|string',
                 'cover_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ]);
@@ -88,9 +75,7 @@ class ProgramController extends Controller
             // Memperbarui data program di database
             $program->update([
                 'name_program' => $request->input('name_program'),
-                'is_active' => $request->input('is_active', $program->is_active),  // Tetap menggunakan string
-                'is_leads' => $request->input('is_leads', false),
-                'is_home' => $request->input('is_home', false),
+                'is_active' => $request->input('is_active', $program->is_active),
                 'description' => $request->input('description'),
                 'cover_image' => $imagePath,
             ]);
@@ -112,5 +97,22 @@ class ProgramController extends Controller
 
         $program->delete();
         return redirect()->route('admin.programs.index')->with('success', 'Program deleted successfully.');
+    }
+
+    public function toggleActive(Request $request, Program $program): JsonResponse
+    {
+        try {
+            // Validasi agar is_active hanya berupa boolean (1 atau 0)
+            $request->validate([
+                'is_active' => 'required|boolean',
+            ]);
+
+            $program->is_active = $request->input('is_active');
+            $program->save();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
     }
 }

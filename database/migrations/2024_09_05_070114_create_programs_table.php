@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->string('name_program');
-            $table->string('is_active')->nullable();
-            $table->string('is_leads')->nullable();
-            $table->string('is_home')->nullable();
+            $table->boolean('is_active')->default(false);
             $table->text('description')->nullable();
             $table->string('cover_image')->nullable();
             $table->softDeletes();

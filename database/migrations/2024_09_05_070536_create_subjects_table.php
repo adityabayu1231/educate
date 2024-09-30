@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_mapel');
             $table->string('kdkelas');
             $table->string('kdmapel');
-            $table->string('nama_mapel');
-            $table->string('cover');
-            $table->string('is_active');
+            $table->string('cover')->nullable();
+            $table->boolean('is_active')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

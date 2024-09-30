@@ -72,7 +72,6 @@
             </div>
         </div>
 
-
         <!-- Create Modal -->
         <div id="createModal" class="fixed inset-0 items-center justify-center bg-gray-900 bg-opacity-50 hidden">
             <div class="bg-white rounded-lg p-6 w-full max-w-md">
@@ -80,7 +79,7 @@
                 <form action="{{ route('admin.tingkat.store') }}" method="POST">
                     @csrf
                     <div class="mb-4">
-                        <label for="level_id" class="block text-gray-700">Level</label>
+                        <label for="level_id" class="block text-gray-700">Jenjang</label>
                         <select id="level_id" name="level_id"
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                             required>
@@ -99,7 +98,7 @@
                         <label for="kode_tingkat" class="block text-gray-700">Kode Tingkat</label>
                         <input type="text" id="kode_tingkat" name="kode_tingkat"
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            required>
+                            readonly required>
                     </div>
                     <div class="flex justify-end">
                         <button type="button" id="closeCreateModal"
@@ -132,13 +131,13 @@
                         <label for="edit_nama_kelas" class="block text-gray-700">Nama Kelas</label>
                         <input type="text" id="edit_nama_kelas" name="nama_kelas"
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            required>
+                            required oninput="generateKodeTingkat()">
                     </div>
                     <div class="mb-4">
                         <label for="edit_kode_tingkat" class="block text-gray-700">Kode Tingkat</label>
                         <input type="text" id="edit_kode_tingkat" name="kode_tingkat"
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            required>
+                            readonly required>
                     </div>
                     <div class="flex justify-end">
                         <button type="button" id="closeEditModal"
@@ -182,5 +181,28 @@
         document.getElementById('closeEditModal').onclick = function() {
             document.getElementById('editModal').classList.add('hidden');
         };
+        document.addEventListener('DOMContentLoaded', function() {
+            const namaKelasInput = document.getElementById('nama_kelas');
+            const kodeTingkatInput = document.getElementById('kode_tingkat');
+
+            // Event listener untuk input nama kelas
+            namaKelasInput.addEventListener('input', function() {
+                // Ambil nilai dari nama kelas
+                const namaKelas = namaKelasInput.value;
+                // Hapus spasi dari nama kelas
+                const kodeTingkat = namaKelas.replace(/\s+/g, '');
+                // Set nilai ke kode tingkat
+                kodeTingkatInput.value = kodeTingkat;
+            });
+        });
+
+        function generateKodeTingkat() {
+            // Mengambil nilai dari input nama kelas
+            const namaKelas = document.getElementById('edit_nama_kelas').value;
+            // Menghilangkan spasi dan mengubah ke huruf kecil
+            const kodeTingkat = namaKelas.replace(/\s+/g, '').toLowerCase();
+            // Mengatur nilai ke input kode tingkat
+            document.getElementById('edit_kode_tingkat').value = kodeTingkat;
+        }
     </script>
 @endsection

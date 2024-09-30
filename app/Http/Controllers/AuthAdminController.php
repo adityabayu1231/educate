@@ -35,11 +35,6 @@ class AuthAdminController extends Controller
         return view('auth.admin.repass');
     }
 
-    public function biostudent()
-    {
-        return view('auth.student.biostudent');
-    }
-
     public function login(Request $request)
     {
         // Validasi input email dan password

@@ -19,14 +19,18 @@ class CheckStudentProfile
     {
         $user = Auth::user();
 
-        // Cek apakah user memiliki data Student
-        $student = Student::where('user_id', $user->id)->first();
+        // Cek apakah role_id adalah 1 atau 2
+        if (in_array($user->role_id, [1, 2])) {
+            // Cek apakah user memiliki data Student
+            $student = Student::where('user_id', $user->id)->first();
 
-        if (!$student) {
-            // Redirect ke halaman pengisian profil jika data Student tidak ditemukan
-            return redirect()->route('student.bio')->with('status', 'Please complete your profile.');
+            if (!$student) {
+                // Redirect ke halaman pengisian profil jika data Student tidak ditemukan
+                return redirect()->route('student.bio')->with('status', 'Please complete your profile.');
+            }
         }
 
+        // Lanjutkan proses jika role_id bukan 1 atau 2
         return $next($request);
     }
 }

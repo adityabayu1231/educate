@@ -67,7 +67,8 @@
                                         class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:text-red-700">
+                                        <button type="submit" class="text-red-500 hover:text-red-700"
+                                            onclick="return confirm('Are you sure you want to delete this program?');">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -77,6 +78,11 @@
                     @endif
                 </tbody>
             </table>
+
+            <!-- Pagination -->
+            <div class="py-4">
+                {{ $subPrograms->links() }}
+            </div>
         </div>
 
         <!-- Create Modal -->
@@ -211,7 +217,8 @@
                         document.getElementById('edit_brand_id').value = brandId;
                         document.getElementById('edit_name_sub_program').value = name;
 
-                        editForm.action = `/admin/master/subprograms/${id}`;
+                        editForm.action =
+                            `/admin/master/subprograms/${id}`; // Pastikan ini sesuai dengan route yang benar
                         editModal.classList.remove('hidden');
                         editModal.classList.add('flex');
                     });

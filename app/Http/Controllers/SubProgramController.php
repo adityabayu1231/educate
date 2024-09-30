@@ -17,7 +17,7 @@ class SubProgramController extends Controller
     public function index()
     {
         try {
-            $subPrograms = SubProgram::with(['program', 'brand'])->get();
+            $subPrograms = SubProgram::paginate(10);
             $programs = Program::all();
             $brands = Brand::all();
             return view('admin.subprogram', compact('subPrograms', 'programs', 'brands'));
@@ -68,10 +68,20 @@ class SubProgramController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubProgramRequest $request, SubProgram $subProgram)
+    public function update(UpdateSubProgramRequest $request, $id)
     {
         try {
+            // Mencari SubProgram berdasarkan ID
+            $subProgram = SubProgram::find($id);
+
+            // Cek apakah SubProgram ada
+            if (!$subProgram) {
+                return redirect()->route('admin.subprograms.index')->with('error', 'SubProgram not found.');
+            }
+
+            // Mengupdate SubProgram dengan validasi dari request
             $subProgram->update($request->validated());
+
             return redirect()->route('admin.subprograms.index')->with('status', 'SubProgram updated successfully.');
         } catch (\Exception $e) {
             Log::error('Error updating SubProgram: ' . $e->getMessage());
@@ -82,10 +92,19 @@ class SubProgramController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubProgram $subProgram)
+    public function destroy($id)
     {
         try {
+            // Mencari SubProgram berdasarkan ID
+            $subProgram = SubProgram::find($id);
+
+            // Cek apakah SubProgram ada
+            if (!$subProgram) {
+                return redirect()->route('admin.subprograms.index')->with('error', 'SubProgram not found.');
+            }
+            // Menghapus SubProgram
             $subProgram->delete();
+
             return redirect()->route('admin.subprograms.index')->with('status', 'SubProgram deleted successfully.');
         } catch (\Exception $e) {
             Log::error('Error deleting SubProgram: ' . $e->getMessage());

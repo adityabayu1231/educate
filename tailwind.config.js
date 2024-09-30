@@ -155,6 +155,7 @@ export default {
     },
 
     plugins: [
+        require("flowbite/plugin"),
         forms,
         typography,
         // add custom variant for expanding sidebar

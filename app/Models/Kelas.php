@@ -18,7 +18,6 @@ class Kelas extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'code_class',
         'name_class',
         'tahun_ajar',
         'kapasitas',

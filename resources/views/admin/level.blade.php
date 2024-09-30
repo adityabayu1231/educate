@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Manage Levels')
+@section('title', 'Manage Jenjang')
 
 @section('content')
     <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
@@ -69,11 +69,11 @@
         <!-- Create Modal -->
         <div id="createModal" class="fixed inset-0 items-center justify-center bg-gray-900 bg-opacity-50 hidden">
             <div class="bg-white rounded-lg p-6 w-full max-w-md">
-                <h2 class="text-xl font-semibold mb-4">Create Level</h2>
+                <h2 class="text-xl font-semibold mb-4">Create Jenjang</h2>
                 <form action="{{ route('admin.levels.store') }}" method="POST">
                     @csrf
                     <div class="mb-4">
-                        <label for="name_level" class="block text-gray-700">Level Name</label>
+                        <label for="name_level" class="block text-gray-700">Jenjang Name</label>
                         <input type="text" id="name_level" name="name_level"
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                             required>

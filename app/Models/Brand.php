@@ -14,7 +14,7 @@ class Brand extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name_brand'];
+    protected $fillable = ['name_brand', 'icon_brand'];
 
     public function subPrograms(): HasMany
     {

@@ -56,44 +56,29 @@
                         </div>
 
                         <!-- Form container -->
-                        <form id="multi-step-form" class="w-full max-w-md">
+                        <form id="multi-step-form" class="w-full max-w-md" action="{{ route('students.store') }}"
+                            method="POST" enctype="multipart/form-data">
+                            @csrf
                             <!-- Step 1: Select your brand -->
                             <div id="form-step-1" class="space-y-4">
                                 <h2 class="text-xl font-semibold">Select Your Brand ✨</h2>
                                 <div class="grid grid-cols-2 gap-4">
-                                    <label
-                                        class="brand-select-box flex flex-col items-center p-4 border rounded-lg cursor-pointer hover:border-blue-500 transition-colors"
-                                        onclick="selectBrand(this)">
-                                        <input type="radio" name="brand" value="Educate" class="hidden">
-                                        <div
-                                            class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                                            <i class="fas fa-graduation-cap text-blue-500 text-2xl"></i>
-                                        </div>
-                                        <span class="font-medium">Educate</span>
-                                        <p class="text-gray-500 text-sm">Premium education platform.</p>
-                                    </label>
-                                    <label
-                                        class="brand-select-box flex flex-col items-center p-4 border rounded-lg cursor-pointer hover:border-blue-500 transition-colors"
-                                        onclick="selectBrand(this)">
-                                        <input type="radio" name="brand" value="Bintang Bangsa" class="hidden">
-                                        <div
-                                            class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                                            <i class="fas fa-star text-yellow-500 text-2xl"></i>
-                                        </div>
-                                        <span class="font-medium">Bintang Bangsa</span>
-                                        <p class="text-gray-500 text-sm">Top choice for many students.</p>
-                                    </label>
-                                    <label
-                                        class="brand-select-box flex flex-col items-center p-4 border rounded-lg cursor-pointer hover:border-blue-500 transition-colors col-span-2"
-                                        onclick="selectBrand(this)">
-                                        <input type="radio" name="brand" value="Sukses CPNS" class="hidden">
-                                        <div
-                                            class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                                            <i class="fas fa-briefcase text-green-500 text-2xl"></i>
-                                        </div>
-                                        <span class="font-medium">Sukses CPNS</span>
-                                        <p class="text-gray-500 text-sm">Specialized in CPNS preparation.</p>
-                                    </label>
+                                    @foreach ($brands as $brand)
+                                        <label
+                                            class="brand-select-box flex flex-col items-center p-4 border rounded-lg cursor-pointer hover:border-blue-500 transition-colors"
+                                            onclick="selectBrand(this)">
+                                            <input type="radio" name="brand_id" value="{{ $brand->id }}"
+                                                class="hidden">
+                                            <div
+                                                class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                                                <img src="{{ asset('storage/' . $brand->icon_brand) }}"
+                                                    alt="{{ $brand->name_brand }} Icon" class="w-8 h-8">
+                                                <!-- Ganti <i> dengan <img> -->
+                                            </div>
+                                            <span class="font-medium">{{ $brand->name_brand }}</span>
+                                            <!-- Nama merek -->
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
 
@@ -101,39 +86,24 @@
                             <div id="form-step-2" class="hidden space-y-4">
                                 <h2 class="text-xl font-semibold">Select Your Program ✨</h2>
                                 <div class="grid grid-cols-2 gap-4">
-                                    <label
-                                        class="program-select-box flex flex-col items-center p-4 border rounded-lg cursor-pointer hover:border-blue-500 transition-colors"
-                                        onclick="selectProgram(this)">
-                                        <input type="radio" name="program" value="Program 1" class="hidden">
-                                        <div
-                                            class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                                            <i class="fas fa-book text-blue-500 text-2xl"></i>
-                                        </div>
-                                        <span class="font-medium">Program 1</span>
-                                        <p class="text-gray-500 text-sm">Introduction to basic concepts.</p>
-                                    </label>
-                                    <label
-                                        class="program-select-box flex flex-col items-center p-4 border rounded-lg cursor-pointer hover:border-blue-500 transition-colors"
-                                        onclick="selectProgram(this)">
-                                        <input type="radio" name="program" value="Program 2" class="hidden">
-                                        <div
-                                            class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                                            <i class="fas fa-laptop text-yellow-500 text-2xl"></i>
-                                        </div>
-                                        <span class="font-medium">Program 2</span>
-                                        <p class="text-gray-500 text-sm">Advanced techniques and tools.</p>
-                                    </label>
-                                    <label
-                                        class="program-select-box flex flex-col items-center p-4 border rounded-lg cursor-pointer hover:border-blue-500 transition-colors col-span-2"
-                                        onclick="selectProgram(this)">
-                                        <input type="radio" name="program" value="Program 3" class="hidden">
-                                        <div
-                                            class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                                            <i class="fas fa-cogs text-green-500 text-2xl"></i>
-                                        </div>
-                                        <span class="font-medium">Program 3</span>
-                                        <p class="text-gray-500 text-sm">Expert level with practical skills.</p>
-                                    </label>
+                                    @foreach ($programs as $program)
+                                        <label
+                                            class="program-select-box flex flex-col items-center p-4 border rounded-lg cursor-pointer hover:border-blue-500 transition-colors"
+                                            onclick="selectProgram(this)">
+                                            <input type="radio" name="program_id" value="{{ $program->id }}"
+                                                class="hidden"> <!-- Ubah value di sini -->
+                                            <div
+                                                class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                                                <img src="{{ asset('storage/' . $program->cover_image) }}"
+                                                    alt="{{ $program->name_program }} Image" class="w-8 h-8">
+                                                <!-- Ganti <i> dengan <img> -->
+                                            </div>
+                                            <span class="text-xs font-bold">{{ $program->name_program }}</span>
+                                            <!-- Nama program -->
+                                            <p class="text-xs text-center">{{ $program->description }}.</p>
+                                            <!-- Deskripsi program -->
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
 
@@ -144,35 +114,38 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="relative">
                                             <input type="text" name="fullname"
-                                                class="form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
-                                                placeholder="Fullname" required />
+                                                class="required-field form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm bg-gray-100 cursor-not-allowed"
+                                                value="{{ auth()->user()->fullname }}" readonly />
                                             <i class="fas fa-user absolute top-3 left-3 text-gray-500"></i>
                                         </div>
+
+                                        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+
                                         <div class="relative">
                                             <select name="subprogram"
-                                                class="form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                                class="required-field form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                                 required>
                                                 <option value="" disabled selected>Select Subprogram</option>
-                                                <option value="Subprogram 1">Subprogram 1</option>
-                                                <option value="Subprogram 2">Subprogram 2</option>
+                                                @foreach ($subprograms as $subprogram)
+                                                    <option value="{{ $subprogram->id }}">
+                                                        {{ $subprogram->name_sub_program }}</option>
+                                                @endforeach
                                             </select>
                                             <i class="fas fa-list-alt absolute top-3 left-3 text-gray-500"></i>
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="relative">
-                                            <select name="birth_city"
-                                                class="form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                            <input type="text" name="birth_city" id="cityInput"
+                                                placeholder="Enter City of Birth"
+                                                class="required-field form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                                 required>
-                                                <option value="" disabled selected>Select City of Birth</option>
-                                                <option value="City 1">City 1</option>
-                                                <option value="City 2">City 2</option>
-                                            </select>
                                             <i class="fas fa-city absolute top-3 left-3 text-gray-500"></i>
                                         </div>
+
                                         <div class="relative">
                                             <input type="date" name="date_of_birth"
-                                                class="form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                                class="required-field form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                                 placeholder="Date of Birth" required />
                                             <i class="fas fa-calendar-alt absolute top-3 left-3 text-gray-500"></i>
                                         </div>
@@ -180,7 +153,7 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="relative">
                                             <select name="agama"
-                                                class="form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                                class="required-field form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                                 required>
                                                 <option value="" disabled selected>Select Agama</option>
                                                 <option value="Islam">Islam</option>
@@ -190,7 +163,7 @@
                                             </select>
                                             <i class="fas fa-mosque absolute top-3 left-3 text-gray-500"></i>
                                         </div>
-                                        <div class="relative flex items-center space-x-4">
+                                        <div class="relative flex items-center space-x-4 text-sm">
                                             <div class="flex items-center">
                                                 <input type="radio" id="male" name="gender" value="Male"
                                                     class="mr-2" required>
@@ -206,81 +179,79 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="relative">
                                             <select name="provinsi"
-                                                class="form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                                class="required-field form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm"
                                                 required>
                                                 <option value="" disabled selected>Select Provinsi</option>
-                                                <option value="Provinsi 1">Provinsi 1</option>
-                                                <option value="Provinsi 2">Provinsi 2</option>
+                                                <!-- Provinsi options akan dimasukkan di sini -->
                                             </select>
                                             <i class="fas fa-map-marker-alt absolute top-3 left-3 text-gray-500"></i>
                                         </div>
+
                                         <div class="relative">
                                             <select name="city"
-                                                class="form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
-                                                required>
+                                                class="required-field form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm"
+                                                disabled required>
                                                 <option value="" disabled selected>Select City</option>
-                                                <option value="City 1">City 1</option>
-                                                <option value="City 2">City 2</option>
                                             </select>
                                             <i class="fas fa-building absolute top-3 left-3 text-gray-500"></i>
                                         </div>
                                     </div>
+
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="relative">
                                             <select name="kecamatan"
-                                                class="form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
-                                                required>
+                                                class="required-field form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm"
+                                                disabled required>
                                                 <option value="" disabled selected>Select Kecamatan</option>
-                                                <option value="Kecamatan 1">Kecamatan 1</option>
-                                                <option value="Kecamatan 2">Kecamatan 2</option>
                                             </select>
                                             <i class="fas fa-location-arrow absolute top-3 left-3 text-gray-500"></i>
                                         </div>
+
                                         <div class="relative">
                                             <select name="kelurahan"
-                                                class="form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
-                                                required>
+                                                class="required-field form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm"
+                                                disabled required>
                                                 <option value="" disabled selected>Select Kelurahan</option>
-                                                <option value="Kelurahan 1">Kelurahan 1</option>
-                                                <option value="Kelurahan 2">Kelurahan 2</option>
                                             </select>
                                             <i class="fas fa-home absolute top-3 left-3 text-gray-500"></i>
                                         </div>
                                     </div>
+
                                     <div class="relative">
                                         <input type="text" name="postal_code"
-                                            class="form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                            class="required-field form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                             placeholder="Postal Code" required />
                                         <i class="fas fa-mail-bulk absolute top-3 left-3 text-gray-500"></i>
                                     </div>
                                     <div class="relative">
-                                        <textarea name="address_detail" class="form-textarea rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                        <textarea name="address_detail"
+                                            class="required-field form-textarea rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                             placeholder="Detail Address" required></textarea>
                                         <i class="fas fa-address-card absolute top-3 left-3 text-gray-500"></i>
                                     </div>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="relative">
                                             <input type="text" name="previous_school"
-                                                class="form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                                class="required-field form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                                 placeholder="Previous School" required />
                                             <i class="fas fa-school absolute top-3 left-3 text-gray-500"></i>
                                         </div>
                                         <div class="relative">
                                             <input type="text" name="grade"
-                                                class="form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                                class="required-field form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                                 placeholder="Grade" required />
                                             <i class="fas fa-graduation-cap absolute top-3 left-3 text-gray-500"></i>
                                         </div>
                                     </div>
                                     <div class="relative">
                                         <input type="text" name="instagram"
-                                            class="form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                            class="required-field form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                             placeholder="Instagram Username" required />
                                         <i class="fab fa-instagram absolute top-3 left-3 text-gray-500"></i>
                                     </div>
                                     <div class="relative">
                                         <input type="text" name="hobby"
-                                            class="form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
+                                            class="required-field form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                             placeholder="Hobby" required />
                                         <i class="fas fa-basketball-ball absolute top-3 left-3 text-gray-500"></i>
                                     </div>
@@ -289,13 +260,13 @@
                                             class="block mb-2 text-sm font-medium text-gray-900">Upload Your
                                             Photo</label>
                                         <input type="file" name="your_photo"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+                                            class="required-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
                                             required />
                                     </div>
                                     <div class="relative">
                                         <input type="text" name="address_coordinate"
-                                            class="form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full"
-                                            placeholder="Address Coordinate" required />
+                                            class="required-field form-input rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
+                                            placeholder="Address Coordinate (Optional)" />
                                         <i class="fas fa-map-marker-alt absolute top-3 left-3 text-gray-500"></i>
                                     </div>
                                 </div>
@@ -323,7 +294,8 @@
 
                                     <div>
                                         <label for="father_email"
-                                            class="block text-sm font-medium text-gray-700">Email Ayah</label>
+                                            class="block text-sm font-medium text-gray-700">Email
+                                            Ayah</label>
                                         <input type="email" id="father_email" name="father_email" required
                                             class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" />
                                     </div>
@@ -367,7 +339,7 @@
                             </div>
 
                             <!-- Step 5: Final Step -->
-                            <div id="form-step-5" class="hidden text-center space-y-4">
+                            <div id="form-step-5" class="hidden text-center space-y-6">
                                 <!-- Icon Checkmark -->
                                 <div class="flex justify-center items-center mb-4">
                                     <div class="relative w-16 h-16 flex items-center justify-center">
@@ -399,138 +371,15 @@
                         </form>
                     </div>
 
-                    <script>
-                        let currentStep = 1;
-                        const stepCount = 5;
-                        const progressBar = document.getElementById('progress-bar');
-                        const stepIndicators = [
-                            document.getElementById('step1'),
-                            document.getElementById('step2'),
-                            document.getElementById('step3'),
-                            document.getElementById('step4'),
-                            document.getElementById('step5')
-                        ];
-
-                        function updateProgress() {
-                            const progressPercentage = ((currentStep - 1) / (stepCount - 1)) * 100;
-                            progressBar.style.width = `${progressPercentage}%`;
-
-                            stepIndicators.forEach((step, index) => {
-                                if (index < currentStep) {
-                                    step.classList.add('bg-blue-500', 'text-white');
-                                    step.classList.remove('text-gray-500', 'bg-white');
-                                } else {
-                                    step.classList.add('text-gray-500', 'bg-white');
-                                    step.classList.remove('bg-blue-500', 'text-white');
-                                }
-                            });
-
-                            // Show/Hide form steps
-                            document.querySelectorAll('[id^="form-step-"]').forEach(step => {
-                                if (step.id === `form-step-${currentStep}`) {
-                                    step.classList.remove('hidden');
-                                } else {
-                                    step.classList.add('hidden');
-                                }
-                            });
-
-                            // Update buttons
-                            document.getElementById('prevBtn').classList.toggle('hidden', currentStep === 1);
-                            const nextBtn = document.getElementById('nextBtn');
-                            if (currentStep === stepCount) {
-                                nextBtn.classList.add('hidden');
-                            } else {
-                                nextBtn.classList.remove('hidden');
-                                nextBtn.textContent = 'Next';
-                            }
-                        }
-
-                        function selectBrand(label) {
-                            // Remove selected class from all brand select boxes
-                            document.querySelectorAll('.brand-select-box').forEach(box => {
-                                box.classList.remove('bg-blue-500', 'text-white');
-                                box.classList.add('text-gray-500', 'bg-white');
-                            });
-
-                            // Add selected class to the clicked brand box
-                            label.classList.add('bg-blue-500', 'text-white');
-                            label.classList.remove('text-gray-500', 'bg-white');
-                        }
-
-                        function selectProgram(label) {
-                            // Remove selected class from all program select boxes
-                            document.querySelectorAll('.program-select-box').forEach(box => {
-                                box.classList.remove('bg-blue-500', 'text-white');
-                                box.classList.add('text-gray-500', 'bg-white');
-                            });
-
-                            // Add selected class to the clicked program box
-                            label.classList.add('bg-blue-500', 'text-white');
-                            label.classList.remove('text-gray-500', 'bg-white');
-                        }
-
-                        document.getElementById('nextBtn').addEventListener('click', () => {
-                            if (currentStep < stepCount) {
-                                currentStep++;
-                                updateProgress();
-                            }
-                        });
-
-                        document.getElementById('prevBtn').addEventListener('click', () => {
-                            if (currentStep > 1) {
-                                currentStep--;
-                                updateProgress();
-                            }
-                        });
-
-                        // Keyboard navigation
-                        document.addEventListener('keydown', (event) => {
-                            if (event.key === 'ArrowRight') {
-                                // Pressing Right Arrow or Enter for Next
-                                if (currentStep < stepCount) {
-                                    currentStep++;
-                                    updateProgress();
-                                }
-                            } else if (event.key === 'ArrowLeft') {
-                                // Pressing Left Arrow for Back
-                                if (currentStep > 1) {
-                                    currentStep--;
-                                    updateProgress();
-                                }
-                            } else if (event.key === 'Enter' && currentStep === stepCount) {
-                                // Enter key on the last step
-                                document.getElementById('nextBtn').click(); // or submit the form if needed
-                            }
-                        });
-
-                        // Fungsi konfirmasi sebelum pengiriman
-                        function confirmGoToDashboard() {
-                            return confirm("Apakah Anda yakin telah mengisi semua data dengan benar?");
-                        }
-
-                        // Handle Go to Dashboard button confirmation
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const goToDashboardBtn = document.getElementById('goToDashboardBtn');
-
-                            if (goToDashboardBtn) {
-                                goToDashboardBtn.addEventListener('click', (event) => {
-                                    if (!confirmGoToDashboard()) {
-                                        event.preventDefault(); // Stop form submission if user selects "No"
-                                    }
-                                });
-                            }
-                        });
-
-                        // Initialize
-                        updateProgress();
-                    </script>
+                    <script src="{{ asset('js/form-navigation.js') }}"></script>
+                    <script src="{{ asset('js/wilayah.js') }}"></script>
                 </div>
             </div>
         </div>
 
         <!-- Icon Pesawat di tengah garis perbatasan -->
         <img src="{{ asset('frontend/images/logo/pesawat.png') }}" alt="icon"
-            class="absolute top-1/4 transform -translate-y-1/2 left-1/2 -translate-x-1/2 w-48 h-48 hidden lg:block">
+            class="absolute top-1/3 transform -translate-y-1/2 left-1/2 -translate-x-1/2 w-48 h-48 hidden lg:block">
 
         <!-- Right side: Image -->
         <div class="hidden md:block w-1/2">

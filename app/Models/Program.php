@@ -15,7 +15,7 @@ class Program extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'programs';
-    protected $fillable = ['name_program', 'is_active', 'is_leads', 'is_home', 'description', 'cover_image'];
+    protected $fillable = ['name_program', 'is_active', 'description', 'cover_image'];
 
     public function subPrograms(): HasMany
     {

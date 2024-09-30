@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('brand_id')->constrained('brands');
             $table->foreignId('program_id')->constrained('programs');
             $table->foreignId('sub_program_id')->constrained('sub_programs');
-            $table->foreignId('class_id')->constrained('kelas');
+            $table->foreignId('class_id')->nullable()->constrained('kelas');
             $table->string('gender');
             $table->string('place_of_birth');
             $table->date('date_of_birth');
