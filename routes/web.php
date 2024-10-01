@@ -4,17 +4,17 @@ use App\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TingkatController;
+use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\SubProgramController;
 use App\Http\Controllers\AuthTeacherController;
-use App\Http\Controllers\AuthUserController;
-use App\Http\Controllers\KelasController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\SubjectController;
 
 Route::get('/', function () {
     return view('auth.login');

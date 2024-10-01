@@ -3,15 +3,15 @@
     <div class="relative min-h-screen flex">
         <!-- Left side: Login form -->
         <div class="w-full md:w-1/2 flex flex-col bg-white p-6 relative">
-            <div class="flex-1 flex flex-col justify-center">
+            <div class="flex flex-col justify-center">
                 <div class="max-w-sm w-full mx-auto">
                     <x-validation-errors class="mb-4" />
-                    @session('status')
-                        <div class="mb-4 font-medium text-sm text-green-600">
-                            {{ $value }}
-                        </div>
-                    @endsession
                     <div class="min-h-screen flex flex-col items-center justify-center p-4">
+                        @session('status')
+                            <div class="mb-4 font-medium text-sm text-green-600">
+                                {{ $value }}
+                            </div>
+                        @endsession
                         <!-- Step indicator with connecting line -->
                         <div class="relative flex items-center w-full max-w-md mb-8">
                             <!-- Gray base line -->

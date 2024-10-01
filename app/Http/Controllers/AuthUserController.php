@@ -25,6 +25,12 @@ class AuthUserController extends Controller
 
     public function biostudent()
     {
+        // Cek apakah role_id pengguna adalah 2 (student)
+        if (Auth::user()->role_id == 2) {
+            return redirect()->route('teacher.biodata'); // Mengalihkan ke halaman biodata teacher jika role_id 2
+        }
+
+        // Jika role_id bukan 2, lanjutkan ke halaman student
         $brands = Brand::all();
         $programs = Program::all();
         $subprograms = SubProgram::all();

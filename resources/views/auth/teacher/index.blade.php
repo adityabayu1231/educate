@@ -106,11 +106,13 @@
                             @csrf
                             <div>
                                 <div class="flex items-center">
-                                    <x-label for="name" value="{{ __('Fullname') }}" />
+                                    <x-label for="fullname" value="{{ __('Fullname') }}" />
                                     <span class="text-red-500">*</span>
                                 </div>
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name"
-                                    :value="old('name')" required autofocus autocomplete="name" />
+                                <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname"
+                                    :value="old('fullname')" required autofocus autocomplete="fullname" />
+                                <x-input id="role_id" class="block mt-1 w-full" type="hidden" name="role_id"
+                                    :value="2" required autofocus autocomplete="role_id" />
                             </div>
 
                             <div class="mt-4">
@@ -128,7 +130,7 @@
                                     <span class="text-red-500">*</span>
                                 </div>
                                 <x-input id="email" class="block mt-1 w-full" type="email" name="email"
-                                    :value="old('email')" required autocomplete="username" />
+                                    :value="old('email')" required autocomplete="email" />
                             </div>
 
                             <div class="mt-4">
