@@ -13,7 +13,17 @@
             </div>
         @endif
 
-        <!-- Create New Mata Pelajaran Button -->
+        @if ($errors->any())
+            <div class="bg-red-100 text-red-800 p-4 rounded mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- Create New Kelas Button -->
         <button id="openCreateModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4">
             <i class="fas fa-plus mr-2"></i> Create New Kelas
         </button>
@@ -37,31 +47,32 @@
                 <tbody class="text-gray-600 text-xs font-light">
                     @if ($kelass->isEmpty())
                         <tr>
-                            <td colspan="7" class="py-3 px-6 text-center text-gray-500">No Data Found</td>
+                            <td colspan="10" class="py-3 px-6 text-center text-gray-500">No Data Found</td>
                         </tr>
                     @else
-                        @foreach ($kelass as $index => $subject)
+                        @foreach ($kelass as $index => $kelas)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left">{{ $index + 1 }}</td>
-                                <td class="py-3 px-6 text-left">{{ $subject->name_class }}</td>
-                                <td class="py-3 px-6 text-left">{{ $subject->tahun_ajar }}</td>
-                                <td class="py-3 px-6 text-left">{{ $subject->kapasitas }}</td>
-                                <td class="py-3 px-6 text-left">{{ $subject->status }}</td>
-                                <td class="py-3 px-6 text-left">{{ $subject->jenis_pembelajaran }}</td>
-                                <td class="py-3 px-6 text-left">{{ $subject->program_id }}</td>
-                                <td class="py-3 px-6 text-left">{{ $subject->subprogram_id }}</td>
-                                <td class="py-3 px-6 text-left">{{ $subject->brand_id }}</td>
+                                <td class="py-3 px-6 text-left">{{ $kelas->name_class }}</td>
+                                <td class="py-3 px-6 text-left">{{ $kelas->tahun_ajar }}</td>
+                                <td class="py-3 px-6 text-left">{{ $kelas->kapasitas }}</td>
+                                <td class="py-3 px-6 text-left">{{ $kelas->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                <td class="py-3 px-6 text-left">{{ $kelas->jenis_pembelajaran }}</td>
+                                <td class="py-3 px-6 text-left">{{ $kelas->program->name_program }}</td>
+                                <td class="py-3 px-6 text-left">{{ $kelas->subprogram->name_sub_program }}</td>
+                                <td class="py-3 px-6 text-left">{{ $kelas->brand->name_brand }}</td>
                                 <td class="py-3 px-6 text-right">
                                     <button class="bg-yellow-500 text-white px-4 py-1 rounded btn-edit"
-                                        data-id="{{ $subject->id }}" data-name-class="{{ $subject->name_class }}"
-                                        data-tahun-ajar="{{ $subject->tahun_ajar }}"
-                                        data-kapasitas="{{ $subject->kapasitas }}" data-status="{{ $subject->status }}"
-                                        data-program-id="{{ $subject->program_id }}"
-                                        data-subprogram-id="{{ $subject->subprogram_id }}"
-                                        data-brand-id="{{ $subject->brand_id }}">
+                                        data-id="{{ $kelas->id }}" data-name-class="{{ $kelas->name_class }}"
+                                        data-tahun-ajar="{{ $kelas->tahun_ajar }}"
+                                        data-jenis-pembelajaran="{{ $kelas->jenis_pembelajaran }}"
+                                        data-kapasitas="{{ $kelas->kapasitas }}" data-status="{{ $kelas->status }}"
+                                        data-program-id="{{ $kelas->program_id }}"
+                                        data-subprogram-id="{{ $kelas->subprogram_id }}"
+                                        data-brand-id="{{ $kelas->brand_id }}">
                                         <i class="fas fa-edit"></i> Edit
                                     </button>
-                                    <form action="{{ route('admin.kelas.destroy', $subject->id) }}" method="POST"
+                                    <form action="{{ route('admin.kelas.destroy', $kelas->id) }}" method="POST"
                                         class="inline-block">
                                         @csrf
                                         @method('DELETE')
@@ -78,168 +89,256 @@
             </table>
         </div>
 
-        <!-- Create Subject Modal -->
+        <!-- Create Kelas Modal -->
         <div id="createModal" class="fixed inset-0 hidden items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-4">
-            <div class="bg-white rounded-lg p-6 w-full max-w-md mx-auto relative overflow-y-auto max-h-[90vh] shadow-lg">
+            <div class="bg-white rounded-lg p-6 w-full max-w-2xl mx-auto relative overflow-y-auto max-h-[90vh] shadow-lg">
                 <h2 class="text-xl font-semibold mb-4 flex items-center">
                     <i class="fas fa-plus-circle mr-2 text-blue-500"></i> Create Kelas
                 </h2>
-                <form id="createForm" method="POST" action="{{ route('admin.kelas.store') }}"
-                    enctype="multipart/form-data">
+                <form id="createForm" method="POST" action="{{ route('admin.kelas.store') }}">
                     @csrf
-                    <div class="mb-4">
-                        <label for="create_kdkelas" class="block text-gray-700 text-sm">Nama Kelas</label>
-                        <input type="text" id="create_kdkelas" name="name_class"
-                            class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                    <div class="flex flex-wrap -mx-2">
+                        <!-- Nama Kelas -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="create_name_class" class="block text-gray-700 text-sm">Nama Kelas</label>
+                            <input type="text" id="create_name_class" name="name_class"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                        </div>
+
+                        <!-- Tahun Ajar -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="create_tahun_ajar" class="block text-gray-700 text-sm">Tahun Ajar</label>
+                            <input type="text" id="create_tahun_ajar" name="tahun_ajar"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                        </div>
+
+                        <!-- Kapasitas -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="create_kapasitas" class="block text-gray-700 text-sm">Kapasitas</label>
+                            <input type="number" id="create_kapasitas" name="kapasitas"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="create_status" class="block text-gray-700 text-sm">Status</label>
+                            <select id="create_status" name="status"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+
+                        <!-- Jenis Pembelajaran -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="create_jenis_pembelajaran" class="block text-gray-700 text-sm">Jenis
+                                Pembelajaran</label>
+                            <input type="text" id="create_jenis_pembelajaran" name="jenis_pembelajaran"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                        </div>
+
+                        <!-- Brand -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="create_brand_id" class="block text-gray-700 text-sm">Brand</label>
+                            <select id="create_brand_id" name="brand_id"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name_brand }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Program -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="create_program_id" class="block text-gray-700 text-sm">Program</label>
+                            <select id="create_program_id" name="program_id"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                                @foreach ($programs as $program)
+                                    <option value="{{ $program->id }}">{{ $program->name_program }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Sub Program -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="create_subprogram_id" class="block text-gray-700 text-sm">Sub Program</label>
+                            <select id="create_subprogram_id" name="subprogram_id"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                                @foreach ($subprograms as $subprogram)
+                                    <option value="{{ $subprogram->id }}">{{ $subprogram->name_sub_program }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                    <div class="mb-4">
-                        <label for="create_kdmapel" class="block text-gray-700 text-sm">Kode Mata Pelajaran</label>
-                        <input type="text" id="create_kdmapel" name="kdmapel"
-                            class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="create_nama_mapel" class="block text-gray-700 text-sm">Nama Mata Pelajaran</label>
-                        <input type="text" id="create_nama_mapel" name="nama_mapel"
-                            class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="create_cover" class="block text-gray-700 text-sm">Cover</label>
-                        <input type="file" id="create_cover" name="cover"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-base focus:ring-blue-500 focus:border-blue-500">
-                        <img id="createImagePreview" class="mt-2 hidden w-24 h-24 rounded shadow-lg">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm">Is Active</label>
-                        <input type="text" id="create_is_active" name="is_active"
-                            class="block w-full border border-gray-300 p-2 rounded text-sm"
-                            placeholder="Input bebas, contohnya: active, inactive">
-                    </div>
-                    <div class="flex justify-end space-x-2">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                            <i class="fas fa-save"></i> Save
-                        </button>
+
+                    <div class="text-right">
                         <button type="button" id="closeCreateModal"
-                            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
-                            <i class="fas fa-times"></i> Cancel
-                        </button>
+                            class="bg-gray-400 text-white px-4 py-2 rounded mr-2">Cancel</button>
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Create</button>
                     </div>
                 </form>
             </div>
         </div>
-        <!-- Edit Subject Modal -->
+        <!-- End Create Kelas Modal -->
+
+        <!-- Edit Kelas Modal -->
         <div id="editModal" class="fixed inset-0 hidden items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-4">
-            <div class="bg-white rounded-lg p-6 w-full max-w-md mx-auto relative overflow-y-auto max-h-[90vh] shadow-lg">
+            <div class="bg-white rounded-lg p-6 w-full max-w-2xl mx-auto relative overflow-y-auto max-h-[90vh] shadow-lg">
                 <h2 class="text-xl font-semibold mb-4 flex items-center">
-                    <i class="fas fa-edit mr-2 text-yellow-500"></i> Edit Mata Pelajaran
+                    <i class="fas fa-edit mr-2 text-yellow-500"></i> Edit Kelas
                 </h2>
-                <form id="editForm" method="POST" action="{{ route('admin.mapel.update', ['mapel' => ':id']) }}"
-                    enctype="multipart/form-data">
+                <form id="editForm" method="POST" action="">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" id="edit_id" name="id">
+                    <div class="flex flex-wrap -mx-2">
+                        <!-- Nama Kelas -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="edit_name_class" class="block text-gray-700 text-sm">Nama Kelas</label>
+                            <input type="text" id="edit_name_class" name="name_class"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                        </div>
 
-                    <div class="mb-4">
-                        <label for="edit_kdkelas" class="block text-gray-700 text-sm">Kode Kelas</label>
-                        <input type="text" id="edit_kdkelas" name="kdkelas"
-                            class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                        <!-- Tahun Ajar -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="edit_tahun_ajar" class="block text-gray-700 text-sm">Tahun Ajar</label>
+                            <input type="text" id="edit_tahun_ajar" name="tahun_ajar"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                        </div>
+
+                        <!-- Kapasitas -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="edit_kapasitas" class="block text-gray-700 text-sm">Kapasitas</label>
+                            <input type="number" id="edit_kapasitas" name="kapasitas"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="edit_status" class="block text-gray-700 text-sm">Status</label>
+                            <select id="edit_status" name="status"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+
+                        <!-- Jenis Pembelajaran -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="edit_jenis_pembelajaran" class="block text-gray-700 text-sm">Jenis
+                                Pembelajaran</label>
+                            <input type="text" id="edit_jenis_pembelajaran" name="jenis_pembelajaran"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                        </div>
+
+                        <!-- Brand -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="edit_brand_id" class="block text-gray-700 text-sm">Brand</label>
+                            <select id="edit_brand_id" name="brand_id"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name_brand }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Program -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="edit_program_id" class="block text-gray-700 text-sm">Program</label>
+                            <select id="edit_program_id" name="program_id"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                                @foreach ($programs as $program)
+                                    <option value="{{ $program->id }}">{{ $program->name_program }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Sub Program -->
+                        <div class="w-full md:w-1/2 px-2 mb-4">
+                            <label for="edit_subprogram_id" class="block text-gray-700 text-sm">Sub Program</label>
+                            <select id="edit_subprogram_id" name="subprogram_id"
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
+                                @foreach ($subprograms as $subprogram)
+                                    <option value="{{ $subprogram->id }}">{{ $subprogram->name_sub_program }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="edit_kdmapel" class="block text-gray-700 text-sm">Kode Mata Pelajaran</label>
-                        <input type="text" id="edit_kdmapel" name="kdmapel"
-                            class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="edit_nama_mapel" class="block text-gray-700 text-sm">Nama Mata Pelajaran</label>
-                        <input type="text" id="edit_nama_mapel" name="nama_mapel"
-                            class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="edit_cover" class="block text-gray-700 text-sm">Cover</label>
-                        <input type="file" id="edit_cover" name="cover"
-                            class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm">
-                        <img id="editImagePreview" class="mt-2 hidden w-24 h-24 rounded shadow-lg">
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="edit_is_active" class="block text-gray-700 text-sm">Is Active</label>
-                        <input type="text" id="edit_is_active" name="is_active"
-                            class="block w-full border border-gray-300 p-2 rounded text-sm"
-                            placeholder="Input bebas, contohnya: active, inactive">
-                    </div>
-
-                    <div class="flex justify-end space-x-2">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                            <i class="fas fa-save"></i> Update
-                        </button>
+                    <div class="text-right">
                         <button type="button" id="closeEditModal"
-                            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
-                            <i class="fas fa-times"></i> Cancel
-                        </button>
+                            class="bg-gray-400 text-white px-4 py-2 rounded mr-2">Cancel</button>
+                        <button type="submit"
+                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">Update</button>
                     </div>
                 </form>
             </div>
         </div>
+        <!-- End Edit Kelas Modal -->
+
     </div>
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Handle opening and closing of create modal
-                const openCreateModal = document.getElementById('openCreateModal');
-                const closeCreateModal = document.getElementById('closeCreateModal');
-                const createModal = document.getElementById('createModal');
+            document.getElementById('openCreateModal').addEventListener('click', function() {
+                document.getElementById('createModal').classList.remove('hidden');
+            });
 
-                openCreateModal.addEventListener('click', () => {
-                    createModal.classList.remove('hidden');
-                    createModal.classList.add('flex');
+            document.getElementById('closeCreateModal').addEventListener('click', function() {
+                document.getElementById('createModal').classList.add('hidden');
+            });
+
+            const editButtons = document.querySelectorAll('.btn-edit');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const nameClass = this.dataset.nameClass;
+                    const tahunAjar = this.dataset.tahunAjar;
+                    const kapasitas = this.dataset.kapasitas;
+                    const status = this.dataset.status;
+                    const programId = this.dataset.programId;
+                    const subprogramId = this.dataset.subprogramId;
+                    const brandId = this.dataset.brandId;
+                    const jenisPembelajaran = this.dataset.jenisPembelajaran;
+
+                    const editForm = document.getElementById('editForm');
+                    editForm.action = `/admin/master/kelas/${id}`;
+
+                    document.getElementById('edit_name_class').value = nameClass;
+                    document.getElementById('edit_tahun_ajar').value = tahunAjar;
+                    document.getElementById('edit_kapasitas').value = kapasitas;
+                    document.getElementById('edit_status').value = status;
+                    document.getElementById('edit_program_id').value = programId;
+                    document.getElementById('edit_subprogram_id').value = subprogramId;
+                    document.getElementById('edit_brand_id').value = brandId;
+                    document.getElementById('edit_jenis_pembelajaran').value = jenisPembelajaran;
+
+                    document.getElementById('editModal').classList.remove('hidden');
                 });
+            });
 
-                closeCreateModal.addEventListener('click', () => {
-                    createModal.classList.remove('flex');
-                    createModal.classList.add('hidden');
-                });
+            document.getElementById('closeEditModal').addEventListener('click', function() {
+                document.getElementById('editModal').classList.add('hidden');
+            });
 
-                // Handle opening and closing of edit modal
-                const editModal = document.getElementById('editModal');
-                const closeEditModal = document.getElementById('closeEditModal');
-                const editForm = document.getElementById('editForm');
+            // Misalkan Anda memiliki tombol hapus dalam tabel
+            $('.delete-button').on('click', function() {
+                const kelasId = $(this).data('id'); // Ambil ID kelas dari atribut data
+                const url = `/admin/master/kelas/${kelasId}`; // Sesuaikan dengan URL route Anda
 
-                closeEditModal.addEventListener('click', () => {
-                    editModal.classList.remove('flex');
-                    editModal.classList.add('hidden');
-                });
-
-                // Handle edit button click
-                document.querySelectorAll('.btn-edit').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        const kdkelas = this.dataset.kdkelas;
-                        const kdmapel = this.dataset.kdmapel;
-                        const nama_mapel = this.dataset.nama;
-                        const cover = this.dataset.cover;
-                        const isActive = this.dataset.isActive;
-
-                        document.getElementById('edit_id').value = id;
-                        document.getElementById('edit_kdkelas').value = kdkelas;
-                        document.getElementById('edit_kdmapel').value = kdmapel;
-                        document.getElementById('edit_nama_mapel').value = nama_mapel;
-                        document.getElementById('edit_is_active').value = isActive;
-
-                        if (cover) {
-                            const editImagePreview = document.getElementById('editImagePreview');
-                            editImagePreview.src = `/storage/${cover}`;
-                            editImagePreview.classList.remove('hidden');
-                        } else {
-                            document.getElementById('editImagePreview').classList.add('hidden');
+                if (confirm('Apakah Anda yakin ingin menghapus kelas ini?')) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: url,
+                        success: function(response) {
+                            alert(response.message);
+                            // Hapus elemen tabel kelas dari tampilan, atau reload halaman
+                            location.reload();
+                        },
+                        error: function(xhr) {
+                            alert('Terjadi kesalahan saat menghapus kelas.');
                         }
-
-                        editForm.action = editForm.action.replace(':id', id);
-                        editModal.classList.remove('hidden');
-                        editModal.classList.add('flex');
                     });
-                });
+                }
             });
         </script>
     @endpush

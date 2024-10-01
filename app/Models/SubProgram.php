@@ -16,6 +16,8 @@ class SubProgram extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'sub_programs';
+
     protected $fillable = ['program_id', 'name_sub_program', 'brand_id'];
 
     public function program(): BelongsTo

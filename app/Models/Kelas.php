@@ -43,8 +43,9 @@ class Kelas extends Model
      */
     public function subprogram()
     {
-        return $this->belongsTo(SubProgram::class);
+        return $this->belongsTo(SubProgram::class, 'subprogram_id', 'id');
     }
+
 
     /**
      * Relasi ke Brand.
