@@ -63,7 +63,7 @@ Route::middleware([
 ])->group(function () {
 
     // Route group for teachers
-    Route::prefix('teacher')->name('teacher.')->middleware(['checkteacher'])->group(function () {
+    Route::prefix('teacher')->name('teacher.')->group(function () {
         Route::get('/', [AuthTeacherController::class, 'index'])->name('index');
         Route::get('/reset-pass', [AuthTeacherController::class, 'passupt'])->name('passupt');
 
@@ -71,8 +71,8 @@ Route::middleware([
         Route::get('/classes', [AuthTeacherController::class, 'index'])->name('classes.index');
         Route::get('/profile', [AuthTeacherController::class, 'edit'])->name('profile.edit');
         Route::get('/biodata', [AuthTeacherController::class, 'biodata'])->name('biodata');
-        Route::get('/bio', [AuthTeacherController::class, 'show'])->name('biodata.show');
     });
+
 
     // Route group for students
     Route::middleware(['checkstudent'])->group(function () {

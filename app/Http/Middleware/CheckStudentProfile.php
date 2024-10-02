@@ -35,7 +35,7 @@ class CheckStudentProfile
 
             if (!$teacher) {
                 // Redirect ke halaman pengisian profil jika data Teacher tidak ditemukan
-                return redirect()->route('teacher.bio')->with('status', 'Please complete your teacher profile.');
+                return redirect()->route('teacher.biodata')->with('status', 'Please complete your teacher profile.');
             }
         }
 
