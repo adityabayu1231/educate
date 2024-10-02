@@ -15,6 +15,7 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\SubProgramController;
 use App\Http\Controllers\AuthTeacherController;
+use App\Http\Controllers\PaketController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -49,6 +50,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('mapel', SubjectController::class);
             Route::patch('mapel/{subject}/toggle-active', [SubjectController::class, 'toggleActive'])->name('mapel.toggle-active');
             Route::resource('kelas', KelasController::class);
+            Route::resource('paket', PaketController::class);
         });
     });
 });
