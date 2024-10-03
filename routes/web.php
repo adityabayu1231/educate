@@ -71,6 +71,7 @@ Route::middleware([
         Route::get('/classes', [AuthTeacherController::class, 'index'])->name('classes.index');
         Route::get('/profile', [AuthTeacherController::class, 'edit'])->name('profile.edit');
         Route::get('/biodata', [AuthTeacherController::class, 'biodata'])->name('biodata');
+        Route::post('/biodata', [AuthTeacherController::class, 'store'])->name('store');
     });
 
 

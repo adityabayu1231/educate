@@ -36,45 +36,49 @@
 
                     <x-validation-errors class="mb-4" />
 
-                    <form id="multiStepForm" method="POST" enctype="multipart/form-data">
+                    <form id="multiStepForm" method="POST" action="{{ route('teacher.store') }}"
+                        enctype="multipart/form-data">
                         @csrf
 
                         <!-- Form 1 -->
                         <div id="form1" class="form-step">
                             <div class="mb-4">
                                 <x-label for="name" value="{{ __('Fullname') }}" />
-                                <x-input id="name" class="block mt-1 w-full" type="text" name="name"
-                                    :value="old('name')" required autofocus autocomplete="name" />
+                                <x-input id="name"
+                                    class="block mt-1 w-full bg-gray-200 text-gray-600  required-field" type="text"
+                                    name="name" value="{{ Auth::user()->fullname }}" required readonly />
                             </div>
 
-                            <!-- Additional fields for form 1 -->
                             <div class="mb-4">
                                 <x-label for="email" value="{{ __('Email') }}" />
-                                <x-input id="email" class="block mt-1 w-full" type="email" name="email"
-                                    :value="old('email')" required />
+                                <x-input id="email"
+                                    class="block mt-1 w-full bg-gray-200 text-gray-600  required-field" type="email"
+                                    name="email" value="{{ Auth::user()->email }}" required readonly />
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="city_of_birth" value="{{ __('City of Birth') }}" />
-                                <x-input id="city_of_birth" class="block mt-1 w-full" type="text"
-                                    name="city_of_birth" :value="old('city_of_birth')" required />
+                                <x-input id="city_of_birth"
+                                    class="block mt-1 w-full required-field focus:ring-2 focus:ring-blue-500"
+                                    type="text" name="city_of_birth" :value="old('city_of_birth')" required autocomplete
+                                    autofocus />
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="gender" value="{{ __('Gender') }}" />
                                 <div class="flex items-center">
                                     <x-input id="male" type="radio" name="gender" value="male"
-                                        class="mr-2" />
+                                        class="mr-2 required-field" />
                                     <x-label for="male" value="{{ __('Male') }}" />
                                     <x-input id="female" type="radio" name="gender" value="female"
-                                        class="ml-4 mr-2" />
+                                        class="ml-4 mr-2 required-field" />
                                     <x-label for="female" value="{{ __('Female') }}" />
                                 </div>
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="religion" value="{{ __('Religion') }}" />
-                                <x-select id="religion" name="religion">
+                                <x-select id="religion" name="religion" class="required-field">
                                     <option value="islam">{{ __('Islam') }}</option>
                                     <option value="christian">{{ __('Christian') }}</option>
                                     <!-- Add more options as needed -->
@@ -83,14 +87,16 @@
 
                             <div class="mb-4">
                                 <x-label for="date_of_birth" value="{{ __('Date of Birth') }}" />
-                                <x-input id="date_of_birth" class="block mt-1 w-full" type="date"
+                                <x-input id="date_of_birth" class="block mt-1 w-full required-field" type="date"
                                     name="date_of_birth" :value="old('date_of_birth')" required />
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="phone" value="{{ __('Phone Number') }}" />
-                                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone"
-                                    :value="old('phone')" required />
+                                <x-input id="phone"
+                                    class="block mt-1 w-full required-field bg-gray-200 text-gray-600 cursor-not-allowed"
+                                    type="text" name="phone" value="{{ Auth::user()->phone_number }}" required
+                                    readonly />
                             </div>
 
                             <div class="mb-4">
@@ -117,59 +123,77 @@
                         <div id="form2" class="form-step hidden">
                             <div class="mb-4">
                                 <x-label for="province" value="{{ __('Province') }}" />
-                                <x-input id="province" class="block mt-1 w-full" type="text" name="province"
-                                    :value="old('province')" />
+                                <select name="province" id="province"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field">
+                                    <option value="" disabled selected>Select Province</option>
+                                    <!-- Options will be populated via JavaScript -->
+                                </select>
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="city" value="{{ __('City') }}" />
-                                <x-input id="city" class="block mt-1 w-full" type="text" name="city"
-                                    :value="old('city')" />
+                                <select name="city" id="city"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    disabled>
+                                    <option value="" disabled selected>Select City</option>
+                                    <!-- Options will be populated via JavaScript -->
+                                </select>
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="district" value="{{ __('District') }}" />
-                                <x-input id="district" class="block mt-1 w-full" type="text" name="district"
-                                    :value="old('district')" />
+                                <select name="district" id="district"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    disabled>
+                                    <option value="" disabled selected>Select District</option>
+                                    <!-- Options will be populated via JavaScript -->
+                                </select>
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="village" value="{{ __('Village') }}" />
-                                <x-input id="village" class="block mt-1 w-full" type="text" name="village"
-                                    :value="old('village')" />
+                                <select name="village" id="village"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    disabled>
+                                    <option value="" disabled selected>Select Village</option>
+                                    <!-- Options will be populated via JavaScript -->
+                                </select>
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="postal_code" value="{{ __('Postal Code') }}" />
-                                <x-input id="postal_code" class="block mt-1 w-full" type="text"
-                                    name="postal_code" :value="old('postal_code')" />
+                                <x-input id="postal_code"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    type="text" name="postal_code" :value="old('postal_code')" />
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="address_details" value="{{ __('Address Details') }}" />
-                                <x-textarea id="address_details"
-                                    name="address_details">{{ old('address_details') }}</x-textarea>
+                                <x-textarea id="address_details" name="address_details"
+                                    class="required-field p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none">{{ old('address_details') }}</x-textarea>
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="domicile_address" value="{{ __('Domicile Address') }}" />
-                                <x-input id="domicile_address" class="block mt-1 w-full" type="text"
-                                    name="domicile_address" :value="old('domicile_address')" />
+                                <x-input id="domicile_address"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    type="text" name="domicile_address" :value="old('domicile_address')" />
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="address_coordinates" value="{{ __('Address Coordinates') }}" />
-                                <x-input id="address_coordinates" class="block mt-1 w-full" type="text"
-                                    name="address_coordinates" :value="old('address_coordinates')" />
+                                <x-input id="address_coordinates"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    type="text" name="address_coordinates" :value="old('address_coordinates')" />
                             </div>
 
                             <div class="flex justify-between mt-4">
                                 <button type="button" id="backForm2"
-                                    class="bg-gray-500 text-white py-2 px-4 rounded">
+                                    class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition duration-200">
                                     {{ __('Back') }}
                                 </button>
                                 <button type="button" id="nextForm2"
-                                    class="bg-blue-500 text-white py-2 px-4 rounded">
+                                    class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
                                     {{ __('Next') }}
                                 </button>
                             </div>
@@ -179,14 +203,14 @@
                         <div id="form3" class="form-step hidden">
                             <div class="mb-4">
                                 <x-label for="education_level" value="{{ __('Level of Education') }}" />
-                                <x-input id="education_level" class="block mt-1 w-full" type="text"
+                                <x-input id="education_level" class="block mt-1 w-full required-field" type="text"
                                     name="education_level" :value="old('education_level')" />
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="university" value="{{ __('University') }}" />
-                                <x-input id="university" class="block mt-1 w-full" type="text" name="university"
-                                    :value="old('university')" />
+                                <x-input id="university" class="block mt-1 w-full required-field" type="text"
+                                    name="university" :value="old('university')" />
                             </div>
 
                             <div class="mb-4">
@@ -197,14 +221,14 @@
 
                             <div class="mb-4">
                                 <x-label for="major" value="{{ __('Major') }}" />
-                                <x-input id="major" class="block mt-1 w-full" type="text" name="major"
-                                    :value="old('major')" />
+                                <x-input id="major" class="block mt-1 w-full required-field" type="text"
+                                    name="major" :value="old('major')" />
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="subject" value="{{ __('Subject') }}" />
-                                <x-input id="subject" class="block mt-1 w-full" type="text" name="subject"
-                                    :value="old('subject')" />
+                                <x-input id="subject" class="block mt-1 w-full required-field" type="text"
+                                    name="subject" :value="old('subject')" />
                             </div>
 
                             <div class="mb-4">
@@ -221,14 +245,14 @@
 
                             <div class="mb-4">
                                 <x-label for="teaching_level" value="{{ __('Teaching Level') }}" />
-                                <x-input id="teaching_level" class="block mt-1 w-full" type="text"
+                                <x-input id="teaching_level" class="block mt-1 w-full required-field" type="text"
                                     name="teaching_level" :value="old('teaching_level')" />
                             </div>
 
                             <div class="mb-4">
                                 <x-label for="teacher_requirements" value="{{ __('Teacher Requirements') }}" />
-                                <x-input id="teacher_requirements" class="block mt-1 w-full" type="text"
-                                    name="teacher_requirements" :value="old('teacher_requirements')" />
+                                <x-input id="teacher_requirements" class="block mt-1 w-full required-field"
+                                    type="text" name="teacher_requirements" :value="old('teacher_requirements')" />
                             </div>
 
                             <!-- Buttons to navigate between forms -->
@@ -268,60 +292,50 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const formSteps = document.querySelectorAll('.form-step');
-            let currentStep = 0;
-
-            function showStep(step) {
-                formSteps.forEach((form, index) => {
-                    form.classList.toggle('hidden', index !== step);
-                });
+        document.addEventListener('DOMContentLoaded', function() {
+            function checkRequiredFields(step) {
+                let requiredFields = step.querySelectorAll('.required-field');
+                for (let field of requiredFields) {
+                    if (field.type !== "radio" && !field.value) {
+                        return false;
+                    }
+                    if (field.type === "radio" && !step.querySelector('input[name="' + field.name + '"]:checked')) {
+                        return false;
+                    }
+                }
+                return true;
             }
 
-            document.getElementById('nextForm1').addEventListener('click', () => {
-                currentStep = 1;
-                showStep(currentStep);
-            });
-
-            document.getElementById('backForm2').addEventListener('click', () => {
-                currentStep = 0;
-                showStep(currentStep);
-            });
-
-            document.getElementById('nextForm2').addEventListener('click', () => {
-                currentStep = 2;
-                showStep(currentStep);
-            });
-
-            document.getElementById('backForm3').addEventListener('click', () => {
-                currentStep = 1;
-                showStep(currentStep);
-            });
-
-            // Modal functionality
-            const modal = document.getElementById('imagePreviewModal');
-            const previewImage = document.getElementById('previewImage');
-            const closeModal = document.getElementById('closeModal');
-
-            // Only add event listener to the photo input
-            const photoInput = document.getElementById('photo');
-
-            photoInput.addEventListener('change', (event) => {
-                if (event.target.files[0] && event.target.files[0].type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        previewImage.src = e.target.result;
-                        modal.classList.remove('hidden');
-                        modal.classList.add('flex');
-                    };
-                    reader.readAsDataURL(event.target.files[0]);
+            document.getElementById('nextForm1').addEventListener('click', function() {
+                if (checkRequiredFields(document.getElementById('form1'))) {
+                    document.getElementById('form1').classList.add('hidden');
+                    document.getElementById('form2').classList.remove('hidden');
+                } else {
+                    alert('Please fill in all required fields.');
                 }
             });
 
-            closeModal.addEventListener('click', () => {
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
+            document.getElementById('nextForm2').addEventListener('click', function() {
+                if (checkRequiredFields(document.getElementById('form2'))) {
+                    document.getElementById('form2').classList.add('hidden');
+                    document.getElementById('form3').classList.remove('hidden');
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            });
+
+            // Event listener untuk tombol back pada form 2
+            document.getElementById('backForm2').addEventListener('click', function() {
+                document.getElementById('form2').classList.add('hidden');
+                document.getElementById('form1').classList.remove('hidden');
+            });
+
+            // Event listener untuk tombol back pada form 3
+            document.getElementById('backForm3').addEventListener('click', function() {
+                document.getElementById('form3').classList.add('hidden');
+                document.getElementById('form2').classList.remove('hidden');
             });
         });
     </script>
+    <script src="{{ asset('js/wilayah2.js') }}"></script>
 </x-login-admin-layout>

@@ -34,7 +34,7 @@ class Teacher extends Model
         'photo',
         'nik',
         'cv',
-        'subject_id',
+        'subject_ids',
         'bank',
         'account_number',
         'account_name'
@@ -43,10 +43,5 @@ class Teacher extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function subject(): BelongsTo
-    {
-        return $this->belongsTo(Subject::class);
     }
 }

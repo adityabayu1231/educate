@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('nik')->nullable();
             $table->string('cv')->nullable(); // URL or path to file
-            $table->foreignId('subject_id')->nullable()->constrained('subjects');
+            $table->string('subject_ids')->nullable();
             $table->string('bank')->nullable();
             $table->string('account_number')->nullable();
             $table->string('account_name')->nullable();
