@@ -6,12 +6,12 @@
             <div class="flex flex-col justify-center">
                 <div class="max-w-sm w-full mx-auto">
                     <x-validation-errors class="mb-4" />
+                    @session('status')
+                        <div class="mb-4 font-medium text-sm text-green-600">
+                            {{ $value }}
+                        </div>
+                    @endsession
                     <div class="min-h-screen flex flex-col items-center justify-center p-4">
-                        @session('status')
-                            <div class="mb-4 font-medium text-sm text-green-600">
-                                {{ $value }}
-                            </div>
-                        @endsession
                         <!-- Step indicator with connecting line -->
                         <div class="relative flex items-center w-full max-w-md mb-8">
                             <!-- Gray base line -->
@@ -352,7 +352,7 @@
 
                                 <!-- Text and Button -->
                                 <div class="flex flex-col items-center">
-                                    <h2 class="text-2xl font-semibold mb-2">Selamat Bergabung! 🎉</h2>
+                                    <h2 class="text-2xl font-semibold mb-2">Selamat Bergabung! ✨</h2>
                                     <p class="mb-4">Terima kasih telah melengkapi formulir ini.</p>
                                     <button type="submit" id="goToDashboardBtn"
                                         class="px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center justify-center">

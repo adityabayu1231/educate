@@ -55,30 +55,30 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-// Route group for shared routes (dashboard and biodata for both teacher and student)
+// Route group for teacher (without middleware at the group level)
+Route::prefix('teacher')->name('teacher.')->group(function () {
+    // Public routes (no middleware)
+    Route::get('/', [AuthTeacherController::class, 'index'])->name('index');
+    Route::get('/reset-pass', [AuthTeacherController::class, 'passupt'])->name('passupt');
+
+    // Protected routes (with middleware)
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/classes', [AuthTeacherController::class, 'index'])->name('classes.index');
+        Route::get('/profile', [AuthTeacherController::class, 'edit'])->name('profile.edit');
+        Route::get('/biodata', [AuthTeacherController::class, 'biodata'])->name('biodata');
+        // Example of another protected route
+        Route::get('/bio', [AuthTeacherController::class, 'show'])->name('biodata.show');
+    });
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-
-    // Route group for teachers
-    Route::prefix('teacher')->name('teacher.')->group(function () {
-        Route::get('/', [AuthTeacherController::class, 'index'])->name('index');
-        Route::get('/reset-pass', [AuthTeacherController::class, 'passupt'])->name('passupt');
-
-        // Protected routes for teachers
-        Route::get('/classes', [AuthTeacherController::class, 'index'])->name('classes.index');
-        Route::get('/profile', [AuthTeacherController::class, 'edit'])->name('profile.edit');
-        Route::get('/biodata', [AuthTeacherController::class, 'biodata'])->name('biodata');
-        Route::post('/biodata', [AuthTeacherController::class, 'store'])->name('store');
-    });
-
-
-    // Route group for students
     Route::middleware(['checkstudent'])->group(function () {
         Route::get('/dashboard', [AuthUserController::class, 'index'])->name('dashboard');
-        Route::get('/biodata', [AuthUserController::class, 'biostudent'])->name('student.bio');
-        Route::post('/biodata', [StudentController::class, 'store'])->name('students.store');
     });
+    Route::get('/biodata', [AuthUserController::class, 'biostudent'])->name('student.bio');
+    Route::post('/biodata', [StudentController::class, 'store'])->name('students.store');
 });
