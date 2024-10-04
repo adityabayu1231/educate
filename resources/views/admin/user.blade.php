@@ -55,7 +55,7 @@
                                 </td>
                                 <td class="py-2 px-4 text-right">
                                     <button data-id="{{ $user->id }}" data-fullname="{{ $user->fullname }}"
-                                        data-email="{{ $user->email }}"
+                                        data-email="{{ $user->email }}" data-password="{{ $user->password }}"
                                         class="editUserBtn text-blue-500 hover:text-blue-700">
                                         <i class="fas fa-edit"></i>
                                     </button>
@@ -130,7 +130,7 @@
                 <h2 class="text-xl font-semibold mb-4">Edit User</h2>
                 <form id="editForm" method="POST">
                     @csrf
-                    @method('PUT')
+                    @method('PATCH') <!-- Mengubah metode menjadi PATCH -->
                     <div class="mb-4">
                         <label for="edit_fullname" class="block text-gray-700">Full Name</label>
                         <input type="text" id="edit_fullname" name="fullname"
@@ -144,8 +144,19 @@
                             required>
                     </div>
                     <div class="mb-4">
+                        <label for="old_password" class="block text-gray-700">Old Password</label>
+                        <input type="text" id="old_password" name="old_password" readonly
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="new_password" class="block text-gray-700">New Password</label>
+                        <input type="password" id="new_password" name="new_password"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class="mb-4">
                         <label for="edit_role_id" class="block text-gray-700">Role</label>
-                        <select id="role_id" name="role_id"
+                        <select id="edit_role_id" name="role_id"
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                             required>
                             <option value="">Select Role</option>
@@ -191,11 +202,13 @@
                     const userId = this.getAttribute('data-id');
                     const userFullname = this.getAttribute('data-fullname');
                     const userEmail = this.getAttribute('data-email');
+                    const userPassword = this.getAttribute('data-password'); // Ambil password lama
                     const form = document.getElementById('editForm');
 
                     form.action = `/admin/master/users/${userId}`;
                     document.getElementById('edit_fullname').value = userFullname;
                     document.getElementById('edit_email').value = userEmail;
+                    document.getElementById('old_password').value = userPassword; // Set password lama
 
                     showModal('editModal');
                 });
@@ -227,8 +240,7 @@
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            // Optionally revert the toggle state if there's an error
-                            this.checked = !this.checked;
+                            this.checked = !this.checked; // Revert state jika ada error
                         });
                 });
             });

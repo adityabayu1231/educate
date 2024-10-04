@@ -19,6 +19,12 @@ class CheckStudentProfile
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
+        $currentRoute = $request->route()->getName(); // Dapatkan nama route saat ini
+
+        // Jangan jalankan pengecekan pada halaman pengisian profil
+        if (in_array($currentRoute, ['student.bio', 'teacher.biodata'])) {
+            return $next($request);
+        }
 
         // Cek apakah role_id adalah 1 (siswa) atau 2 (guru)
         if ($user->role_id == 1) {

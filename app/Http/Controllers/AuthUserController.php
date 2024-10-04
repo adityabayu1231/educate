@@ -32,7 +32,7 @@ class AuthUserController extends Controller
 
         // Jika role_id bukan 2, lanjutkan ke halaman student
         $brands = Brand::all();
-        $programs = Program::all();
+        $programs = Program::where('is_active', true)->get();
         $subprograms = SubProgram::all();
 
         return view('auth.student.biostudent', compact('brands', 'programs', 'subprograms'));

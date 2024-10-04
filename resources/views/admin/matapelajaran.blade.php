@@ -83,7 +83,7 @@
                 </tbody>
             </table>
         </div>
-
+        {{ $subjects->links() }}
 
         <!-- Create Subject Modal -->
         <div id="createModal" class="fixed inset-0 hidden items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-4">
@@ -224,11 +224,109 @@
 
                 createNamaMapel.addEventListener('input', function() {
                     const namaMapel = this.value.trim(); // Get the trimmed value
-                    const sanitizedKode = namaMapel.replace(/\s+/g, '')
-                        .toLowerCase(); // Remove spaces and convert to lowercase
-                    createKdkelas.value = sanitizedKode; // Set Kode Kelas
-                    createKdmapel.value = sanitizedKode; // Set Kode Mata Pelajaran
+
+                    // Mapping of nama_mapel to kdkelas and kdmapel
+                    const mapping = {
+                        "Pengetahuan dan Pemahaman Umum": "PPU",
+                        "Pengetahuan Kuantitatif": "PK",
+                        "Teknik Komputer Jaringan": "TKJ",
+                        "Teknologi Informasi - Teknik Komputer dan Jaringan": "TI-TKJ",
+                        "TPA-Analitik": "TPA-A",
+                        "Matematika": "MTK",
+                        "Biologi": "BIO",
+                        "Bahasa Indonesia": "BINDO",
+                        "Bahasa Inggris": "BING",
+                        "Penalaran Umum": "PU",
+                        "Pemahaman Bacaan dan Menulis": "PBM",
+                        "Tes Intelegensi Umum": "TIU",
+                        "Tes Wawasan Kebangsaan": "TWK",
+                        "Tes Karakteristik Pribadi": "TKP",
+                        "Fisika": "FIS",
+                        "Geografi": "GEO",
+                        "Sosiologi": "SOS",
+                        "Ekonomi": "EKO",
+                        "Sejarah": "SEJ",
+                        "SKB": "SKB",
+                        "IPA": "IPA",
+                        "Bahasa Arab": "ARB",
+                        "Tes Potensi Dasar": "TPD",
+                        "Mandarin": "MDR",
+                        "ICT": "ICTSD",
+                        "Pendidikan Agama Islam": "PAI",
+                        "UOI": "UOI",
+                        "TOEFL": "TOEFL",
+                        "Pengetahuan Umum": "PNGUM",
+                        "Calistung": "CLS",
+                        "Bahasa Jepang": "JPN",
+                        "GMST": "GMST",
+                        "UKDI": "UKDI",
+                        "TPA": "TPA",
+                        "Ilmu Hukum": "HKM",
+                        "Basic Math": "BM",
+                        "TIU STAN": "TIUSTAN",
+                        "Latihan Soal": "LS",
+                        "UKMPDD": "UKM",
+                        "Bahasa Korea": "KR",
+                        "Seleksi Kompetisi Bidang": "SKB",
+                        "Manajerial Sosiokultural": "MANSOS-CPNS",
+                        "Menggambar": "GBR",
+                        "Manajerial": "MNG",
+                        "Sosiokultural": "SK",
+                        "Komputer": "KMP",
+                        "Akuntansi": "AKN",
+                        "Profesional": "PRF",
+                        "Psikotest": "PSI",
+                        "Seleksi Kompetensi Manajerial": "SKM",
+                        "Seleksi Kompetensi Sosial Kultural": "SKSK",
+                        "Seleksi Kompetensi Wawancara": "SKW",
+                        "Seleksi Kompetensi Teknis": "SKT",
+                        "Mengaji": "MGJ",
+                        "Penalaran Kognitif": "PKG",
+                        "Penalaran Matematika": "PLM",
+                        "Literasi Bahasa Indonesia": "LBI",
+                        "Literasi Bahasa Inggris": "LBE",
+                        "Coaching": "COA",
+                        "Jasmani": "JSM",
+                        "TPA Verbal": "TPA-V",
+                        "Psikologi Kepribadian": "PSB",
+                        "Psikologi Kecerdasan": "PSC",
+                        "Psikologi Kecermatan": "PSA",
+                        "Pauli / Kraeplin": "PKR",
+                        "Logic dan Quantitative": "LNQ",
+                        "Mental Ideologi": "MI",
+                        "Manajerial Sosiokultural dan Wawancara": "MANSOSWAN",
+                        "Penalaran Numerik": "PN",
+                        "Solfegio": "SB",
+                        "Vokal": "SBV",
+                        "Gitar": "SBG",
+                        "IELTS": "IELTS",
+                    };
+
+                    // Get the code based on the input value
+                    const kodeKelas = mapping[namaMapel] || generateKodeKelas(namaMapel);
+                    createKdkelas.value = kodeKelas; // Set Kode Kelas
+                    createKdmapel.value = kodeKelas; // Set Kode Mata Pelajaran
                 });
+
+                // Function to generate code for subjects not in mapping
+                function generateKodeKelas(namaMapel) {
+                    const excludedWords = ['dan', 'atau'];
+                    const words = namaMapel.split(' ');
+                    let kode = '';
+
+                    if (words.length === 1) {
+                        // If only one word, take the first three letters
+                        kode = words[0].substring(0, 3).toUpperCase();
+                    } else {
+                        // For multiple words, take the first letter of each word excluding excludedWords
+                        kode = words
+                            .filter(word => !excludedWords.includes(word.toLowerCase()))
+                            .map(word => word.charAt(0).toUpperCase())
+                            .join('');
+                    }
+
+                    return kode;
+                }
 
                 // Handle opening and closing of edit modal
                 const editModal = document.getElementById('editModal');
