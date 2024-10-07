@@ -221,11 +221,8 @@
                 const createNamaMapel = document.getElementById('create_nama_mapel');
                 const createKdkelas = document.getElementById('create_kdkelas');
                 const createKdmapel = document.getElementById('create_kdmapel');
-
                 createNamaMapel.addEventListener('input', function() {
-                    const namaMapel = this.value.trim(); // Get the trimmed value
-
-                    // Mapping of nama_mapel to kdkelas and kdmapel
+                    const namaMapel = this.value.trim();
                     const mapping = {
                         "Pengetahuan dan Pemahaman Umum": "PPU",
                         "Pengetahuan Kuantitatif": "PK",

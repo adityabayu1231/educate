@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Program;
 use App\Models\Student;
+use App\Models\Subject;
+use App\Models\Teacher;
 use App\Models\SubProgram;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +18,24 @@ class AuthUserController extends Controller
         // Mendapatkan data user yang sudah login
         $user = Auth::user();
 
+        // Mengambil data teacher berdasarkan user_id dari user yang sedang login
+        $teacher = Teacher::where('user_id', $user->id)->first();
+
+        // Inisialisasi variabel untuk mata pelajaran
+        $subjects = collect(); // Menggunakan koleksi kosong sebagai default
+
+        // Mengecek apakah role_id adalah 2 (guru)
+        if ($user->role_id == 2 && $teacher) {
+            // Mengambil mata pelajaran berdasarkan subject_ids
+            $subject_ids = json_decode($teacher->subject_ids);
+            $subjects = Subject::whereIn('id', $subject_ids)->get();
+        }
+
         // Mengambil data student berdasarkan user_id dari user yang sedang login
         $student = Student::where('user_id', $user->id)->first();
 
-        // Mengirim data user dan student ke view dashboard
-        return view('dashboard', compact('user', 'student'));
+        // Mengirim data user, teacher, dan subjects ke view dashboard
+        return view('dashboard', compact('user', 'teacher', 'subjects', 'student'));
     }
 
     public function biostudent()

@@ -66,8 +66,7 @@ Route::prefix('teacher')->name('teacher.')->group(function () {
         Route::get('/classes', [AuthTeacherController::class, 'index'])->name('classes.index');
         Route::get('/profile', [AuthTeacherController::class, 'edit'])->name('profile.edit');
         Route::get('/biodata', [AuthTeacherController::class, 'biodata'])->name('biodata');
-        // Example of another protected route
-        Route::get('/bio', [AuthTeacherController::class, 'show'])->name('biodata.show');
+        Route::post('/biodata', [AuthTeacherController::class, 'store'])->name('store');
     });
 });
 

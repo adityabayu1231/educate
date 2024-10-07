@@ -221,8 +221,205 @@
                         </div>
                     </div>
                 @elseif (Auth::user()->role_id == 2)
-                    <!-- Role ID 2 (misalnya sebagai guru atau peran lain) -->
-                    <h1>Saya adalah {{ Auth::user()->fullname }}, sebagai {{ Auth::user()->role->name }}</h1>
+                    <!-- Tampilan untuk Guru -->
+                    <h1 class="text-2xl font-semibold text-gray-800 mb-4">
+                        Saya adalah {{ Auth::user()->fullname }}, sebagai {{ Auth::user()->role->name }}
+                    </h1>
+
+                    <!-- Data Section -->
+                    <div class="space-y-4">
+                        <!-- Row: Informasi Pengguna -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="fullname" class="block text-sm font-medium text-gray-700">Full
+                                    Name</label>
+                                <input type="text" id="fullname" name="fullname"
+                                    value="{{ Auth::user()->fullname }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="email" name="email"
+                                    value="{{ Auth::user()->email }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700">No HP</label>
+                                <input type="text" id="phone" name="phone"
+                                    value="{{ Auth::user()->phone_number }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                        </div>
+
+                        <!-- Row: Data Guru -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="place_of_birth" class="block text-sm font-medium text-gray-700">Place of
+                                    Birth</label>
+                                <input type="text" id="place_of_birth" name="place_of_birth"
+                                    value="{{ $teacher->place_of_birth }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date of
+                                    Birth</label>
+                                <input type="date" id="date_of_birth" name="date_of_birth"
+                                    value="{{ $teacher->date_of_birth }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                                <input type="text" id="gender" name="gender" value="{{ $teacher->gender }}"
+                                    readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="religion" class="block text-sm font-medium text-gray-700">Religion</label>
+                                <input type="text" id="religion" name="religion"
+                                    value="{{ $teacher->religion }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="province" class="block text-sm font-medium text-gray-700">Province</label>
+                                <input type="text" id="provinsi" name="province" value="" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                                <input type="text" id="kota" name="city" value="" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="district" class="block text-sm font-medium text-gray-700">District</label>
+                                <input type="text" id="kecamatan" name="district" value="" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="village" class="block text-sm font-medium text-gray-700">Village</label>
+                                <input type="text" id="kelurahan" name="village" value="" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="postal_code" class="block text-sm font-medium text-gray-700">Postal
+                                    Code</label>
+                                <input type="text" id="postal_code" name="postal_code"
+                                    value="{{ $teacher->postal_code }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                                <input type="text" id="address" name="address" value="{{ $teacher->address }}"
+                                    readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="university"
+                                    class="block text-sm font-medium text-gray-700">University</label>
+                                <input type="text" id="university" name="university"
+                                    value="{{ $teacher->university }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="degree" class="block text-sm font-medium text-gray-700">Degree</label>
+                                <input type="text" id="degree" name="degree" value="{{ $teacher->degree }}"
+                                    readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="major" class="block text-sm font-medium text-gray-700">Major</label>
+                                <input type="text" id="major" name="major" value="{{ $teacher->major }}"
+                                    readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="teaching_level" class="block text-sm font-medium text-gray-700">Teaching
+                                    Level</label>
+                                <input type="text" id="teaching_level" name="teaching_level"
+                                    value="{{ $teacher->teaching_level }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="achievements"
+                                    class="block text-sm font-medium text-gray-700">Achievements</label>
+                                <textarea id="achievements" name="achievements" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">{{ $teacher->achievements }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
+                                <textarea id="notes" name="notes" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">{{ $teacher->notes }}</textarea>
+                            </div>
+                            <div>
+                                <label for="nik" class="block text-sm font-medium text-gray-700">NIK</label>
+                                <input type="text" id="nik" name="nik" value="{{ $teacher->nik }}"
+                                    readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="cv" class="block text-sm font-medium text-gray-700">CV</label>
+                                <input type="text" id="cv" name="cv" value="{{ $teacher->cv }}"
+                                    readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="bank" class="block text-sm font-medium text-gray-700">Bank</label>
+                                <input type="text" id="bank" name="bank" value="{{ $teacher->bank }}"
+                                    readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="account_number" class="block text-sm font-medium text-gray-700">Account
+                                    Number</label>
+                                <input type="text" id="account_number" name="account_number"
+                                    value="{{ $teacher->account_number }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                            <div>
+                                <label for="account_name" class="block text-sm font-medium text-gray-700">Account
+                                    Name</label>
+                                <input type="text" id="account_name" name="account_name"
+                                    value="{{ $teacher->account_name }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                        </div>
+
+                        <!-- Row: Mata Pelajaran -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="subjects" class="block text-sm font-medium text-gray-700">Mata
+                                    Pelajaran</label>
+                                <input type="text" id="subjects" name="subjects"
+                                    value="{{ $subjects->pluck('nama_mapel')->join(', ') }}" readonly
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                            </div>
+                        </div>
+
+                        <!-- Button Change / Save -->
+                        <div class="text-right mt-4">
+                            <button id="changeButton"
+                                class="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600">
+                                <i class="fas fa-edit mr-2"></i> Change
+                            </button>
+                        </div>
+                    </div>
                 @else
                     <!-- Role selain 1 dan 2 (misalnya Admin) -->
                     <h1>Halo selamat datang kembali admin!</h1>
@@ -291,10 +488,19 @@
                 alert('Data orang tua telah disimpan!');
             }
         });
-        const provinceId = "{{ $student ? $student->province_id : '' }}";
-        const cityId = "{{ $student ? $student->city_id : '' }}";
-        const districtId = "{{ $student ? $student->district_id : '' }}";
-        const villageId = "{{ $student ? $student->village_id : '' }}";
+
+        @if (Auth::user()->role_id == 1) // Jika role_id adalah 1 (siswa)
+            const provinceId = "{{ $student ? $student->province_id : '' }}";
+            const cityId = "{{ $student ? $student->city_id : '' }}";
+            const districtId = "{{ $student ? $student->district_id : '' }}";
+            const villageId = "{{ $student ? $student->village_id : '' }}";
+        @else
+            const provinceId = '';
+            const cityId = '';
+            const districtId = '';
+            const villageId = '';
+        @endif
+
         // Function to fetch data from API
         async function fetchData() {
             try {
@@ -330,4 +536,55 @@
         // Call the fetchData function
         fetchData();
     </script>
+    @if (Auth::user()->role_id == 2) // Jika role_id adalah 2 (guru)
+    <script>
+        const provinsiId = "{{ $teacher ? $teacher->province_id : '' }}"; // ID Provinsi
+        const kotaId = "{{ $teacher ? $teacher->city_id : '' }}"; // ID Kota
+        const kecamatanId = "{{ $teacher ? $teacher->district_id : '' }}"; // ID Kecamatan
+        const kelurahanId = "{{ $teacher ? $teacher->village_id : '' }}"; // ID Kelurahan
+    
+        async function fetchDataGuru() {
+            try {
+                // Fetch Province
+                const provinceResponse = await fetch(
+                    `https://adityabayu1231.github.io/api-wilayah-indonesia/api/province/${provinsiId}.json`
+                );
+                const provinceData = await provinceResponse.json();
+                document.getElementById('provinsi').value = provinceData.name;
+                console.log("Province data fetched successfully:", provinceData.name); // Log sukses
+    
+                // Fetch City
+                const cityResponse = await fetch(
+                    `https://adityabayu1231.github.io/api-wilayah-indonesia/api/regency/${kotaId}.json`
+                );
+                const cityData = await cityResponse.json();
+                document.getElementById('kota').value = cityData.name;
+                console.log("City data fetched successfully:", cityData.name); // Log sukses
+    
+                // Fetch District
+                const districtResponse = await fetch(
+                    `https://adityabayu1231.github.io/api-wilayah-indonesia/api/district/${kecamatanId}.json`
+                );
+                const districtData = await districtResponse.json();
+                document.getElementById('kecamatan').value = districtData.name;
+                console.log("District data fetched successfully:", districtData.name); // Log sukses
+    
+                // Fetch Village
+                const villageResponse = await fetch(
+                    `https://adityabayu1231.github.io/api-wilayah-indonesia/api/village/${kelurahanId}.json`
+                );
+                const villageData = await villageResponse.json();
+                document.getElementById('kelurahan').value = villageData.name;
+                console.log("Village data fetched successfully:", villageData.name); // Log sukses
+    
+            } catch (error) {
+                console.error("Error fetching data:", error); // Log kesalahan
+                alert("Failed to fetch data. Please check the console for more details."); // Pemberitahuan kepada pengguna
+            }
+        }
+    
+        // Call the fetchDataGuru function
+        fetchDataGuru();
+    </script>
+    @endif    
 </x-app-layout>

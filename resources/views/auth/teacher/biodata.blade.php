@@ -23,7 +23,7 @@
                 <div class="bg-white shadow-2xl rounded-lg mt-12 p-6 mb-7">
                     <div class="text-center mb-4">
                         <h1 id="formTitle" class="text-2xl font-bold text-gray-700">
-                            Personal Information
+                            Informasi Pribadi
                             <i id="iconFire" class="fas fa-fire text-orange-500"></i>
                         </h1>
                     </div>
@@ -42,71 +42,73 @@
 
                         <!-- Form 1 -->
                         <div id="form1" class="form-step">
+                            <!-- Nama Lengkap -->
                             <div class="mb-4">
-                                <x-label for="name" value="{{ __('Fullname') }}" />
+                                <x-label for="name" value="{{ __('Nama Lengkap') }}" />
                                 <x-input id="name"
-                                    class="block mt-1 w-full bg-gray-200 text-gray-600  required-field" type="text"
+                                    class="block mt-1 w-full bg-gray-200 text-gray-600 required-field" type="text"
                                     name="name" value="{{ Auth::user()->fullname }}" required readonly />
                             </div>
 
+                            <!-- Email -->
                             <div class="mb-4">
                                 <x-label for="email" value="{{ __('Email') }}" />
                                 <x-input id="email"
-                                    class="block mt-1 w-full bg-gray-200 text-gray-600  required-field" type="email"
+                                    class="block mt-1 w-full bg-gray-200 text-gray-600 required-field" type="email"
                                     name="email" value="{{ Auth::user()->email }}" required readonly />
                             </div>
 
+                            <!-- Nomor Handphone -->
                             <div class="mb-4">
-                                <x-label for="city_of_birth" value="{{ __('City of Birth') }}" />
+                                <x-label for="phone" value="{{ __('Nomor Handphone') }}" />
+                                <x-input id="phone"
+                                    class="block mt-1 w-full bg-gray-200 text-gray-600 required-field" type="text"
+                                    name="phone" value="{{ Auth::user()->phone_number }}" required readonly />
+                            </div>
+
+                            <!-- Tempat Lahir -->
+                            <div class="mb-4">
+                                <x-label for="city_of_birth" value="{{ __('Tempat Lahir') }}" />
                                 <x-input id="city_of_birth"
                                     class="block mt-1 w-full required-field focus:ring-2 focus:ring-blue-500"
-                                    type="text" name="city_of_birth" :value="old('city_of_birth')" required autocomplete
-                                    autofocus />
+                                    type="text" name="city_of_birth" :value="old('city_of_birth')" required />
                             </div>
 
+                            <!-- Tanggal Lahir -->
                             <div class="mb-4">
-                                <x-label for="gender" value="{{ __('Gender') }}" />
-                                <div class="flex items-center">
-                                    <x-input id="male" type="radio" name="gender" value="male"
-                                        class="mr-2 required-field" />
-                                    <x-label for="male" value="{{ __('Male') }}" />
-                                    <x-input id="female" type="radio" name="gender" value="female"
-                                        class="ml-4 mr-2 required-field" />
-                                    <x-label for="female" value="{{ __('Female') }}" />
-                                </div>
-                            </div>
-
-                            <div class="mb-4">
-                                <x-label for="religion" value="{{ __('Religion') }}" />
-                                <x-select id="religion" name="religion" class="required-field">
-                                    <option value="islam">{{ __('Islam') }}</option>
-                                    <option value="christian">{{ __('Christian') }}</option>
-                                    <!-- Add more options as needed -->
-                                </x-select>
-                            </div>
-
-                            <div class="mb-4">
-                                <x-label for="date_of_birth" value="{{ __('Date of Birth') }}" />
+                                <x-label for="date_of_birth" value="{{ __('Tanggal Lahir') }}" />
                                 <x-input id="date_of_birth" class="block mt-1 w-full required-field" type="date"
                                     name="date_of_birth" :value="old('date_of_birth')" required />
                             </div>
 
+                            <!-- Jenis Kelamin -->
                             <div class="mb-4">
-                                <x-label for="phone" value="{{ __('Phone Number') }}" />
-                                <x-input id="phone"
-                                    class="block mt-1 w-full required-field bg-gray-200 text-gray-600 cursor-not-allowed"
-                                    type="text" name="phone" value="{{ Auth::user()->phone_number }}" required
-                                    readonly />
+                                <x-label for="gender" value="{{ __('Jenis Kelamin') }}" />
+                                <div class="flex items-center">
+                                    <x-input id="male" type="radio" name="gender" value="male"
+                                        class="mr-2 required-field" />
+                                    <x-label for="male" value="{{ __('Pria') }}" />
+                                    <x-input id="female" type="radio" name="gender" value="female"
+                                        class="ml-4 mr-2 required-field" />
+                                    <x-label for="female" value="{{ __('Wanita') }}" />
+                                </div>
                             </div>
 
+                            <!-- Agama -->
                             <div class="mb-4">
-                                <x-label for="status" value="{{ __('Status') }}" />
-                                <x-input id="status" class="block mt-1 w-full" type="text" name="status"
-                                    :value="old('status')" />
+                                <x-label for="religion" value="{{ __('Agama') }}" />
+                                <x-select id="religion" name="religion" class="required-field">
+                                    <option value="islam">{{ __('Islam') }}</option>
+                                    <option value="kristen">{{ __('Kristen') }}</option>
+                                    <option value="hindu">{{ __('Hindu') }}</option>
+                                    <option value="buddha">{{ __('Buddha') }}</option>
+                                    <option value="konghucu">{{ __('Konghucu') }}</option>
+                                </x-select>
                             </div>
 
+                            <!-- Prestasi -->
                             <div class="mb-4">
-                                <x-label for="achievements" value="{{ __('Achievements') }}" />
+                                <x-label for="achievements" value="{{ __('Prestasi') }}" />
                                 <x-input id="achievements" class="block mt-1 w-full" type="text"
                                     name="achievements" :value="old('achievements')" />
                             </div>
@@ -121,79 +123,67 @@
 
                         <!-- Form 2 -->
                         <div id="form2" class="form-step hidden">
+                            <!-- Provinsi -->
                             <div class="mb-4">
-                                <x-label for="province" value="{{ __('Province') }}" />
+                                <x-label for="province" value="{{ __('Provinsi') }}" />
                                 <select name="province" id="province"
-                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field">
-                                    <option value="" disabled selected>Select Province</option>
-                                    <!-- Options will be populated via JavaScript -->
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 required-field">
+                                    <option value="" disabled selected>Pilih Provinsi</option>
                                 </select>
                             </div>
 
+                            <!-- Kota/Kabupaten -->
                             <div class="mb-4">
-                                <x-label for="city" value="{{ __('City') }}" />
+                                <x-label for="city" value="{{ __('Kota/Kabupaten') }}" />
                                 <select name="city" id="city"
-                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 required-field"
                                     disabled>
-                                    <option value="" disabled selected>Select City</option>
-                                    <!-- Options will be populated via JavaScript -->
+                                    <option value="" disabled selected>Pilih Kota</option>
                                 </select>
                             </div>
 
+                            <!-- Kecamatan -->
                             <div class="mb-4">
-                                <x-label for="district" value="{{ __('District') }}" />
+                                <x-label for="district" value="{{ __('Kecamatan') }}" />
                                 <select name="district" id="district"
-                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 required-field"
                                     disabled>
-                                    <option value="" disabled selected>Select District</option>
-                                    <!-- Options will be populated via JavaScript -->
+                                    <option value="" disabled selected>Pilih Kecamatan</option>
                                 </select>
                             </div>
 
+                            <!-- Kelurahan -->
                             <div class="mb-4">
-                                <x-label for="village" value="{{ __('Village') }}" />
+                                <x-label for="village" value="{{ __('Kelurahan') }}" />
                                 <select name="village" id="village"
-                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 required-field"
                                     disabled>
-                                    <option value="" disabled selected>Select Village</option>
-                                    <!-- Options will be populated via JavaScript -->
+                                    <option value="" disabled selected>Pilih Kelurahan</option>
                                 </select>
                             </div>
 
+                            <!-- Kode Pos -->
                             <div class="mb-4">
-                                <x-label for="postal_code" value="{{ __('Postal Code') }}" />
+                                <x-label for="postal_code" value="{{ __('Kode Pos') }}" />
                                 <x-input id="postal_code"
-                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
+                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 required-field"
                                     type="text" name="postal_code" :value="old('postal_code')" />
                             </div>
 
+                            <!-- Alamat Lengkap -->
                             <div class="mb-4">
-                                <x-label for="address_details" value="{{ __('Address Details') }}" />
+                                <x-label for="address_details" value="{{ __('Alamat Lengkap') }}" />
                                 <x-textarea id="address_details" name="address_details"
-                                    class="required-field p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none">{{ old('address_details') }}</x-textarea>
-                            </div>
-
-                            <div class="mb-4">
-                                <x-label for="domicile_address" value="{{ __('Domicile Address') }}" />
-                                <x-input id="domicile_address"
-                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
-                                    type="text" name="domicile_address" :value="old('domicile_address')" />
-                            </div>
-
-                            <div class="mb-4">
-                                <x-label for="address_coordinates" value="{{ __('Address Coordinates') }}" />
-                                <x-input id="address_coordinates"
-                                    class="block mt-1 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300 focus:outline-none required-field"
-                                    type="text" name="address_coordinates" :value="old('address_coordinates')" />
+                                    class="required-field p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300">{{ old('address_details') }}</x-textarea>
                             </div>
 
                             <div class="flex justify-between mt-4">
                                 <button type="button" id="backForm2"
-                                    class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition duration-200">
+                                    class="bg-gray-500 text-white py-2 px-4 rounded">
                                     {{ __('Back') }}
                                 </button>
                                 <button type="button" id="nextForm2"
-                                    class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
+                                    class="bg-blue-500 text-white py-2 px-4 rounded">
                                     {{ __('Next') }}
                                 </button>
                             </div>
@@ -201,67 +191,112 @@
 
                         <!-- Form 3 -->
                         <div id="form3" class="form-step hidden">
+                            <!-- Universitas -->
                             <div class="mb-4">
-                                <x-label for="education_level" value="{{ __('Level of Education') }}" />
-                                <x-input id="education_level" class="block mt-1 w-full required-field" type="text"
-                                    name="education_level" :value="old('education_level')" />
-                            </div>
-
-                            <div class="mb-4">
-                                <x-label for="university" value="{{ __('University') }}" />
+                                <x-label for="university" value="{{ __('Universitas') }}" />
                                 <x-input id="university" class="block mt-1 w-full required-field" type="text"
                                     name="university" :value="old('university')" />
                             </div>
 
+                            <!-- Gelar -->
                             <div class="mb-4">
-                                <x-label for="photo" value="{{ __('Photo') }}" />
-                                <x-input id="photo" class="block border border-gray-300 mt-1 w-full"
-                                    type="file" name="photo" />
+                                <x-label for="degree" value="{{ __('Gelar') }}" />
+                                <x-input id="degree" class="block mt-1 w-full required-field" type="text"
+                                    name="degree" :value="old('degree')" />
                             </div>
 
+                            <!-- Jurusan -->
                             <div class="mb-4">
-                                <x-label for="major" value="{{ __('Major') }}" />
+                                <x-label for="major" value="{{ __('Jurusan') }}" />
                                 <x-input id="major" class="block mt-1 w-full required-field" type="text"
                                     name="major" :value="old('major')" />
                             </div>
 
+                            <!-- Jenjang Mengajar -->
                             <div class="mb-4">
-                                <x-label for="subject" value="{{ __('Subject') }}" />
-                                <x-input id="subject" class="block mt-1 w-full required-field" type="text"
-                                    name="subject" :value="old('subject')" />
-                            </div>
-
-                            <div class="mb-4">
-                                <x-label for="ktp" value="{{ __('KTP') }}" />
-                                <x-input id="ktp" class="block border border-gray-300 mt-1 w-full"
-                                    type="file" name="ktp" />
-                            </div>
-
-                            <div class="mb-4">
-                                <x-label for="cv" value="{{ __('CV') }}" />
-                                <x-input id="cv" class="block border border-gray-300 mt-1 w-full"
-                                    type="file" name="cv" />
-                            </div>
-
-                            <div class="mb-4">
-                                <x-label for="teaching_level" value="{{ __('Teaching Level') }}" />
+                                <x-label for="teaching_level" value="{{ __('Jenjang Mengajar') }}" />
                                 <x-input id="teaching_level" class="block mt-1 w-full required-field" type="text"
                                     name="teaching_level" :value="old('teaching_level')" />
                             </div>
 
+                            <!-- Foto -->
                             <div class="mb-4">
-                                <x-label for="teacher_requirements" value="{{ __('Teacher Requirements') }}" />
-                                <x-input id="teacher_requirements" class="block mt-1 w-full required-field"
-                                    type="text" name="teacher_requirements" :value="old('teacher_requirements')" />
+                                <x-label for="photo" value="{{ __('Foto') }}" />
+                                <x-input id="photo" class="block mt-1 w-full" type="file" name="photo"
+                                    accept="image/*" onchange="previewImage(event)" />
                             </div>
 
-                            <!-- Buttons to navigate between forms -->
+                            <!-- KTP -->
+                            <div class="mb-4">
+                                <x-label for="ktp" value="{{ __('KTP') }}" />
+                                <x-input id="ktp" class="block mt-1 w-full" type="file" name="ktp"
+                                    accept=".pdf,.doc,.docx,image/*" />
+                            </div>
+
+                            <!-- CV -->
+                            <div class="mb-4">
+                                <x-label for="cv" value="{{ __('CV') }}" />
+                                <x-input id="cv" class="block mt-1 w-full" type="file" name="cv"
+                                    accept=".pdf,.doc,.docx,image/*" />
+                            </div>
+
+                            <!-- Bank -->
+                            <div class="mb-4">
+                                <x-label for="bank" value="{{ __('Bank') }}" />
+                                <x-input id="bank" class="block mt-1 w-full required-field" type="text"
+                                    name="bank" :value="old('bank')" />
+                            </div>
+
+                            <!-- Nomor Rekening -->
+                            <div class="mb-4">
+                                <x-label for="account_number" value="{{ __('Nomor Rekening') }}" />
+                                <x-input id="account_number" class="block mt-1 w-full required-field" type="text"
+                                    name="account_number" :value="old('account_number')" />
+                            </div>
+
+                            <!-- Rekening Atas Nama -->
+                            <div class="mb-4">
+                                <x-label for="account_name" value="{{ __('Rekening Atas Nama') }}" />
+                                <x-input id="account_name" class="block mt-1 w-full required-field" type="text"
+                                    name="account_name" :value="old('account_name')" />
+                            </div>
+
+                            <!-- ID Mata Pelajaran -->
+                            <div class="mb-4">
+                                <x-label for="subject_ids" value="{{ __('ID Mata Pelajaran') }}" />
+                                <div class="relative">
+                                    <button type="button" id="selectAll"
+                                        class="absolute top-0 right-0 mt-1 mr-2 bg-blue-500 text-white px-3 py-1 rounded">
+                                        Select All
+                                    </button>
+                                    <div class="overflow-y-auto max-h-60 border border-gray-300 rounded-lg shadow-lg">
+                                        @foreach ($subjects as $subject)
+                                            <label class="flex items-center p-2 hover:bg-gray-100 cursor-pointer">
+                                                <input type="checkbox" name="subject_ids[]"
+                                                    value="{{ $subject->id }}" class="mr-2"
+                                                    {{ is_array(old('subject_ids')) && in_array($subject->id, old('subject_ids')) ? 'checked' : '' }}>
+                                                {{ $subject->nama_mapel }}
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Keterangan -->
+                            <div class="mb-4">
+                                <x-label for="notes" value="{{ __('Keterangan') }}" />
+                                <x-textarea id="notes" name="notes"
+                                    class="required-field p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300">{{ old('notes') }}</x-textarea>
+                            </div>
+
                             <div class="flex justify-between mt-4">
                                 <button type="button" id="backForm3"
                                     class="bg-gray-500 text-white py-2 px-4 rounded">
                                     {{ __('Back') }}
                                 </button>
-                                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">
+                                <button type="button"
+                                    onclick="if(confirm('Are you sure you want to submit the form?')) { document.getElementById('multiStepForm').submit(); }"
+                                    class="bg-blue-500 text-white py-2 px-4 rounded">
                                     {{ __('Submit') }}
                                 </button>
                             </div>
@@ -334,6 +369,38 @@
             document.getElementById('backForm3').addEventListener('click', function() {
                 document.getElementById('form3').classList.add('hidden');
                 document.getElementById('form2').classList.remove('hidden');
+            });
+        });
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage');
+                    previewImage.src = e.target.result;
+
+                    // Menampilkan modal
+                    const modal = document.getElementById('imagePreviewModal');
+                    modal.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Event listener untuk tombol close modal
+        document.getElementById('closeModal').addEventListener('click', function() {
+            const modal = document.getElementById('imagePreviewModal');
+            modal.classList.add('hidden');
+        });
+        // Toggle Select All
+        document.getElementById('selectAll').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent form submission when clicking the button
+            const checkboxes = document.querySelectorAll('input[name="subject_ids[]"]');
+            const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = !allChecked;
             });
         });
     </script>

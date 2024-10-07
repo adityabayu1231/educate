@@ -37,120 +37,338 @@
                 </h3>
                 <ul class="mt-3">
                     <!-- Dashboard -->
-                    <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 bg-amber-500 rounded-md"
-                        :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-amber-500/[0.24] to-amber-500/[0.04]': {{ Request::is('dashboard') ? 'true' : 'false' }} }"
-                        x-data="{ open: {{ Request::is('dashboard') ? 'true' : 'false' }} }">
-                        <a class="block text-white truncate transition @if (!Request::is('dashboard')) hover:text-gray-200 @endif"
-                            href="#0" @click.prevent="open = !open; sidebarExpanded = true">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas fa-user-circle text-white"></i>
-                                    <span
-                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                        My Profile
-                                    </span>
+                    @if (Auth::user()->role_id == 1)
+                        <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 bg-amber-500 rounded-md"
+                            :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-amber-500/[0.24] to-amber-500/[0.04]': {{ Request::is('dashboard') ? 'true' : 'false' }} }"
+                            x-data="{ open: {{ Request::is('dashboard') ? 'true' : 'false' }} }">
+                            <a class="block text-white truncate transition @if (!Request::is('dashboard')) hover:text-gray-200 @endif"
+                                href="#0" @click.prevent="open = !open; sidebarExpanded = true">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-user-circle text-white"></i>
+                                        <span
+                                            class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                            My Profile
+                                        </span>
+                                    </div>
+                                    <div
+                                        class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                        <i class="fas fa-chevron-down text-white"
+                                            :class="open ? 'rotate-180' : 'rotate-0'"></i>
+                                    </div>
                                 </div>
-                                <div
-                                    class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                    <i class="fas fa-chevron-down text-white"
-                                        :class="open ? 'rotate-180' : 'rotate-0'"></i>
-                                </div>
+                            </a>
+                            <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                                <ul class="pl-8 mt-1" :class="open ? '!block' : 'hidden'">
+                                    <li class="mb-1 last:mb-0">
+                                        <a class="block hover:text-gray-200 transition truncate @if (Request::is('dashboard')) text-white @endif"
+                                            href="{{ route('dashboard') }}">
+                                            <span
+                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                Main
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="mb-1 last:mb-0">
+                                        <a class="block text-gray-300 hover:text-gray-100 transition truncate"
+                                            href="#">
+                                            <span
+                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                Fintech
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                        </a>
-                        <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                            <ul class="pl-8 mt-1" :class="open ? '!block' : 'hidden'">
-                                <li class="mb-1 last:mb-0">
-                                    <a class="block hover:text-gray-200 transition truncate @if (Request::is('dashboard')) text-white @endif"
-                                        href="{{ route('dashboard') }}">
-                                        <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                            Main
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="mb-1 last:mb-0">
-                                    <a class="block text-gray-300 hover:text-gray-100 transition truncate @if (Route::is('fintech')) text-white @endif"
-                                        href="#">
-                                        <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                            Fintech
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                        </li>
 
+                        <!-- My Target -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center justify-between">
+                                    <div class="grow flex items-center">
+                                        <i class="fa-solid fa-clipboard-check text-amber-500"></i>
+                                        <span
+                                            class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
+                                            Target</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
 
-                    <!-- Messages -->
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                        <a class="block text-gray-100 truncate transition @if (!in_array(Request::segment(1), ['messages'])) {{ 'hover:text-white' }} @endif"
-                            href="#">
-                            <div class="flex items-center justify-between">
-                                <div class="grow flex items-center">
-                                    <i
-                                        class="fas fa-envelope @if (in_array(Request::segment(1), ['messages'])) {{ 'text-violet-500' }} @else {{ 'text-gray-500' }} @endif"></i>
+                        <!-- Edu Center -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-bars-progress text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Edu
+                                        Center</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- My Schedule -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-clipboard-list text-amber-500"></i>
                                     <span
                                         class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
-                                        Target</span>
+                                        Schedule</span>
                                 </div>
-                                <!-- Badge -->
-                                <div class="flex flex-shrink-0 ml-2">
+                            </a>
+                        </li>
+
+                        <!-- Teacher Profile -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-tie text-amber-500"></i>
                                     <span
-                                        class="inline-flex items-center justify-center h-5 text-xs font-medium text-white bg-violet-400 px-2 rounded">4</span>
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Teacher
+                                        Profile</span>
                                 </div>
+                            </a>
+                        </li>
+
+                        <!-- Learning Report -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fas fa-book-open text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Learning
+                                        Report</span>
+                                </div>
+                            </a>
+                        </li>
+                    @elseif (Auth::user()->role_id == 2)
+                        <!-- Dashboard -->
+                        <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 bg-amber-500 rounded-md"
+                            :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-amber-500/[0.24] to-amber-500/[0.04]': {{ Request::is('dashboard') ? 'true' : 'false' }} }"
+                            x-data="{ open: {{ Request::is('dashboard') ? 'true' : 'false' }} }">
+                            <a class="block text-white truncate transition @if (!Request::is('dashboard')) hover:text-gray-200 @endif"
+                                href="#0" @click.prevent="open = !open; sidebarExpanded = true">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-user-circle text-white"></i>
+                                        <span
+                                            class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                            My Profile
+                                        </span>
+                                    </div>
+                                    <div
+                                        class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                        <i class="fas fa-chevron-down text-white"
+                                            :class="open ? 'rotate-180' : 'rotate-0'"></i>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                                <ul class="pl-8 mt-1" :class="open ? '!block' : 'hidden'">
+                                    <li class="mb-1 last:mb-0">
+                                        <a class="block hover:text-gray-200 transition truncate @if (Request::is('dashboard')) text-white @endif"
+                                            href="{{ route('dashboard') }}">
+                                            <span
+                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                Main
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="mb-1 last:mb-0">
+                                        <a class="block text-gray-300 hover:text-gray-100 transition truncate"
+                                            href="#">
+                                            <span
+                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                Fintech
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                        </a>
-                    </li>
-                    <!-- Inbox -->
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                        <a class="block text-gray-100 truncate transition @if (!in_array(Request::segment(1), ['inbox'])) {{ 'hover:text-white' }} @endif"
-                            href="#">
-                            <div class="flex items-center">
-                                <i
-                                    class="fas fa-inbox @if (in_array(Request::segment(1), ['inbox'])) {{ 'text-violet-500' }} @else {{ 'text-gray-500' }} @endif"></i>
-                                <span
-                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Edu
-                                    Center</span>
+                        </li>
+
+                        <!-- Edu Center -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-bars-progress text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Edu
+                                        Center</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- My Schedule -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-clipboard-list text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
+                                        Schedule</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- Biodata Siswa -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fas fa-book text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Biodata
+                                        Siswa</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- Teaching Report -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fas fa-book-open text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Teaching
+                                        Report</span>
+                                </div>
+                            </a>
+                        </li>
+                    @else
+                        <!-- If not role 1 or 2, show all menus -->
+                        <!-- My Profile -->
+                        <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 bg-amber-500 rounded-md"
+                            :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-amber-500/[0.24] to-amber-500/[0.04]': {{ Request::is('dashboard') ? 'true' : 'false' }} }"
+                            x-data="{ open: {{ Request::is('dashboard') ? 'true' : 'false' }} }">
+                            <a class="block text-white truncate transition @if (!Request::is('dashboard')) hover:text-gray-200 @endif"
+                                href="#0" @click.prevent="open = !open; sidebarExpanded = true">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-user-circle text-white"></i>
+                                        <span
+                                            class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                            My Profile
+                                        </span>
+                                    </div>
+                                    <div
+                                        class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                        <i class="fas fa-chevron-down text-white"
+                                            :class="open ? 'rotate-180' : 'rotate-0'"></i>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                                <ul class="pl-8 mt-1" :class="open ? '!block' : 'hidden'">
+                                    <li class="mb-1 last:mb-0">
+                                        <a class="block hover:text-gray-200 transition truncate @if (Request::is('dashboard')) text-white @endif"
+                                            href="{{ route('dashboard') }}">
+                                            <span
+                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                Main
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="mb-1 last:mb-0">
+                                        <a class="block text-gray-300 hover:text-gray-100 transition truncate"
+                                            href="#">
+                                            <span
+                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                Fintech
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                        </a>
-                    </li>
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                        <a class="block text-gray-100 truncate transition @if (!in_array(Request::segment(1), ['inbox'])) {{ 'hover:text-white' }} @endif"
-                            href="#">
-                            <div class="flex items-center">
-                                <i
-                                    class="fas fa-calendar-day @if (in_array(Request::segment(1), ['inbox'])) {{ 'text-violet-500' }} @else {{ 'text-gray-500' }} @endif"></i>
-                                <span
-                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
-                                    Schedule</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                        <a class="block text-gray-100 truncate transition @if (!in_array(Request::segment(1), ['inbox'])) {{ 'hover:text-white' }} @endif"
-                            href="#">
-                            <div class="flex items-center">
-                                <i
-                                    class="fas fa-chalkboard-teacher @if (in_array(Request::segment(1), ['inbox'])) {{ 'text-violet-500' }} @else {{ 'text-gray-500' }} @endif"></i>
-                                <span
-                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Teacher
-                                    Profile</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                        <a class="block text-gray-100 truncate transition @if (!in_array(Request::segment(1), ['inbox'])) {{ 'hover:text-white' }} @endif"
-                            href="#">
-                            <div class="flex items-center">
-                                <i
-                                    class="fas fa-book @if (in_array(Request::segment(1), ['inbox'])) {{ 'text-violet-500' }} @else {{ 'text-gray-500' }} @endif"></i>
-                                <span
-                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Learning
-                                    Report</span>
-                            </div>
-                        </a>
-                    </li>
+                        </li>
+
+                        <!-- My Target -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center justify-between">
+                                    <div class="grow flex items-center">
+                                        <i class="fa-solid fa-clipboard-check text-amber-500"></i>
+                                        <span
+                                            class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
+                                            Target</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- Edu Center -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-bars-progress text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Edu
+                                        Center</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- My Schedule -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-clipboard-list text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
+                                        Schedule</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- Teacher Profile -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-tie text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Teacher
+                                        Profile</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- Learning Report -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fas fa-book-open text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Learning
+                                        Report</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- Biodata Siswa -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fas fa-book text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Biodata
+                                        Siswa</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <!-- Teaching Report -->
+                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
+                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                                <div class="flex items-center">
+                                    <i class="fas fa-book-open text-amber-500"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Teaching
+                                        Report</span>
+                                </div>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
