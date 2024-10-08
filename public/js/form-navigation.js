@@ -90,6 +90,19 @@ function validateFields() {
     return allFilled;
 }
 
+function validateStep4() {
+    const requiredField = document.querySelectorAll(".required-form");
+    const allFilleds = Array.from(requiredField).every((field) => {
+        return field.value.trim() !== "";
+    });
+
+    if (!allFilleds) {
+        alert("Harap isi semua kolom yang diperlukan sebelum melanjutkan.");
+    }
+
+    return allFilleds;
+}
+
 document.getElementById("nextBtn").addEventListener("click", () => {
     const selectedBrand = document.querySelector(
         'input[name="brand_id"]:checked'
@@ -112,6 +125,11 @@ document.getElementById("nextBtn").addEventListener("click", () => {
     // Validation for step 3
     if (currentStep === 3 && !validateFields()) {
         return; // Stop if not all fields are filled
+    }
+
+    // Validation for step 4
+    if (currentStep === 4 && !validateStep4()) {
+        return; // Stop if not all fields in step 4 are filled
     }
 
     if (currentStep < stepCount) {

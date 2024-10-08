@@ -18,7 +18,7 @@ class TeacherController extends Controller
     public function index()
     {
         try {
-            $teachers = Teacher::with(['user', 'subject'])->paginate(10);
+            $teachers = Teacher::paginate(10);
             $users = User::all(); // For creating new teacher
             $subjects = Subject::all(); // For subjects selection
             return view('admin.teachers', compact('teachers', 'users', 'subjects'));

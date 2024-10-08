@@ -84,7 +84,7 @@
         <!-- Right side: Image -->
         <div class="hidden md:block w-1/2">
             <img src="https://plus.unsplash.com/premium_photo-1664303228186-a61e7dc91597?q=80&w=1892&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Login Image" class="w-full h-full object-cover">
+                alt="Login Image" class="w-full h-auto max-h-screen object-cover">
         </div>
     </div>
 </x-guest-layout>
