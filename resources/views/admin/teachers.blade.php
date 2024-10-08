@@ -3,10 +3,34 @@
 @section('title', 'Manage Teachers')
 
 @section('content')
-    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold text-gray-900">Manage Teachers</h1>
+    <div class="px-4 sm:px-6 lg:px-8 py-1 w-full max-w-9xl mx-auto">
+
+        <div class="relative bg-blue-600 h-32 flex items-center justify-between p-4 rounded-lg shadow-lg mb-4">
+            <!-- Background Image as Cover -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-50"
+                style="background-image: url('{{ asset('backend/images/illustration/paper.jpg') }}');">
+            </div>
+
+            <!-- Content: Welcome Message and Button -->
+            <div class="relative flex justify-between w-full">
+                <!-- Left Section: Welcome Message -->
+                <div class="text-white p-4">
+                    <h1 class="text-2xl font-bold mb-2 text-black">Manages Guru ✨</h1>
+                    <!-- Mengurangi ukuran teks -->
+                    <p class="text-md text-gray-100">Lorem ipsum dolor sit amet</p> <!-- Mengurangi ukuran teks -->
+                </div>
+            </div>
         </div>
+
+        <div class="flex justify-end items-center mb-6">
+            <form method="GET" action="{{ route('admin.students.index') }}">
+                <input type="text" name="search" placeholder="Search guru..."
+                    class="border border-gray-300 rounded-md px-4 py-2">
+                <button type="submit"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md ml-2">Search</button>
+            </form>
+        </div>
+
         <!-- Display success or error messages -->
         @if (session('status'))
             <div class="mb-4 max-w-md p-4 bg-green-100 text-green-800 border-l-4 border-green-500 rounded-r-lg shadow-lg">

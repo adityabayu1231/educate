@@ -3,9 +3,26 @@
 @section('title', 'Manage Users')
 
 @section('content')
-    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold text-gray-900">Manage Users</h1>
+    <div class="px-4 sm:px-6 lg:px-8 py-1 w-full max-w-9xl mx-auto">
+
+        <div class="relative bg-blue-600 h-32 flex items-center justify-between p-4 rounded-lg shadow-lg mb-4">
+            <!-- Background Image as Cover -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-50"
+                style="background-image: url('{{ asset('backend/images/illustration/paper.jpg') }}');">
+            </div>
+
+            <!-- Content: Welcome Message and Button -->
+            <div class="relative flex justify-between w-full">
+                <!-- Left Section: Welcome Message -->
+                <div class="text-white p-4">
+                    <h1 class="text-2xl font-bold mb-2 text-black">Manages User ✨</h1>
+                    <!-- Mengurangi ukuran teks -->
+                    <p class="text-md text-gray-100">Lorem ipsum dolor sit amet</p> <!-- Mengurangi ukuran teks -->
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-end items-center mb-6">
             <button id="createUserBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
                 <i class="fas fa-plus mr-2"></i> Create User
             </button>

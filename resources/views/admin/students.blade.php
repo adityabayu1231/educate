@@ -3,11 +3,28 @@
 @section('title', 'Manage Students')
 
 @section('content')
-    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold text-gray-900">Manage Students</h1>
+    <div class="px-4 sm:px-6 lg:px-8 py-1 w-full max-w-9xl mx-auto">
+
+        <div class="relative bg-blue-600 h-32 flex items-center justify-between p-4 rounded-lg shadow-lg mb-4">
+            <!-- Background Image as Cover -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-50"
+                style="background-image: url('{{ asset('backend/images/illustration/paper.jpg') }}');">
+            </div>
+
+            <!-- Content: Welcome Message and Button -->
+            <div class="relative flex justify-between w-full">
+                <!-- Left Section: Welcome Message -->
+                <div class="text-white p-4">
+                    <h1 class="text-2xl font-bold mb-2 text-black">Manages Siswa ✨</h1>
+                    <!-- Mengurangi ukuran teks -->
+                    <p class="text-md text-gray-100">Lorem ipsum dolor sit amet</p> <!-- Mengurangi ukuran teks -->
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-end items-center mb-6">
             <form method="GET" action="{{ route('admin.students.index') }}">
-                <input type="text" name="search" placeholder="Search students..."
+                <input type="text" name="search" placeholder="Search siswa..."
                     class="border border-gray-300 rounded-md px-4 py-2">
                 <button type="submit"
                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md ml-2">Search</button>
@@ -24,18 +41,18 @@
             <table class="min-w-full bg-white shadow-md rounded-lg">
                 <thead>
                     <tr class="bg-gray-200 text-gray-800">
-                        <th class="py-2 px-4">No</th>
-                        <th class="py-2 px-4">Student Name</th>
-                        <th class="py-2 px-4">Eduline ID</th>
-                        <th class="py-2 px-4">Gender</th>
-                        <th class="py-2 px-4">Actions</th>
+                        <th class="py-2 px-4 text-left">No</th>
+                        <th class="py-2 px-4 text-left">Student Name</th>
+                        <th class="py-2 px-4 text-left">Eduline ID</th>
+                        <th class="py-2 px-4 text-left">Gender</th>
+                        <th class="py-2 px-4 text-left">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($students as $index => $student)
                         <tr class="border-b">
                             <td class="py-2 px-4">{{ $loop->iteration }}</td>
-                            <td class="py-2 px-4">{{ $student->user->name }}</td>
+                            <td class="py-2 px-4">{{ $student->user->fullname }}</td>
                             <td class="py-2 px-4">{{ $student->eduline_id }}</td>
                             <td class="py-2 px-4">{{ $student->gender }}</td>
                             <td class="py-2 px-4">

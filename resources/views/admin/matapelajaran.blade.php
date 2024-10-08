@@ -3,8 +3,23 @@
 @section('title', 'Manage Mata Pelajaran')
 
 @section('content')
-    <div class="container mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-4">Manage Mata Pelajaran</h1>
+    <div class="container mx-auto p-4">
+        <div class="relative bg-blue-600 h-32 flex items-center justify-between p-4 rounded-lg shadow-lg mb-4">
+            <!-- Background Image as Cover -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-50"
+                style="background-image: url('{{ asset('backend/images/illustration/paper.jpg') }}');">
+            </div>
+
+            <!-- Content: Welcome Message and Button -->
+            <div class="relative flex justify-between w-full">
+                <!-- Left Section: Welcome Message -->
+                <div class="text-white p-4">
+                    <h1 class="text-2xl font-bold mb-2 text-black">Manages Mata Pelajaran ✨</h1>
+                    <!-- Mengurangi ukuran teks -->
+                    <p class="text-md text-gray-100">Lorem ipsum dolor sit amet</p> <!-- Mengurangi ukuran teks -->
+                </div>
+            </div>
+        </div>
 
         @if (session('success'))
             <div class="relative bg-green-100 text-green-800 p-4 rounded mb-4">
@@ -14,9 +29,11 @@
         @endif
 
         <!-- Create New Mata Pelajaran Button -->
-        <button id="openCreateModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4">
-            <i class="fas fa-plus mr-2"></i> Create New Mata Pelajaran
-        </button>
+        <div class="flex justify-end">
+            <button id="openCreateModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4">
+                <i class="fas fa-plus mr-2"></i> Tambah Mata Pelajaran
+            </button>
+        </div>
 
         <div class="overflow-x-auto">
             <table class="min-w-full w-full bg-white shadow-md rounded-lg overflow-hidden">

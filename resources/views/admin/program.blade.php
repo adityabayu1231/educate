@@ -3,8 +3,24 @@
 @section('title', 'Manage Programs')
 
 @section('content')
-    <div class="container mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-4">Manage Programs</h1>
+    <div class="container mx-auto p-4">
+
+        <div class="relative bg-blue-600 h-32 flex items-center justify-between p-4 rounded-lg shadow-lg mb-4">
+            <!-- Background Image as Cover -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-50"
+                style="background-image: url('{{ asset('backend/images/illustration/paper.jpg') }}');">
+            </div>
+
+            <!-- Content: Welcome Message and Button -->
+            <div class="relative flex justify-between w-full">
+                <!-- Left Section: Welcome Message -->
+                <div class="text-white p-4">
+                    <h1 class="text-2xl font-bold mb-2 text-black">Manages Program ✨</h1>
+                    <!-- Mengurangi ukuran teks -->
+                    <p class="text-md text-gray-100">Lorem ipsum dolor sit amet</p> <!-- Mengurangi ukuran teks -->
+                </div>
+            </div>
+        </div>
 
         <!-- Success message with progress bar animation -->
         @if (session('success'))
@@ -14,9 +30,11 @@
             </div>
         @endif
 
-        <!-- Button to open the create modal -->
-        <button id="openCreateModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4">Create New
-            Program</button>
+        <div class="flex justify-end">
+            <!-- Button to open the create modal -->
+            <button id="openCreateModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4">Tambah
+                Program</button>
+        </div>
 
         <!-- Table displaying the programs -->
         <div class="overflow-x-auto">
@@ -64,8 +82,8 @@
                                 </td>
                                 <td class="py-3 px-6 text-right">
                                     <button data-id="{{ $program->id }}" data-name="{{ $program->name_program }}"
-                                        data-is-active="{{ $program->is_active }}" data-is-leads="{{ $program->is_leads }}"
-                                        data-is-home="{{ $program->is_home }}"
+                                        data-is-active="{{ $program->is_active }}"
+                                        data-is-leads="{{ $program->is_leads }}" data-is-home="{{ $program->is_home }}"
                                         data-description="{{ $program->description }}"
                                         data-cover-image="{{ $program->cover_image }}"
                                         class="flex items-center text-blue-500 hover:text-blue-700 btn-edit">

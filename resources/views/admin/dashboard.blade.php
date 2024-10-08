@@ -3,11 +3,30 @@
 @section('title', 'Dashboard Admin')
 
 @section('content')
-    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+    <div class="px-4 sm:px-6 lg:px-8 py-1 w-full max-w-9xl mx-auto">
+        <div class="relative bg-blue-600 h-32 flex items-center justify-between p-4 rounded-lg shadow-lg mb-4">
+            <!-- Background Image as Cover -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-50"
+                style="background-image: url('{{ asset('backend/images/illustration/paper.jpg') }}');">
+            </div>
 
-        <!-- Dashboard Title -->
-        <div class="mb-8">
-            <h1 class="text-2xl md:text-3xl text-gray-800 dark:text-gray-100 font-bold">Dashboard ✨</h1>
+            <!-- Content: Welcome Message and Button -->
+            <div class="relative flex justify-between w-full">
+                <!-- Left Section: Welcome Message -->
+                <div class="text-white p-4">
+                    <h1 class="text-2xl font-bold mb-2 text-black">Welcome back, Admin 👋</h1>
+                    <!-- Mengurangi ukuran teks -->
+                    <p class="text-md text-gray-100">Lorem ipsum dolor sit amet</p> <!-- Mengurangi ukuran teks -->
+                </div>
+
+                <!-- Right Section: Circular Button with Arrow -->
+                <div class="relative p-4 flex flex-col items-end">
+                    <button
+                        class="bg-white text-blue-600 rounded-full p-3 shadow-lg hover:bg-blue-600 hover:text-white transition duration-300 mb-2">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- Cards -->
@@ -126,35 +145,24 @@
                     <tr
                         class="transition-transform transform hover:bg-indigo-100 dark:hover:bg-indigo-900 duration-200 ease-in-out">
                         <td class="px-6 py-4 border-b border-gray-200 text-center">3</td>
-                        <td class="px-6 py-4 border-b border-gray-200">Hafidz Alim</td>
+                        <td class="px-6 py-4 border-b border-gray-200">Budi Santoso</td>
                         <td class="px-6 py-4 border-b border-gray-200">2024-09-14</td>
-                        <td class="px-6 py-4 border-b border-gray-200">10:15</td>
-                        <td class="px-6 py-4 border-b border-gray-200">XII IPA 3</td>
+                        <td class="px-6 py-4 border-b border-gray-200">08:30</td>
+                        <td class="px-6 py-4 border-b border-gray-200">XII IPA 1</td>
                         <td class="px-6 py-4 border-b border-gray-200">Kimia</td>
                         <td class="px-6 py-4 border-b border-gray-200">Reaksi Kimia</td>
-                        <td class="px-6 py-4 border-b border-gray-200 text-center">88</td>
-                    </tr>
-                    <tr
-                        class="transition-transform transform hover:bg-indigo-100 dark:hover:bg-indigo-900 duration-200 ease-in-out">
-                        <td class="px-6 py-4 border-b border-gray-200 text-center">4</td>
-                        <td class="px-6 py-4 border-b border-gray-200">Rina Andini</td>
-                        <td class="px-6 py-4 border-b border-gray-200">2024-09-15</td>
-                        <td class="px-6 py-4 border-b border-gray-200">11:00</td>
-                        <td class="px-6 py-4 border-b border-gray-200">XII IPA 4</td>
-                        <td class="px-6 py-4 border-b border-gray-200">Biologi</td>
-                        <td class="px-6 py-4 border-b border-gray-200">Genetika</td>
                         <td class="px-6 py-4 border-b border-gray-200 text-center">92</td>
                     </tr>
                     <tr
                         class="transition-transform transform hover:bg-indigo-100 dark:hover:bg-indigo-900 duration-200 ease-in-out">
-                        <td class="px-6 py-4 border-b border-gray-200 text-center">5</td>
-                        <td class="px-6 py-4 border-b border-gray-200">Budi Santoso</td>
-                        <td class="px-6 py-4 border-b border-gray-200">2024-09-15</td>
-                        <td class="px-6 py-4 border-b border-gray-200">13:00</td>
-                        <td class="px-6 py-4 border-b border-gray-200">XII IPA 5</td>
-                        <td class="px-6 py-4 border-b border-gray-200">Ekonomi</td>
-                        <td class="px-6 py-4 border-b border-gray-200">Mikroekonomi</td>
-                        <td class="px-6 py-4 border-b border-gray-200 text-center">86</td>
+                        <td class="px-6 py-4 border-b border-gray-200 text-center">4</td>
+                        <td class="px-6 py-4 border-b border-gray-200">Siti Aisyah</td>
+                        <td class="px-6 py-4 border-b border-gray-200">2024-09-14</td>
+                        <td class="px-6 py-4 border-b border-gray-200">09:00</td>
+                        <td class="px-6 py-4 border-b border-gray-200">XII IPA 2</td>
+                        <td class="px-6 py-4 border-b border-gray-200">Biologi</td>
+                        <td class="px-6 py-4 border-b border-gray-200">Sistem Pencernaan</td>
+                        <td class="px-6 py-4 border-b border-gray-200 text-center">88</td>
                     </tr>
                 </tbody>
             </table>

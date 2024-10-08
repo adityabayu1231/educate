@@ -3,12 +3,29 @@
 @section('title', 'Manage SubPrograms')
 
 @section('content')
-    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold text-gray-900">Manage SubPrograms</h1>
+    <div class="px-4 sm:px-6 lg:px-8 py-1 w-full max-w-9xl mx-auto">
+
+        <div class="relative bg-blue-600 h-32 flex items-center justify-between p-4 rounded-lg shadow-lg mb-4">
+            <!-- Background Image as Cover -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-50"
+                style="background-image: url('{{ asset('backend/images/illustration/paper.jpg') }}');">
+            </div>
+
+            <!-- Content: Welcome Message and Button -->
+            <div class="relative flex justify-between w-full">
+                <!-- Left Section: Welcome Message -->
+                <div class="text-white p-4">
+                    <h1 class="text-2xl font-bold mb-2 text-black">Manages Sub Programs ✨</h1>
+                    <!-- Mengurangi ukuran teks -->
+                    <p class="text-md text-gray-100">Lorem ipsum dolor sit amet</p> <!-- Mengurangi ukuran teks -->
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-end items-center mb-6">
             <button id="createSubProgramBtn"
                 class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center">
-                <i class="fas fa-plus mr-2"></i> Create SubProgram
+                <i class="fas fa-plus mr-2"></i> Tambah SubProgram
             </button>
         </div>
 
@@ -61,7 +78,7 @@
                                         data-brand="{{ $subProgram->brand_id }}"
                                         data-name="{{ $subProgram->name_sub_program }}"
                                         class="editSubProgramBtn text-blue-500 hover:text-blue-700">
-                                        <i class="fas fa-edit"></i>
+                                        <i class="fas fa-edit"></i> Edit
                                     </button>
                                     <form action="{{ route('admin.subprograms.destroy', $subProgram) }}" method="POST"
                                         class="inline">
@@ -69,7 +86,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700"
                                             onclick="return confirm('Are you sure you want to delete this program?');">
-                                            <i class="fas fa-trash"></i>
+                                            <i class="fas fa-trash"></i> Delete
                                         </button>
                                     </form>
                                 </td>
