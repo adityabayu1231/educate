@@ -489,7 +489,7 @@
             }
         });
 
-        @if (Auth::user()->role_id == 1) // Jika role_id adalah 1 (siswa)
+        @if (Auth::user()->role_id == 1)
             const provinceId = "{{ $student ? $student->province_id : '' }}";
             const cityId = "{{ $student ? $student->city_id : '' }}";
             const districtId = "{{ $student ? $student->district_id : '' }}";
@@ -536,55 +536,57 @@
         // Call the fetchData function
         fetchData();
     </script>
-    @if (Auth::user()->role_id == 2) // Jika role_id adalah 2 (guru)
-    <script>
-        const provinsiId = "{{ $teacher ? $teacher->province_id : '' }}"; // ID Provinsi
-        const kotaId = "{{ $teacher ? $teacher->city_id : '' }}"; // ID Kota
-        const kecamatanId = "{{ $teacher ? $teacher->district_id : '' }}"; // ID Kecamatan
-        const kelurahanId = "{{ $teacher ? $teacher->village_id : '' }}"; // ID Kelurahan
-    
-        async function fetchDataGuru() {
-            try {
-                // Fetch Province
-                const provinceResponse = await fetch(
-                    `https://adityabayu1231.github.io/api-wilayah-indonesia/api/province/${provinsiId}.json`
-                );
-                const provinceData = await provinceResponse.json();
-                document.getElementById('provinsi').value = provinceData.name;
-                console.log("Province data fetched successfully:", provinceData.name); // Log sukses
-    
-                // Fetch City
-                const cityResponse = await fetch(
-                    `https://adityabayu1231.github.io/api-wilayah-indonesia/api/regency/${kotaId}.json`
-                );
-                const cityData = await cityResponse.json();
-                document.getElementById('kota').value = cityData.name;
-                console.log("City data fetched successfully:", cityData.name); // Log sukses
-    
-                // Fetch District
-                const districtResponse = await fetch(
-                    `https://adityabayu1231.github.io/api-wilayah-indonesia/api/district/${kecamatanId}.json`
-                );
-                const districtData = await districtResponse.json();
-                document.getElementById('kecamatan').value = districtData.name;
-                console.log("District data fetched successfully:", districtData.name); // Log sukses
-    
-                // Fetch Village
-                const villageResponse = await fetch(
-                    `https://adityabayu1231.github.io/api-wilayah-indonesia/api/village/${kelurahanId}.json`
-                );
-                const villageData = await villageResponse.json();
-                document.getElementById('kelurahan').value = villageData.name;
-                console.log("Village data fetched successfully:", villageData.name); // Log sukses
-    
-            } catch (error) {
-                console.error("Error fetching data:", error); // Log kesalahan
-                alert("Failed to fetch data. Please check the console for more details."); // Pemberitahuan kepada pengguna
+    @if (Auth::user()->role_id == 2)
+        <script>
+            const provinsiId = "{{ $teacher ? $teacher->province_id : '' }}"; // ID Provinsi
+            const kotaId = "{{ $teacher ? $teacher->city_id : '' }}"; // ID Kota
+            const kecamatanId = "{{ $teacher ? $teacher->district_id : '' }}"; // ID Kecamatan
+            const kelurahanId = "{{ $teacher ? $teacher->village_id : '' }}"; // ID Kelurahan
+
+            async function fetchDataGuru() {
+                try {
+                    // Fetch Province
+                    const provinceResponse = await fetch(
+                        `https://adityabayu1231.github.io/api-wilayah-indonesia/api/province/${provinsiId}.json`
+                    );
+                    const provinceData = await provinceResponse.json();
+                    document.getElementById('provinsi').value = provinceData.name;
+                    console.log("Province data fetched successfully:", provinceData.name); // Log sukses
+
+                    // Fetch City
+                    const cityResponse = await fetch(
+                        `https://adityabayu1231.github.io/api-wilayah-indonesia/api/regency/${kotaId}.json`
+                    );
+                    const cityData = await cityResponse.json();
+                    document.getElementById('kota').value = cityData.name;
+                    console.log("City data fetched successfully:", cityData.name); // Log sukses
+
+                    // Fetch District
+                    const districtResponse = await fetch(
+                        `https://adityabayu1231.github.io/api-wilayah-indonesia/api/district/${kecamatanId}.json`
+                    );
+                    const districtData = await districtResponse.json();
+                    document.getElementById('kecamatan').value = districtData.name;
+                    console.log("District data fetched successfully:", districtData.name); // Log sukses
+
+                    // Fetch Village
+                    const villageResponse = await fetch(
+                        `https://adityabayu1231.github.io/api-wilayah-indonesia/api/village/${kelurahanId}.json`
+                    );
+                    const villageData = await villageResponse.json();
+                    document.getElementById('kelurahan').value = villageData.name;
+                    console.log("Village data fetched successfully:", villageData.name); // Log sukses
+
+                } catch (error) {
+                    console.error("Error fetching data:", error); // Log kesalahan
+                    alert(
+                        "Failed to fetch data. Please check the console for more details."
+                        ); // Pemberitahuan kepada pengguna
+                }
             }
-        }
-    
-        // Call the fetchDataGuru function
-        fetchDataGuru();
-    </script>
-    @endif    
+
+            // Call the fetchDataGuru function
+            fetchDataGuru();
+        </script>
+    @endif
 </x-app-layout>

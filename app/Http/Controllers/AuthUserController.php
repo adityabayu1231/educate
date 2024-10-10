@@ -52,4 +52,29 @@ class AuthUserController extends Controller
 
         return view('auth.student.biostudent', compact('brands', 'programs', 'subprograms'));
     }
+
+    public function usertarget()
+    {
+        return view('usertarget');
+    }
+
+    public function educenter()
+    {
+        return view('educenter');
+    }
+
+    public function eduschedule()
+    {
+        return view('eduschedule');
+    }
+
+    public function eduteacher()
+    {
+        return view('eduteacher');
+    }
+
+    public function edulearnrept()
+    {
+        return view('edulearningreport');
+    }
 }

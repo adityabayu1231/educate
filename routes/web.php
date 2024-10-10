@@ -77,6 +77,11 @@ Route::middleware([
 ])->group(function () {
     Route::middleware(['checkstudent'])->group(function () {
         Route::get('/dashboard', [AuthUserController::class, 'index'])->name('dashboard');
+        Route::get('/user-target', [AuthUserController::class, 'usertarget'])->name('user.target');
+        Route::get('/edu-center', [AuthUserController::class, 'educenter'])->name('user.ec');
+        Route::get('/edu-schedule', [AuthUserController::class, 'eduschedule'])->name('user.schd');
+        Route::get('/edu-teacher', [AuthUserController::class, 'eduteacher'])->name('user.teach');
+        Route::get('/edu-learning-report', [AuthUserController::class, 'edulearnrept'])->name('user.lernport');
     });
     Route::get('/biodata', [AuthUserController::class, 'biostudent'])->name('student.bio');
     Route::post('/biodata', [StudentController::class, 'store'])->name('students.store');
