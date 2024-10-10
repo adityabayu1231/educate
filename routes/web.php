@@ -67,6 +67,10 @@ Route::prefix('teacher')->name('teacher.')->group(function () {
         Route::get('/profile', [AuthTeacherController::class, 'edit'])->name('profile.edit');
         Route::get('/biodata', [AuthTeacherController::class, 'biodata'])->name('biodata');
         Route::post('/biodata', [AuthTeacherController::class, 'store'])->name('store');
+        Route::get('/edu-center', [AuthTeacherController::class, 'teachercenter'])->name('center');
+        Route::get('/schedule', [AuthTeacherController::class, 'teacherschedule'])->name('schedule');
+        Route::get('/bio-siswa', [AuthTeacherController::class, 'teacherbiosiswa'])->name('biosiswa');
+        Route::get('/report', [AuthTeacherController::class, 'teachereport'])->name('report');
     });
 });
 

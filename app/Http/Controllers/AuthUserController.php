@@ -55,26 +55,26 @@ class AuthUserController extends Controller
 
     public function usertarget()
     {
-        return view('usertarget');
+        return view('student/usertarget');
     }
 
     public function educenter()
     {
-        return view('educenter');
+        return view('student/educenter');
     }
 
     public function eduschedule()
     {
-        return view('eduschedule');
+        return view('student/eduschedule');
     }
 
     public function eduteacher()
     {
-        return view('eduteacher');
+        return view('student/eduteacher');
     }
 
     public function edulearnrept()
     {
-        return view('edulearningreport');
+        return view('student/edulearningreport');
     }
 }

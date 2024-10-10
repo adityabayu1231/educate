@@ -100,4 +100,24 @@ class AuthTeacherController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Data successfully saved.');
     }
+
+    public function teachercenter()
+    {
+        return view('teacher/educenter');
+    }
+
+    public function teacherschedule()
+    {
+        return view('teacher/teacherschedule');
+    }
+
+    public function teacherbiosiswa()
+    {
+        return view('teacher/edubio');
+    }
+
+    public function teachereport()
+    {
+        return view('teacher/eduteachreport');
+    }
 }
