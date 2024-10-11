@@ -84,4 +84,14 @@ class KelasController extends Controller
         // Redirect kembali ke halaman kelas dengan pesan sukses
         return redirect()->route('admin.kelas.index')->with('success', 'Kelas berhasil dihapus.');
     }
+
+    public function jadwalkelas()
+    {
+        return view('admin.schedule.index');
+    }
+
+    public function laporanbelajar()
+    {
+        return view('admin.schedule.index');
+    }
 }

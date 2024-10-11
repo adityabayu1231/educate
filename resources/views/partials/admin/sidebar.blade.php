@@ -263,22 +263,18 @@
                         </div>
                     </li>
 
-                    <li
-                        class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if (in_array(Request::segment(1), ['messages'])) {{ 'from-violet-500/[0.24] to-violet-500/[0.04]' }} @endif">
-                        <a class="block text-gray-100 truncate transition @if (!in_array(Request::segment(1), ['messages'])) {{ 'hover:text-white' }} @endif"
-                            href="#">
-                            <div class="flex items-center justify-between">
-                                <div class="grow flex items-center">
-                                    <i
-                                        class="fas fa-calendar-alt shrink-0 @if (in_array(Request::segment(1), ['messages'])) text-violet-500 @else 'text-gray-500' @endif"></i>
-                                    <span
-                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
-                                        Schedule</span>
-                                </div>
-                                <div class="flex flex-shrink-0 ml-2">
-                                    <span
-                                        class="inline-flex items-center justify-center h-5 text-xs font-medium text-white bg-violet-400 px-2 rounded">4</span>
-                                </div>
+                    <!-- My Schedule -->
+                    <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
+                        :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin/schedule') ? 'true' : 'false' }} }">
+                        <a class="block text-gray-100 truncate transition @if (!Request::is('admin/schedule')) hover:text-white @endif"
+                            href="{{ route('admin.jadwalkelas') }}">
+                            <div class="flex items-center">
+                                <i
+                                    class="fas fa-calendar-alt shrink-0 @if (Request::is('admin/schedule')) text-violet-500 @endif"></i>
+                                <span
+                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 @if (Request::is('admin/schedule')) text-violet-500 @endif">
+                                    My Schedule
+                                </span>
                             </div>
                         </a>
                     </li>
