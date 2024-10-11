@@ -17,7 +17,7 @@ class KelasController extends Controller
         $brands = Brand::all();
         $programs = Program::all();
         $subprograms = SubProgram::all();
-        return view('admin.kelas', compact('kelass', 'brands', 'programs', 'subprograms'));
+        return view('admin.master.kelas', compact('kelass', 'brands', 'programs', 'subprograms'));
     }
 
     // Method untuk menyimpan kelas baru

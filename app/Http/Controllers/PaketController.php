@@ -14,7 +14,7 @@ class PaketController extends Controller
     public function index()
     {
         $pakets = Paket::all();
-        return view('admin.paket', compact('pakets'));
+        return view('admin.master.paket', compact('pakets'));
     }
 
     /**

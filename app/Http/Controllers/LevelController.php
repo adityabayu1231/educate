@@ -14,7 +14,7 @@ class LevelController extends Controller
     public function index()
     {
         $levels = Level::paginate(10);
-        return view('admin.level', compact('levels'));
+        return view('admin.master.level', compact('levels'));
     }
 
     /**

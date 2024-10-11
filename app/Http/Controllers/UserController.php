@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         $roles = Role::all();
         $users = User::with('role')->paginate(10);
-        return view('admin.user', compact('users', 'roles'));
+        return view('admin.master.user', compact('users', 'roles'));
     }
 
     public function store(Request $request)

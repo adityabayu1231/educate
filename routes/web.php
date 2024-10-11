@@ -52,6 +52,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('kelas', KelasController::class);
             Route::resource('paket', PaketController::class);
         });
+        Route::prefix('teaching-report')->group(function () {
+            Route::get('/laporan', [TeacherController::class, 'gurureport'])->name('reportguru');
+        });
     });
 });
 

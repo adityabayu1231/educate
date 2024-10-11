@@ -21,7 +21,7 @@ class TeacherController extends Controller
             $teachers = Teacher::paginate(10);
             $users = User::all(); // For creating new teacher
             $subjects = Subject::all(); // For subjects selection
-            return view('admin.teachers', compact('teachers', 'users', 'subjects'));
+            return view('admin.master.teachers', compact('teachers', 'users', 'subjects'));
         } catch (Exception $e) {
             Log::error("Error fetching teachers: " . $e->getMessage());
             return redirect()->back()->withErrors('Unable to fetch teachers at the moment.');
@@ -86,5 +86,10 @@ class TeacherController extends Controller
             Log::error("Error deleting teacher: " . $e->getMessage());
             return redirect()->back()->withErrors('Unable to delete teacher at the moment.');
         }
+    }
+
+    public function gurureport()
+    {
+        return view('admin.teachreport.index');
     }
 }

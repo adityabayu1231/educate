@@ -13,7 +13,7 @@ class ProgramController extends Controller
     public function index()
     {
         $programs = Program::all();
-        return view('admin.program', compact('programs'));
+        return view('admin.master.program', compact('programs'));
     }
 
     public function store(Request $request)

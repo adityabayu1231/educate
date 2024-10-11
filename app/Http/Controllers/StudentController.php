@@ -27,7 +27,7 @@ class StudentController extends Controller
             ->orWhere('gender', 'like', "%{$search}%")
             ->paginate(10);
 
-        return view('admin.students', compact('students', 'search'));
+        return view('admin.master.students', compact('students', 'search'));
     }
 
     /**

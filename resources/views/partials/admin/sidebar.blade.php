@@ -96,8 +96,10 @@
                                 <!-- Toggle Icon -->
                                 <div
                                     class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                    <i class="fas fa-chevron-down text-gray-500 @if (Request::is('admin/master*')) rotate-180 @endif"
-                                        :class="open ? 'rotate-180' : 'rotate-0'"></i>
+                                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 dark:text-gray-500"
+                                        :class="open ? 'rotate-180' : 'rotate-0'" viewBox="0 0 12 12">
+                                        <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                                    </svg>
                                 </div>
                             </div>
                         </a>
@@ -309,19 +311,22 @@
                         </a>
                     </li>
 
-                    <li
-                        class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if (in_array(Request::segment(1), ['inbox'])) {{ 'from-violet-500/[0.24] to-violet-500/[0.04]' }} @endif">
-                        <a class="block text-gray-100 truncate transition @if (!in_array(Request::segment(1), ['inbox'])) {{ 'hover:text-white' }} @endif"
-                            href="#">
+                    <!-- Teaching Report -->
+                    <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
+                        :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin/teaching-report/report') ? 'true' : 'false' }} }">
+                        <a class="block text-gray-100 truncate transition @if (!Request::is('admin/teaching-report/laporan')) hover:text-white @endif"
+                            href="{{ route('admin.reportguru') }}">
                             <div class="flex items-center">
                                 <i
-                                    class="fas fa-file-alt shrink-0 @if (in_array(Request::segment(1), ['inbox'])) text-violet-500 @else 'text-gray-500' @endif"></i>
+                                    class="fas fa-file-alt shrink-0 @if (Request::is('admin/teaching-report/laporan')) text-violet-500 @endif">
+                                </i>
                                 <span
-                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Teaching
+                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 @if (Request::is('admin/teaching-report/laporan')) text-violet-500 @endif">Teaching
                                     Report</span>
                             </div>
                         </a>
                     </li>
+
                 </ul>
             </div>
         </div>

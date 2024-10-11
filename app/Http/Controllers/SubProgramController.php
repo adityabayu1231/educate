@@ -20,7 +20,7 @@ class SubProgramController extends Controller
             $subPrograms = SubProgram::paginate(10);
             $programs = Program::all();
             $brands = Brand::all();
-            return view('admin.subprogram', compact('subPrograms', 'programs', 'brands'));
+            return view('admin.master.subprogram', compact('subPrograms', 'programs', 'brands'));
         } catch (\Exception $e) {
             Log::error('Error fetching SubPrograms: ' . $e->getMessage());
             return redirect()->route('admin.subprograms.index')->with('error', 'Failed to fetch SubPrograms.');
