@@ -113,4 +113,9 @@ class PaketController extends Controller
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
+
+    public function educenter()
+    {
+        return view('admin.educenter.index');
+    }
 }

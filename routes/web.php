@@ -55,6 +55,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('teaching-report')->group(function () {
             Route::get('/laporan', [TeacherController::class, 'gurureport'])->name('reportguru');
         });
+        Route::prefix('edu-center')->group(function () {
+            Route::get('/', [PaketController::class, 'educenter'])->name('adminedu');
+        });
     });
 });
 
