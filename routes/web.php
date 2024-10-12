@@ -63,6 +63,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('schedule')->group(function () {
             Route::get('/', [KelasController::class, 'jadwalkelas'])->name('jadwalkelas');
         });
+
+        Route::prefix('learning-report')->group(function () {
+            Route::get('/', [KelasController::class, 'laporanbelajar'])->name('laporanbelajar');
+        });
     });
 });
 

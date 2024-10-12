@@ -92,6 +92,6 @@ class KelasController extends Controller
 
     public function laporanbelajar()
     {
-        return view('admin.schedule.index');
+        return view('admin.learnreport.index');
     }
 }
