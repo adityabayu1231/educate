@@ -90,6 +90,21 @@ class KelasController extends Controller
         return view('admin.schedule.index');
     }
 
+    public function kbmkelas()
+    {
+        return view('admin.schedule.kbmkelas');
+    }
+
+    public function kbmprivat()
+    {
+        return view('admin.schedule.kbmprivat');
+    }
+
+    public function coaching()
+    {
+        return view('admin.schedule.coaching');
+    }
+
     public function laporanbelajar()
     {
         return view('admin.learnreport.index');

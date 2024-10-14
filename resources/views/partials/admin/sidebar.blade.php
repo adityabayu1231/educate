@@ -265,8 +265,8 @@
 
                     <!-- My Schedule -->
                     <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
-                        :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin/schedule') ? 'true' : 'false' }} }">
-                        <a class="block text-gray-100 truncate transition @if (!Request::is('admin/schedule')) hover:text-white @endif"
+                        :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin/schedule*') ? 'true' : 'false' }} }">
+                        <a class="block text-gray-100 truncate transition @if (!Request::is('admin/schedule*')) hover:text-white @endif"
                             href="{{ route('admin.jadwalkelas') }}">
                             <div class="flex items-center">
                                 <i

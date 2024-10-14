@@ -62,6 +62,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::prefix('schedule')->group(function () {
             Route::get('/', [KelasController::class, 'jadwalkelas'])->name('jadwalkelas');
+            Route::get('/kbm-kelas', [KelasController::class, 'kbmkelas'])->name('kbmkls');
+            Route::get('/kbm-privat', [KelasController::class, 'kbmprivat'])->name('kbmprivat');
+            Route::get('/coaching', [KelasController::class, 'coaching'])->name('coaching');
         });
 
         Route::prefix('learning-report')->group(function () {

@@ -28,56 +28,49 @@
                         <div class="mb-2">
                             <a href="{{ route('admin.laporanbelajar') }}"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/learning-report')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/learning-report')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/learning-report')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Target Nilai</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-kbm-kelas')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-kbm-kelas')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-kbm-kelas')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Nilai Akademik</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-kbm-privat')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-kbm-privat')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-kbm-privat')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Analisa Coach</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-coaching')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Jasmani</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-coaching')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Kesehatan</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-coaching')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Laporan KBM</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-coaching')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Laporan Belajar Siswa</span>
                             </a>
                         </div>
@@ -86,56 +79,49 @@
                         <div class="mb-2">
                             <a href="{{ route('admin.laporanbelajar') }}"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/learning-report')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/learning-report')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/learning-report')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Target Nilai</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-kbm-kelas')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-kbm-kelas')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-kbm-kelas')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Nilai Akademik</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-kbm-privat')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-kbm-privat')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-kbm-privat')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Analisa Coach</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-coaching')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Jasmani</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-coaching')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Kesehatan</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-coaching')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Laporan KBM</span>
                             </a>
                         </div>
                         <div class="mb-2">
                             <a href="#"
                                 class="flex items-center pl-2 pr-3 py-2 rounded-lg transition-colors @if (Request::is('admin/jadwal-coaching')) bg-white text-blue-600 @endif">
-                                <i
-                                    class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @else text-gray-400 @endif"></i>
+                                <i class="fas fa-circle @if (Request::is('admin/jadwal-coaching')) text-blue-600 @endif"></i>
                                 <span class="ml-2">Laporan Belajar Siswa</span>
                             </a>
                         </div>

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Jadwal Assessment')
+@section('title', 'Jadwal Coaching')
 
 @section('content')
     <div class="py-2">
@@ -14,8 +14,8 @@
             <div class="relative flex justify-between w-full">
                 <!-- Left Section: Welcome Message -->
                 <div class="text-white p-4">
-                    <h1 class="text-2xl font-bold mb-1 text-black">Jadwal Assessment ✨</h1>
-                    <p class="text-sm">Assessment</p>
+                    <h1 class="text-2xl font-bold mb-2 text-black">Jadwal Assessment ✨</h1>
+                    <p class="text-sm">Coaching</p>
                 </div>
             </div>
         </div>
