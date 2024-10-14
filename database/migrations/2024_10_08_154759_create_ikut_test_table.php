@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ikut_test', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students')->onDelete('cascade'); // Tabel students yang sudah ada
+            $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
             $table->foreignId('test_kelas_id')->constrained('test_kelas')->onDelete('cascade');
             $table->foreignId('paket_soal_id')->constrained('paket_soal')->onDelete('cascade');
             $table->integer('sisa_waktu');

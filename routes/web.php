@@ -15,6 +15,7 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\SubProgramController;
 use App\Http\Controllers\AuthTeacherController;
+use App\Http\Controllers\MateriController;
 use App\Http\Controllers\PaketController;
 
 Route::get('/', function () {
@@ -51,6 +52,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::patch('mapel/{subject}/toggle-active', [SubjectController::class, 'toggleActive'])->name('mapel.toggle-active');
             Route::resource('kelas', KelasController::class);
             Route::resource('paket', PaketController::class);
+            Route::get('materi', [MateriController::class, 'index'])->name('materi');
         });
         Route::prefix('teaching-report')->group(function () {
             Route::get('/laporan', [TeacherController::class, 'gurureport'])->name('reportguru');

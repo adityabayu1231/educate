@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('test_kelas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_sesi')->constrained('sesi')->onDelete('cascade');
+            $table->foreignId('id_sesi')->constrained('kelas')->onDelete('cascade');
             $table->string('nama_test');
             $table->string('jenis');
             $table->string('teknis_ujian');
             $table->timestamp('mulai_test');
             $table->timestamp('selesai_test');
             $table->timestamp('jadwal_webinar')->nullable();
-            $table->foreignId('id_jadwal_learning')->constrained('jadwal_learning')->onDelete('cascade'); // Contoh: jika ada tabel jadwal_learning
+            $table->string('id_jadwal_learning');
             $table->integer('passing_grade');
             $table->softDeletes();
             $table->timestamps();
