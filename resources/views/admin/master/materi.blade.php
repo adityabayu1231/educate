@@ -17,13 +17,6 @@
             </div>
         </div>
 
-        <div class="flex justify-end items-center mb-6">
-            <button id="createBrandBtn"
-                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center">
-                <i class="fas fa-plus mr-2"></i> Tambah Brand
-            </button>
-        </div>
-
         @if ($brands->isEmpty())
             <p class="text-center text-gray-500">Not Found</p>
         @else
