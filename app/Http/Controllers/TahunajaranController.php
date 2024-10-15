@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tahunajaran;
+use App\Models\Tahunajaran;
 use Illuminate\Http\Request;
 
 class TahunajaranController extends Controller
@@ -12,7 +12,8 @@ class TahunajaranController extends Controller
      */
     public function index()
     {
-        //
+        $tahunAjaran = Tahunajaran::all();
+        return view('admin.master.tahunajaran', compact('tahunAjaran'));
     }
 
     /**
@@ -28,7 +29,13 @@ class TahunajaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        TahunAjaran::create($request->only('name'));
+
+        return redirect()->route('admin.tahun-ajaran.index')->with('success', 'Tahun ajaran berhasil ditambahkan.');
     }
 
     /**
@@ -50,16 +57,24 @@ class TahunajaranController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, tahunajaran $tahunajaran)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $tahunajaran = Tahunajaran::findOrFail($id);
+        $tahunajaran->update($request->only('name'));
+
+        return redirect()->route('admin.tahun-ajaran.index')->with('success', 'Tahun ajaran berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(tahunajaran $tahunajaran)
+    public function destroy(TahunAjaran $tahunAjaran)
     {
-        //
+        $tahunAjaran->delete();
+        return redirect()->route('admin.tahun-ajaran.index')->with('success', 'Tahun ajaran berhasil dihapus.');
     }
 }

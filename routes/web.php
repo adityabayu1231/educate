@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\PaketController;
+use App\Http\Controllers\MateriController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -15,8 +17,7 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\SubProgramController;
 use App\Http\Controllers\AuthTeacherController;
-use App\Http\Controllers\MateriController;
-use App\Http\Controllers\PaketController;
+use App\Http\Controllers\TahunajaranController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -53,6 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('kelas', KelasController::class);
             Route::resource('paket', PaketController::class);
             Route::get('materi', [MateriController::class, 'index'])->name('materi');
+            Route::resource('tahun-ajaran', TahunajaranController::class);
         });
         Route::prefix('teaching-report')->group(function () {
             Route::get('/laporan', [TeacherController::class, 'gurureport'])->name('reportguru');
