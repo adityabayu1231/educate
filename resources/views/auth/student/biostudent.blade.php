@@ -120,16 +120,11 @@
                                         </div>
 
                                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-
                                         <div class="relative">
                                             <select name="subprogram"
                                                 class="required-field form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                                 required>
                                                 <option value="" disabled selected>Select Subprogram</option>
-                                                @foreach ($subprograms as $subprogram)
-                                                    <option value="{{ $subprogram->id }}">
-                                                        {{ $subprogram->name_sub_program }}</option>
-                                                @endforeach
                                             </select>
                                             <i class="fas fa-list-alt absolute top-3 left-3 text-gray-500"></i>
                                         </div>
@@ -364,6 +359,7 @@
 
                     <script src="{{ asset('js/form-navigation.js') }}"></script>
                     <script src="{{ asset('js/wilayah.js') }}"></script>
+                    <script src="{{ asset('js/filteruserbio.js') }}"></script>
                 </div>
             </div>
         </div>

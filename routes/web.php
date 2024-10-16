@@ -115,4 +115,5 @@ Route::middleware([
     });
     Route::get('/biodata', [AuthUserController::class, 'biostudent'])->name('student.bio');
     Route::post('/biodata', [StudentController::class, 'store'])->name('students.store');
+    Route::get('/get-subprograms', [AuthUserController::class, 'getSubPrograms'])->name('get.subprograms');
 });
