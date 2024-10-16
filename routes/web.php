@@ -17,6 +17,7 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\SubProgramController;
 use App\Http\Controllers\AuthTeacherController;
+use App\Http\Controllers\EduCenterController;
 use App\Http\Controllers\TahunajaranController;
 
 Route::get('/', function () {
@@ -52,7 +53,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('mapel', SubjectController::class);
             Route::patch('mapel/{subject}/toggle-active', [SubjectController::class, 'toggleActive'])->name('mapel.toggle-active');
             Route::resource('kelas', KelasController::class);
-            Route::resource('paket', PaketController::class);
             Route::get('materi', [MateriController::class, 'index'])->name('materi');
             Route::resource('tahun-ajaran', TahunajaranController::class);
         });
@@ -61,7 +61,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         Route::prefix('edu-center')->group(function () {
-            Route::get('/', [PaketController::class, 'educenter'])->name('adminedu');
+            Route::get('/', [EduCenterController::class, 'index'])->name('edu-center');
+            Route::get('/e-module', [EduCenterController::class, 'eModule'])->name('e-module');
+            Route::get('/paket-soal', [EduCenterController::class, 'paketSoal'])->name('paket-soal');
+            Route::get('/assign-paket-soal', [EduCenterController::class, 'assignPaketSoal'])->name('assign-paket-soal');
+            Route::get('/add-soal', [EduCenterController::class, 'addSoal'])->name('addsoal');
         });
 
         Route::prefix('schedule')->group(function () {

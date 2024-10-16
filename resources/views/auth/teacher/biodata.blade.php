@@ -308,20 +308,17 @@
     </div>
 
     <!-- Modal for image preview -->
-    <div id="imagePreviewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 justify-center items-center hidden">
-        <div class="bg-white w-8/12 p-4 rounded-lg shadow-lg relative">
+    <div id="imagePreviewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50  justify-center items-center hidden">
+        <div class="bg-white w-11/12 sm:w-8/12 md:w-6/12 lg:w-3/12 p-4 rounded-lg shadow-lg relative">
             <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">
                 <i class="fas fa-times"></i>
             </button>
-            <div class="flex">
-                <div class="w-8/12">
-                    <img id="previewImage" src="#" alt="Image Preview" class="w-full h-full object-cover" />
-                </div>
-                <div class="w-4/12 flex flex-col items-center justify-center">
-                    <p>Example Image</p>
-                    <img src="{{ asset('frontend/images/logo/eduline.png') }}" alt="Example"
-                        class="w-full h-auto mt-2" />
-                </div>
+            <div class="flex flex-col items-center">
+                <img id="previewImage" src="#" alt="Image Preview" class="w-36 h-36 object-cover mb-2" />
+                <!-- Gambar preview lebih kecil -->
+                <p class="text-center">Example Image</p>
+                <img src="{{ asset('frontend/images/logo/eduline.png') }}" alt="Example"
+                    class="w-24 h-auto mt-2" /> <!-- Ukuran gambar contoh lebih kecil -->
             </div>
         </div>
     </div>
@@ -383,6 +380,7 @@
                     // Menampilkan modal
                     const modal = document.getElementById('imagePreviewModal');
                     modal.classList.remove('hidden');
+                    modal.classList.add('flex');
                 };
                 reader.readAsDataURL(file);
             }

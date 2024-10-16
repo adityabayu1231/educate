@@ -217,7 +217,7 @@
             // Mengambil nilai dari input nama kelas
             const namaKelas = document.getElementById('edit_nama_kelas').value;
             // Menghilangkan spasi dan mengubah ke huruf kecil
-            const kodeTingkat = namaKelas.replace(/\s+/g, '').toLowerCase();
+            const kodeTingkat = namaKelas.replace(/\s+/g, '');
             // Mengatur nilai ke input kode tingkat
             document.getElementById('edit_kode_tingkat').value = kodeTingkat;
         }

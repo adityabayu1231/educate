@@ -286,7 +286,7 @@
 
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700">Pekerjaan Ayah</label>
-                                        <input type="text" name="father_job" required
+                                        <input type="text" name="father_occupation" required
                                             class="required-form mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" />
                                     </div>
 
@@ -311,7 +311,7 @@
 
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700">Pekerjaan Bunda</label>
-                                        <input type="text" name="mother_job" required
+                                        <input type="text" name="mother_occupation" required
                                             class="required-form mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full" />
                                     </div>
 

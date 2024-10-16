@@ -38,46 +38,26 @@
                 <ul class="mt-3">
                     <!-- Dashboard -->
                     <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0"
-                        :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin') || Request::is('admin/dashboard') ? 'true' : 'false' }} }"
-                        x-data="{ open: {{ Request::is('admin') || Request::is('admin/dashboard') ? 'true' : 'false' }} }">
+                        :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin') || Request::is('admin/dashboard') ? 'true' : 'false' }} }">
                         <a class="block text-gray-100 truncate transition @if (!Request::is('admin') && !Request::is('admin/dashboard')) hover:text-white @endif"
-                            href="#0" @click.prevent="open = !open; sidebarExpanded = true">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <svg class="shrink-0 fill-current  @if (Request::is('admin/dashboard*')) hover:text-white text-violet-500 @endif"
-                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M5.936.278A7.983 7.983 0 0 1 8 0a8 8 0 1 1-8 8c0-.722.104-1.413.278-2.064a1 1 0 1 1 1.932.516A5.99 5.99 0 0 0 2 8a6 6 0 1 0 6-6c-.53 0-1.045.076-1.548.21A1 1 0 1 1 5.936.278Z" />
-                                        <path
-                                            d="M6.068 7.482A2.003 2.003 0 0 0 8 10a2 2 0 1 0-.518-3.932L3.707 2.293a1 1 0 0 0-1.414 1.414l3.775 3.775Z" />
-                                    </svg>
-                                    <span
-                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Dashboard</span>
-                                </div>
-                                <!-- Icon -->
-                                <div
-                                    class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 dark:text-gray-500"
-                                        :class="open ? 'rotate-180' : 'rotate-0'" viewBox="0 0 12 12">
-                                        <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                                    </svg>
-                                </div>
+                            href="{{ route('admin.index') }}">
+                            <div class="flex items-center">
+                                <svg class="shrink-0 fill-current @if (Request::is('admin/dashboard*')) hover:text-white text-violet-500 @endif"
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.936.278A7.983 7.983 0 0 1 8 0a8 8 0 1 1-8 8c0-.722.104-1.413.278-2.064a1 1 0 1 1 1.932.516A5.99 5.99 0 0 0 2 8a6 6 0 1 0 6-6c-.53 0-1.045.076-1.548.21A1 1 0 1 1 5.936.278Z" />
+                                    <path
+                                        d="M6.068 7.482A2.003 2.003 0 0 0 8 10a2 2 0 1 0-.518-3.932L3.707 2.293a1 1 0 0 0-1.414 1.414l3.775 3.775Z" />
+                                </svg>
+                                <span
+                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Dashboard</span>
                             </div>
                         </a>
-                        <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                            <ul class="pl-8 mt-1" :class="open ? '!block' : 'hidden'">
-                                <li class="mb-1 last:mb-0">
-                                    <a class="block hover:text-gray-200 transition truncate @if (Request::is('admin') || Request::is('admin/dashboard')) text-violet-500 @endif"
-                                        href="{{ route('admin.index') }}">
-                                        <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Main</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
 
+
+                    <!-- Master -->
                     <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0"
                         :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin') || Request::is('admin/master*') ? 'true' : 'false' }} }"
                         x-data="{ open: {{ Request::is('admin') || Request::is('admin/master*') ? 'true' : 'false' }} }">
@@ -264,7 +244,7 @@
                     </li>
 
                     <!-- My Schedule -->
-                    <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
+                    {{-- <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
                         :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin/schedule*') ? 'true' : 'false' }} }">
                         <a class="block text-gray-100 truncate transition @if (!Request::is('admin/schedule*')) hover:text-white @endif"
                             href="{{ route('admin.jadwalkelas') }}">
@@ -277,13 +257,13 @@
                                 </span>
                             </div>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <!-- Edu Center -->
                     <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
                         :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin/edu-center') ? 'true' : 'false' }} }">
                         <a class="block text-gray-100 truncate transition @if (!Request::is('admin/edu-center')) hover:text-white @endif"
-                            href="{{ route('admin.adminedu') }}">
+                            href="{{ route('admin.edu-center') }}">
                             <div class="flex items-center">
                                 <i
                                     class="fas fa-envelope shrink-0 @if (Request::is('admin/edu-center')) text-violet-500 @endif"></i>
@@ -295,7 +275,8 @@
                         </a>
                     </li>
 
-                    <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
+                    <!-- Learning Report -->
+                    {{-- <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
                         :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin/learning-report') ? 'true' : 'false' }} }">
                         <a class="block text-gray-100 truncate transition @if (!Request::is('admin/learning-report')) hover:text-white @endif"
                             href="{{ route('admin.laporanbelajar') }}">
@@ -307,10 +288,10 @@
                                     Report</span>
                             </div>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <!-- Teaching Report -->
-                    <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
+                    {{-- <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 rounded-lg"
                         :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-violet-500/[0.24] to-violet-500/[0.04]': {{ Request::is('admin/teaching-report/report') ? 'true' : 'false' }} }">
                         <a class="block text-gray-100 truncate transition @if (!Request::is('admin/teaching-report/laporan')) hover:text-white @endif"
                             href="{{ route('admin.reportguru') }}">
@@ -323,7 +304,7 @@
                                     Report</span>
                             </div>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

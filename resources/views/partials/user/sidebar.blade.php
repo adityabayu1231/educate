@@ -39,40 +39,22 @@
                     <!-- Dashboard -->
                     @if (Auth::user()->role_id == 1)
                         <!-- My Profile -->
-                        <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 @if (Request::is('dashboard')) bg-amber-500 text-white @endif"
-                            x-data="{ open: {{ Request::is('dashboard') ? 'true' : 'false' }} }">
-                            <a class="block text-white truncate transition hover:text-gray-200" href="#0"
-                                @click.prevent="open = !open; sidebarExpanded = true">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i
-                                            class="fas fa-user-circle {{ Request::is('dashboard') ? 'text-white' : 'text-amber-500' }}"></i>
-                                        <span
-                                            class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
-                                            Profile</span>
-                                    </div>
-                                    <div
-                                        class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                        <i class="fas fa-chevron-down text-white"
-                                            :class="open ? 'rotate-180' : 'rotate-0'"></i>
-                                    </div>
+                        <li
+                            class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 @if (Request::is('dashboard')) bg-amber-500 text-white @endif">
+                            <a class="block text-white truncate transition hover:text-gray-200"
+                                href="{{ route('dashboard') }}">
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-user-circle {{ Request::is('dashboard') ? 'text-white' : 'text-amber-500' }}"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
+                                        Profile</span>
                                 </div>
                             </a>
-                            <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                                <ul class="pl-8 mt-1" :class="open ? '!block' : 'hidden'">
-                                    <li class="mb-1 last:mb-0">
-                                        <a class="block hover:text-gray-200 transition truncate {{ Request::is('dashboard') ? 'text-white' : 'text-gray-300' }}"
-                                            href="{{ route('dashboard') }}">
-                                            <span
-                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Main</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
 
                         <!-- My Target -->
-                        <li
+                        {{-- <li
                             class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 @if (Request::is('user-target')) bg-amber-500 text-white @endif">
                             <a class="block text-gray-100 truncate transition hover:text-white"
                                 href="{{ route('user.target') }}">
@@ -86,7 +68,7 @@
                                     </div>
                                 </div>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <!-- Edu Center -->
                         <li
@@ -104,7 +86,7 @@
                         </li>
 
                         <!-- My Schedule -->
-                        <li
+                        {{-- <li
                             class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 @if (Request::is('edu-schedule')) bg-amber-500 text-white @endif">
                             <a class="block text-gray-100 truncate transition hover:text-white"
                                 href="{{ route('user.schd') }}">
@@ -116,10 +98,10 @@
                                         Schedule</span>
                                 </div>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <!-- Teacher Profile -->
-                        <li
+                        {{-- <li
                             class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 @if (Request::is('edu-teacher')) bg-amber-500 text-white @endif">
                             <a class="block text-gray-100 truncate transition hover:text-white"
                                 href="{{ route('user.teach') }}">
@@ -131,10 +113,10 @@
                                         Profile</span>
                                 </div>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <!-- Learning Report -->
-                        <li
+                        {{-- <li
                             class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 @if (Request::is('edu-learning-report')) bg-amber-500 text-white @endif">
                             <a class="block text-gray-100 truncate transition hover:text-white"
                                 href="{{ route('user.lernport') }}">
@@ -146,43 +128,25 @@
                                         Report</span>
                                 </div>
                             </a>
-                        </li>
+                        </li> --}}
                     @elseif (Auth::user()->role_id == 2)
                         <!-- My Profile -->
-                        <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 @if (Request::is('dashboard')) bg-amber-500 text-white @endif"
-                            x-data="{ open: {{ Request::is('dashboard') ? 'true' : 'false' }} }">
-                            <a class="block text-white truncate transition hover:text-gray-200" href="#0"
-                                @click.prevent="open = !open; sidebarExpanded = true">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i
-                                            class="fas fa-user-circle {{ Request::is('dashboard') ? 'text-white' : 'text-amber-500' }}"></i>
-                                        <span
-                                            class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
-                                            Profile</span>
-                                    </div>
-                                    <div
-                                        class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                        <i class="fas fa-chevron-down text-white"
-                                            :class="open ? 'rotate-180' : 'rotate-0'"></i>
-                                    </div>
+                        <li
+                            class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 @if (Request::is('dashboard')) bg-amber-500 text-white @endif">
+                            <a class="block text-white truncate transition hover:text-gray-200"
+                                href="{{ route('dashboard') }}">
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-user-circle {{ Request::is('dashboard') ? 'text-white' : 'text-amber-500' }}"></i>
+                                    <span
+                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
+                                        Profile</span>
                                 </div>
                             </a>
-                            <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                                <ul class="pl-8 mt-1" :class="open ? '!block' : 'hidden'">
-                                    <li class="mb-1 last:mb-0">
-                                        <a class="block hover:text-gray-200 transition truncate {{ Request::is('dashboard') ? 'text-white' : 'text-gray-300' }}"
-                                            href="{{ route('dashboard') }}">
-                                            <span
-                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Main</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
 
                         <!-- Edu Center -->
-                        <li
+                        {{-- <li
                             class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 @if (Request::is('teacher/edu-center')) bg-amber-500 text-white @endif">
                             <a class="block text-gray-100 truncate transition hover:text-white"
                                 href="{{ route('teacher.center') }}">
@@ -194,7 +158,7 @@
                                         Center</span>
                                 </div>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <!-- My Schedule -->
                         <li
@@ -212,7 +176,7 @@
                         </li>
 
                         <!-- Biodata Siswa -->
-                        <li
+                        {{-- <li
                             class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 @if (Request::is('teacher/bio-siswa')) bg-amber-500 text-white @endif">
                             <a class="block text-gray-100 truncate transition hover:text-white"
                                 href="{{ route('teacher.biosiswa') }}">
@@ -224,7 +188,7 @@
                                         Siswa</span>
                                 </div>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <!-- Teaching Report -->
                         <li
@@ -241,134 +205,17 @@
                             </a>
                         </li>
                     @else
-                        <!-- If not role 1 or 2, show all menus -->
                         <!-- My Profile -->
-                        <li class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 bg-amber-500 rounded-md"
-                            :class="{ 'bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-amber-500/[0.24] to-amber-500/[0.04]': {{ Request::is('dashboard') ? 'true' : 'false' }} }"
-                            x-data="{ open: {{ Request::is('dashboard') ? 'true' : 'false' }} }">
-                            <a class="block text-white truncate transition @if (!Request::is('dashboard')) hover:text-gray-200 @endif"
-                                href="#0" @click.prevent="open = !open; sidebarExpanded = true">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-user-circle text-white"></i>
-                                        <span
-                                            class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                            My Profile
-                                        </span>
-                                    </div>
-                                    <div
-                                        class="flex shrink-0 ml-2 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                        <i class="fas fa-chevron-down text-white"
-                                            :class="open ? 'rotate-180' : 'rotate-0'"></i>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                                <ul class="pl-8 mt-1" :class="open ? '!block' : 'hidden'">
-                                    <li class="mb-1 last:mb-0">
-                                        <a class="block hover:text-gray-200 transition truncate @if (Request::is('dashboard')) text-white @endif"
-                                            href="{{ route('dashboard') }}">
-                                            <span
-                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                                Main
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="mb-1 last:mb-0">
-                                        <a class="block text-gray-300 hover:text-gray-100 transition truncate"
-                                            href="#">
-                                            <span
-                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                                Fintech
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <!-- My Target -->
-                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
-                                <div class="flex items-center justify-between">
-                                    <div class="grow flex items-center">
-                                        <i class="fa-solid fa-clipboard-check text-amber-500"></i>
-                                        <span
-                                            class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
-                                            Target</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- Edu Center -->
-                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
+                        <li
+                            class="pl-4 pr-3 py-2 mb-0.5 last:mb-0 @if (Request::is('dashboard')) bg-amber-500 text-white @endif">
+                            <a class="block text-white truncate transition hover:text-gray-200"
+                                href="{{ route('dashboard') }}">
                                 <div class="flex items-center">
-                                    <i class="fa-solid fa-bars-progress text-amber-500"></i>
-                                    <span
-                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Edu
-                                        Center</span>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- My Schedule -->
-                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
-                                <div class="flex items-center">
-                                    <i class="fa-solid fa-clipboard-list text-amber-500"></i>
+                                    <i
+                                        class="fas fa-user-circle {{ Request::is('dashboard') ? 'text-white' : 'text-amber-500' }}"></i>
                                     <span
                                         class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My
-                                        Schedule</span>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- Teacher Profile -->
-                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
-                                <div class="flex items-center">
-                                    <i class="fas fa-user-tie text-amber-500"></i>
-                                    <span
-                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Teacher
                                         Profile</span>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- Learning Report -->
-                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
-                                <div class="flex items-center">
-                                    <i class="fas fa-book-open text-amber-500"></i>
-                                    <span
-                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Learning
-                                        Report</span>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- Biodata Siswa -->
-                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
-                                <div class="flex items-center">
-                                    <i class="fas fa-book text-amber-500"></i>
-                                    <span
-                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Biodata
-                                        Siswa</span>
-                                </div>
-                            </a>
-                        </li>
-
-                        <!-- Teaching Report -->
-                        <li class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0">
-                            <a class="block text-gray-100 truncate transition hover:text-white" href="#">
-                                <div class="flex items-center">
-                                    <i class="fas fa-book-open text-amber-500"></i>
-                                    <span
-                                        class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Teaching
-                                        Report</span>
                                 </div>
                             </a>
                         </li>
