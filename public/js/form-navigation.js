@@ -9,6 +9,9 @@ const stepIndicators = [
     document.getElementById("step5"),
 ];
 
+let selectedBrandId = null; // Untuk menyimpan brand_id
+let selectedProgramId = null; // Untuk menyimpan program_id
+
 function updateProgress() {
     const progressPercentage = ((currentStep - 1) / (stepCount - 1)) * 100;
     progressBar.style.width = `${progressPercentage}%`;
@@ -46,6 +49,12 @@ function updateProgress() {
 }
 
 function selectBrand(label) {
+    // Menyimpan brand_id yang dipilih
+    selectedBrandId = label.querySelector('input[name="brand_id"]').value;
+
+    // Call fetchSubprograms to get subprograms based on selected brand
+    fetchSubprograms();
+
     // Remove selected class from all brand select boxes
     document.querySelectorAll(".brand-select-box").forEach((box) => {
         box.classList.remove("bg-blue-500", "text-white");
@@ -58,6 +67,12 @@ function selectBrand(label) {
 }
 
 function selectProgram(label) {
+    // Menyimpan program_id yang dipilih
+    selectedProgramId = label.querySelector('input[name="program_id"]').value;
+
+    // Call fetchSubprograms to get subprograms based on selected brand and program
+    fetchSubprograms();
+
     // Remove selected class from all program select boxes
     document.querySelectorAll(".program-select-box").forEach((box) => {
         box.classList.remove("bg-blue-500", "text-white");
@@ -197,3 +212,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Initialize
 updateProgress();
+
+// Fetch subprograms from API
+async function fetchSubprograms() {
+    // Ensure brand_id and program_id are selected
+    if (!selectedBrandId || !selectedProgramId) {
+        return; // Do nothing if brand_id or program_id are not selected
+    }
+
+    try {
+        // Fetch subprograms based on brand_id and program_id using the new endpoint
+        const response = await fetch(
+            `http://educate_to.test/api/subprograms/search?brand_id=${selectedBrandId}&program_id=${selectedProgramId}`
+        );
+
+        // Check if response status is not 200
+        if (!response.ok) {
+            console.error("Failed to fetch subprograms:", response.status);
+            return;
+        }
+
+        const subprograms = await response.json();
+
+        // Log the fetched subprograms
+        console.log("Fetched subprograms:", subprograms); // Console log data from API
+
+        // Log status 200 if successful
+        console.log("Successfully fetched subprograms:", response.status);
+
+        // Get the select element
+        const selectElement = document.getElementById("subprogram-select");
+
+        // Clear any existing options (except the default one)
+        selectElement.innerHTML =
+            '<option value="" disabled selected>Select Subprogram</option>';
+
+        // Check if any subprograms were found
+        if (subprograms.length === 0) {
+            console.error(
+                "No subprograms found for the selected Brand and Program."
+            );
+            alert("Tidak ada subprogram yang ditemukan untuk pilihan Anda.");
+            return;
+        }
+
+        // Loop through the fetched subprograms and create option elements
+        subprograms.forEach((subprogram) => {
+            const option = document.createElement("option");
+            option.value = subprogram.id;
+            option.textContent = subprogram.name_sub_program;
+            selectElement.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error fetching subprograms:", error);
+    }
+}
+
+// Initial call to populate the select box
+// Note: This will only execute when the selectedBrandId and selectedProgramId are set

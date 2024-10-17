@@ -1,14 +1,41 @@
-// Debugging: Cek nilai JSON yang diterima
-console.log("{!! $subprogramsJson !!}");
-var subprograms = JSON.parse("{!! $subprogramsJson !!}");
+let brandId = null;
+let programId = null;
 
-// Mendapatkan elemen select
-var subprogramSelect = document.querySelector('select[name="subprogram"]');
+function saveBrandId(selectElement) {
+    brandId = selectElement.value;
+    console.log("Brand ID:", brandId);
+}
 
-// Mengisi select dengan opsi dari subprograms
-subprograms.forEach(function (subprogram) {
-    var option = document.createElement("option");
-    option.value = subprogram.id;
-    option.textContent = subprogram.name_sub_program; // Pastikan ini adalah nama field yang tepat
-    subprogramSelect.appendChild(option);
-});
+function saveProgramId(selectElement) {
+    programId = selectElement.value;
+    console.log("Program ID:", programId);
+
+    // Panggil API untuk mendapatkan subprogram
+    fetchSubPrograms();
+}
+
+function fetchSubPrograms() {
+    fetch(
+        `http://educate_to.test/api/subprograms?brand_id=${brandId}&program_id=${programId}`
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            populateSubProgramSelect(data);
+        })
+        .catch((error) => {
+            console.error("Error fetching subprograms:", error);
+        });
+}
+
+function populateSubProgramSelect(subprograms) {
+    const subprogramSelect = document.getElementById("subprogram-select");
+    subprogramSelect.innerHTML =
+        '<option value="" disabled selected>Select Subprogram</option>';
+
+    subprograms.forEach((subprogram) => {
+        const option = document.createElement("option");
+        option.value = subprogram.id;
+        option.textContent = subprogram.name;
+        subprogramSelect.appendChild(option);
+    });
+}

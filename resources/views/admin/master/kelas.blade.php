@@ -180,10 +180,8 @@
                         <div class="w-full md:w-1/2 px-2 mb-4">
                             <label for="create_subprogram_id" class="block text-gray-700 text-sm">Sub Program</label>
                             <select id="create_subprogram_id" name="subprogram_id"
-                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required>
-                                @foreach ($subprograms as $subprogram)
-                                    <option value="{{ $subprogram->id }}">{{ $subprogram->name_sub_program }}</option>
-                                @endforeach
+                                class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required disabled>
+                                <option value="" disabled selected>Pilih Sub Program</option>
                             </select>
                         </div>
                     </div>
@@ -355,6 +353,65 @@
                             alert('Terjadi kesalahan saat menghapus kelas.');
                         }
                     });
+                }
+            });
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const createBrandSelect = document.getElementById("create_brand_id");
+                const createProgramSelect = document.getElementById("create_program_id");
+                const createSubprogramSelect = document.getElementById("create_subprogram_id");
+
+                // Event listener untuk perubahan pada brand
+                createBrandSelect.addEventListener("change", fetchSubprograms);
+                createProgramSelect.addEventListener("change", fetchSubprograms);
+
+                async function fetchSubprograms() {
+                    const brandId = createBrandSelect.value;
+                    const programId = createProgramSelect.value;
+
+                    // Pastikan brand_id dan program_id terpilih
+                    if (!brandId || !programId) {
+                        createSubprogramSelect.innerHTML =
+                            '<option value="" disabled selected>Pilih Sub Program</option>';
+                        createSubprogramSelect.disabled = true;
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(
+                            `http://educate_to.test/api/subprograms/search?brand_id=${brandId}&program_id=${programId}`
+                        );
+
+                        // Cek apakah status response OK (200)
+                        if (!response.ok) {
+                            console.error("Failed to fetch subprograms. Status:", response.status);
+                            createSubprogramSelect.innerHTML =
+                                '<option value="" disabled selected>Pilih Sub Program</option>';
+                            createSubprogramSelect.disabled = true;
+                            return;
+                        }
+
+                        const subprograms = await response.json();
+                        console.log("Subprograms fetched successfully:", subprograms);
+
+                        // Clear previous options
+                        createSubprogramSelect.innerHTML =
+                            '<option value="" disabled selected>Pilih Sub Program</option>';
+                        createSubprogramSelect.disabled = false; // Enable the select
+
+                        // Loop through the fetched subprograms and create option elements
+                        subprograms.forEach(subprogram => {
+                            const option = document.createElement("option");
+                            option.value = subprogram.id;
+                            option.textContent = subprogram.name_sub_program;
+                            createSubprogramSelect.appendChild(option);
+                        });
+                    } catch (error) {
+                        console.error("Error fetching subprograms:", error);
+                        createSubprogramSelect.innerHTML =
+                            '<option value="" disabled selected>Pilih Sub Program</option>';
+                        createSubprogramSelect.disabled = true;
+                    }
                 }
             });
         </script>

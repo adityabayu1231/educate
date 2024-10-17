@@ -120,11 +120,13 @@
                                         </div>
 
                                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+
                                         <div class="relative">
-                                            <select name="subprogram"
+                                            <select id="subprogram-select" name="subprogram"
                                                 class="required-field form-select rounded-lg pl-10 pr-3 py-2 border border-gray-300 w-full text-sm placeholder:text-sm"
                                                 required>
                                                 <option value="" disabled selected>Select Subprogram</option>
+                                                <!-- Options will be populated dynamically -->
                                             </select>
                                             <i class="fas fa-list-alt absolute top-3 left-3 text-gray-500"></i>
                                         </div>
@@ -251,8 +253,7 @@
                                         <i class="fas fa-basketball-ball absolute top-3 left-3 text-gray-500"></i>
                                     </div>
                                     <div class="relative">
-                                        <label for="ktp_document"
-                                            class="block mb-2 text-sm font-medium text-gray-900">Upload Your
+                                        <label class="block mb-2 text-sm font-medium text-gray-900">Upload Your
                                             Photo</label>
                                         <input type="file" name="your_photo"
                                             class="required-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
@@ -359,7 +360,6 @@
 
                     <script src="{{ asset('js/form-navigation.js') }}"></script>
                     <script src="{{ asset('js/wilayah.js') }}"></script>
-                    <script src="{{ asset('js/filteruserbio.js') }}"></script>
                 </div>
             </div>
         </div>
