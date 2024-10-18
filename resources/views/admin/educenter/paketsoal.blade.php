@@ -4,15 +4,29 @@
 
 @section('content')
     <div class="px-4 sm:px-6 lg:px-8 py-1 w-full max-w-9xl mx-auto">
+        <div class="relative bg-blue-600 h-32 flex items-center justify-between p-4 rounded-lg shadow-lg mb-4">
+            <div class="absolute inset-0 bg-cover bg-center opacity-50"
+                style="background-image: url('{{ asset('backend/images/illustration/paper.jpg') }}');">
+            </div>
+            <div class="relative flex justify-between w-full">
+                <div class="text-white p-4">
+                    <h1 class="text-2xl font-bold mb-2 text-black">Edu Center ✨</h1>
+                    <p class="text-sm mb-2 text-gray-100">Paket Soal</p>
+                </div>
+            </div>
+        </div>
+
         <div class="flex items-center mb-6">
             <a href="{{ route('admin.edu-center') }}" class=" hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md">
                 <i class="fa-solid fa-arrow-left-long"></i> Back
             </a>
             <div class="flex-grow"></div>
-            <button id="createDataBtn"
-                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center">
-                <i class="fas fa-plus mr-2"></i> Tambah Soal
-            </button>
+            <a href="{{ route('admin.addpaket') }}">
+                <button id="createDataBtn"
+                    class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Tambah Paket
+                </button>
+            </a>
         </div>
 
         <div class="overflow-x-auto">

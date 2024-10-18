@@ -30,4 +30,9 @@ class EduCenterController extends Controller
     {
         return view('admin.educenter.addsoal');
     }
+
+    public function addPaket()
+    {
+        return view('admin.educenter.addpaket');
+    }
 }
