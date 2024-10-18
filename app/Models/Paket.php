@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Soal;
 use App\Models\Subject;
+use App\Models\Subtest;
+use App\Models\IkutTest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -24,5 +27,20 @@ class Paket extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'mapel_id');
+    }
+
+    public function soal()
+    {
+        return $this->hasMany(Soal::class);
+    }
+
+    public function ikutTest()
+    {
+        return $this->hasMany(IkutTest::class);
+    }
+
+    public function subtest()
+    {
+        return $this->hasMany(Subtest::class);
     }
 }

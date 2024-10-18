@@ -16,144 +16,139 @@
             </div>
         </div>
 
-        <form action="#" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="grid grid-cols-1 lg:grid-cols-10 gap-4"> <!-- Adjusted grid layout -->
+        <!-- Tombol Back -->
+        <a href="{{ route('admin.paket-soal') }}"><button
+                class="mb-6 text-blue-500 hover:bg-blue-500 font-medium px-4 py-2 rounded-md hover:text-white">&larr;
+                back</button></a>
 
-                <!-- Nama Paket Soal -->
-                <div class="col-span-10 lg:col-span-5">
-                    <label for="paket_soal" class="block text-gray-700">Nama Paket Soal</label>
-                    <input type="text" id="paket_soal" name="paket_soal"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        required>
+        <div class="p-4 bg-gray-100">
+            <div class="w-full md:w-1/2 space-y-6 mx-auto md:ml-0">
+                <!-- Setengah layar di desktop, full di mobile, di pojok kiri -->
+                <!-- Soal Text -->
+                <div class="flex flex-col">
+                    <label for="soal" class="mb-2 text-blue-600">Soal</label>
+                    <textarea id="soal" rows="3" class="p-3 border border-gray-300 rounded-lg shadow-sm w-full"></textarea>
                 </div>
 
-                <!-- Mata Pelajaran -->
-                <div class="col-span-10 lg:col-span-5">
-                    <label for="mata_pelajaran" class="block text-gray-700">Mata Pelajaran</label>
-                    <input type="text" id="mata_pelajaran" name="mata_pelajaran"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        required>
+                <!-- Soal Gambar -->
+                <div class="flex flex-col">
+                    <label for="soal_gambar" class="mb-2 text-blue-600">Soal Gambar (Opsional)</label>
+                    <input type="file" id="soal_gambar" accept="image/*" onchange="previewImage(event)"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <img id="image_preview"
+                        class="mt-2 hidden w-full h-32 object-cover rounded-lg border border-gray-300" />
                 </div>
 
-                <!-- Soal dan Upload Gambar (1 Baris) -->
-                <div class="col-span-10 flex items-center space-x-4">
-                    <div class="w-4/5">
-                        <label for="soal" class="block text-gray-700">Soal</label>
-                        <textarea id="soal" name="soal"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            required></textarea>
+                <!-- Pilihan A - E -->
+                <div class="grid grid-cols-6 gap-4">
+                    <!-- Pilihan A -->
+                    <div class="flex flex-col col-span-5">
+                        <label for="pil_a" class="mb-2 text-blue-600">Pilihan A</label>
+                        <input type="text" id="pil_a" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
+                        <!-- Panjang -->
                     </div>
-                    <div class="flex flex-col items-center">
-                        <label for="soal_gambar" class="block text-gray-700">Upload Gambar Soal</label>
-                        <input type="file" id="soal_gambar" name="soal_gambar"
-                            class="mt-1 block border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            accept="image/*">
-                        <button type="button" class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full mt-2">
-                            <i class="fas fa-plus"></i>
-                        </button>
+                    <div class="flex flex-col col-span-1">
+                        <label for="skor_a" class="mb-2 text-blue-600">Skor A</label>
+                        <input type="number" id="skor_a"
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
                     </div>
-                </div>
 
-                <!-- Pilihan Jawaban A & Point A (1 Baris) -->
-                <div class="col-span-10 flex items-center space-x-4">
-                    <div class="w-4/5">
-                        <label for="pil_a" class="block text-gray-700">Pilihan A</label>
-                        <input type="text" id="pil_a" name="pil_a"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            required>
+                    <!-- Pilihan B -->
+                    <div class="flex flex-col col-span-5">
+                        <label for="pil_b" class="mb-2 text-blue-600">Pilihan B</label>
+                        <input type="text" id="pil_b" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
+                        <!-- Panjang -->
                     </div>
-                    <div class="w-1/5">
-                        <label for="skor_a" class="block text-gray-700">Point</label>
-                        <input type="number" id="skor_a" name="skor_a"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            min="0" max="1000" required>
+                    <div class="flex flex-col col-span-1">
+                        <label for="skor_b" class="mb-2 text-blue-600">Skor B</label>
+                        <input type="number" id="skor_b"
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
                     </div>
-                </div>
 
-                <!-- Pilihan Jawaban B & Point B (1 Baris) -->
-                <div class="col-span-10 flex items-center space-x-4">
-                    <div class="w-4/5">
-                        <label for="pil_b" class="block text-gray-700">Pilihan B</label>
-                        <input type="text" id="pil_b" name="pil_b"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            required>
+                    <!-- Pilihan C -->
+                    <div class="flex flex-col col-span-5">
+                        <label for="pil_c" class="mb-2 text-blue-600">Pilihan C</label>
+                        <input type="text" id="pil_c" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
+                        <!-- Panjang -->
                     </div>
-                    <div class="w-1/5">
-                        <label for="skor_b" class="block text-gray-700">Point</label>
-                        <input type="number" id="skor_b" name="skor_b"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            min="0" max="1000" required>
+                    <div class="flex flex-col col-span-1">
+                        <label for="skor_c" class="mb-2 text-blue-600">Skor C</label>
+                        <input type="number" id="skor_c"
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
                     </div>
-                </div>
 
-                <!-- Pilihan Jawaban C & Point C (1 Baris) -->
-                <div class="col-span-10 flex items-center space-x-4">
-                    <div class="w-4/5">
-                        <label for="pil_c" class="block text-gray-700">Pilihan C</label>
-                        <input type="text" id="pil_c" name="pil_c"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <!-- Pilihan D -->
+                    <div class="flex flex-col col-span-5">
+                        <label for="pil_d" class="mb-2 text-blue-600">Pilihan D</label>
+                        <input type="text" id="pil_d" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
+                        <!-- Panjang -->
                     </div>
-                    <div class="w-1/5">
-                        <label for="skor_c" class="block text-gray-700">Point</label>
-                        <input type="number" id="skor_c" name="skor_c"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            min="0" max="1000">
+                    <div class="flex flex-col col-span-1">
+                        <label for="skor_d" class="mb-2 text-blue-600">Skor D</label>
+                        <input type="number" id="skor_d"
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
                     </div>
-                </div>
 
-                <!-- Pilihan Jawaban D & Point D (1 Baris) -->
-                <div class="col-span-10 flex items-center space-x-4">
-                    <div class="w-4/5">
-                        <label for="pil_d" class="block text-gray-700">Pilihan D</label>
-                        <input type="text" id="pil_d" name="pil_d"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <!-- Pilihan E -->
+                    <div class="flex flex-col col-span-5">
+                        <label for="pil_e" class="mb-2 text-blue-600">Pilihan E</label>
+                        <input type="text" id="pil_e" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
+                        <!-- Panjang -->
                     </div>
-                    <div class="w-1/5">
-                        <label for="skor_d" class="block text-gray-700">Point</label>
-                        <input type="number" id="skor_d" name="skor_d"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            min="0" max="1000">
+                    <div class="flex flex-col col-span-1">
+                        <label for="skor_e" class="mb-2 text-blue-600">Skor E</label>
+                        <input type="number" id="skor_e"
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
                     </div>
                 </div>
 
-                <!-- Pilihan Jawaban E & Point E (1 Baris) -->
-                <div class="col-span-10 flex items-center space-x-4">
-                    <div class="w-4/5">
-                        <label for="pil_e" class="block text-gray-700">Pilihan E</label>
-                        <input type="text" id="pil_e" name="pil_e"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div class="w-1/5">
-                        <label for="skor_e" class="block text-gray-700">Point</label>
-                        <input type="number" id="skor_e" name="skor_e"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                            min="0" max="1000">
-                    </div>
+                <!-- Jawaban -->
+                <div class="flex flex-col">
+                    <label for="jawaban" class="mb-2 text-blue-600">Jawaban</label>
+                    <input type="text" id="jawaban" class="p-3 border border-gray-300 rounded-lg shadow-sm w-full">
                 </div>
 
                 <!-- Pembahasan -->
-                <div class="col-span-10">
-                    <label for="pembahasan" class="block text-gray-700">Pembahasan</label>
-                    <textarea id="pembahasan" name="pembahasan"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                <div class="flex flex-col">
+                    <label for="pembahasan" class="mb-2 text-blue-600">Pembahasan (Opsional)</label>
+                    <textarea id="pembahasan" rows="3" class="p-3 border border-gray-300 rounded-lg shadow-sm w-full"></textarea>
                 </div>
 
-                <!-- Upload Gambar Pembahasan -->
-                <div class="col-span-10">
-                    <label for="gambar_pembahasan" class="block text-gray-700">Upload Gambar Pembahasan</label>
-                    <input type="file" id="gambar_pembahasan" name="gambar_pembahasan"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        accept="image/*">
+                <!-- Gambar Pembahasan -->
+                <div class="flex flex-col">
+                    <label for="gambar_pembahasan" class="mb-2 text-blue-600">Gambar Pembahasan (Opsional)</label>
+                    <input type="file" id="gambar_pembahasan" accept="image/*"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
-                <!-- Submit Button -->
-                <div class="col-span-10">
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
-                        <i class="fas fa-plus mr-2"></i> Submit
-                    </button>
+                <!-- Video Penjelasan -->
+                <div class="flex flex-col">
+                    <label for="video_penjelasan" class="mb-2 text-blue-600">Link Video Penjelasan (Opsional)</label>
+                    <input type="url" id="video_penjelasan" placeholder="https://www.youtube.com/watch?v=..."
+                        class="p-3 border border-gray-300 rounded-lg shadow-sm w-full">
                 </div>
+
+                <!-- Tombol Submit -->
+                <button class="mt-4 bg-blue-500 text-white p-3 rounded-lg">Simpan Soal</button>
             </div>
-        </form>
+        </div>
+
+        <script>
+            function previewImage(event) {
+                const imagePreview = document.getElementById('image_preview');
+                const file = event.target.files[0];
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.classList.remove('hidden');
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    imagePreview.classList.add('hidden');
+                }
+            }
+        </script>
     </div>
 @endsection

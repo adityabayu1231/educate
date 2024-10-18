@@ -21,6 +21,6 @@ class Subtest extends Model
 
     public function paketSoal()
     {
-        return $this->belongsTo(PaketSoal::class);
+        return $this->belongsTo(Paket::class);
     }
 }
