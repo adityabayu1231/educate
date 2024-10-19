@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Paket;
 use App\Models\PaketSoal;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +23,6 @@ class Modul extends Model
     // Relasi dengan PaketSoal
     public function paketSoal()
     {
-        return $this->belongsTo(PaketSoal::class, 'id_paket_soal');
+        return $this->belongsTo(Paket::class, 'id_paket_soal');
     }
 }

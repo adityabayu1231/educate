@@ -64,6 +64,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/', [EduCenterController::class, 'index'])->name('edu-center');
             Route::get('/e-module', [EduCenterController::class, 'eModule'])->name('e-module');
             Route::get('/paket-soal', [EduCenterController::class, 'paketSoal'])->name('paket-soal');
+            Route::post('/paket-soal/store', [EduCenterController::class, 'storePaketSoal'])->name('paket-soal.store');
+            Route::patch('/paket-soal/update/{id}', [EduCenterController::class, 'update'])->name('paket-soal.update');
+            Route::delete('/paket-soal/{id}', [EduCenterController::class, 'destroy'])->name('paket-soal.destroy');
             Route::get('/assign-paket-soal', [EduCenterController::class, 'assignPaketSoal'])->name('assign-paket-soal');
             Route::get('/add-soal', [EduCenterController::class, 'addSoal'])->name('addsoal');
             Route::get('/add-paket', [EduCenterController::class, 'addPaket'])->name('addpaket');
