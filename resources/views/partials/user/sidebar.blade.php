@@ -72,12 +72,12 @@
 
                         <!-- Edu Center -->
                         <li
-                            class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 @if (Request::is('edu-center')) bg-amber-500 text-white @endif">
+                            class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 @if (Request::is('edu-centers*')) bg-amber-500 text-white @endif">
                             <a class="block text-gray-100 truncate transition hover:text-white"
                                 href="{{ route('user.ec') }}">
                                 <div class="flex items-center">
                                     <i
-                                        class="fa-solid fa-bars-progress {{ Request::is('edu-center') ? 'text-white' : 'text-amber-500' }}"></i>
+                                        class="fa-solid fa-bars-progress {{ Request::is('edu-centers*') ? 'text-white' : 'text-amber-500' }}"></i>
                                     <span
                                         class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 text-white">Edu
                                         Center</span>

@@ -57,11 +57,6 @@ class AuthUserController extends Controller
         return view('student/usertarget');
     }
 
-    public function educenter()
-    {
-        return view('student/educenter');
-    }
-
     public function eduschedule()
     {
         return view('student/eduschedule');
@@ -75,5 +70,10 @@ class AuthUserController extends Controller
     public function edulearnrept()
     {
         return view('student/edulearningreport');
+    }
+
+    public function educenter()
+    {
+        return view('student/educenter/index');
     }
 }
