@@ -581,7 +581,7 @@
                     console.error("Error fetching data:", error); // Log kesalahan
                     alert(
                         "Failed to fetch data. Please check the console for more details."
-                        ); // Pemberitahuan kepada pengguna
+                    ); // Pemberitahuan kepada pengguna
                 }
             }
 

@@ -6,8 +6,9 @@ use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subject extends Model
 {
@@ -23,9 +24,10 @@ class Subject extends Model
         'is_active',
     ];
 
-    public function teachers(): HasMany
+    // Relasi untuk mendapatkan guru jika perlu
+    public function teacher(): BelongsTo
     {
-        return $this->hasMany(Teacher::class);
+        return $this->belongsTo(Teacher::class);
     }
 
     public function students(): HasMany

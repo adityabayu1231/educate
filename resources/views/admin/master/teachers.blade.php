@@ -67,7 +67,9 @@
                             <td class="py-2 px-4">{{ $loop->iteration }}</td>
                             <td class="py-2 px-4">{{ $teacher->user->fullname }}</td>
                             <td class="py-2 px-4">{{ $teacher->user->email }}</td>
-                            <td class="py-2 px-4">{{ $teacher->subject->name ?? 'N/A' }}</td>
+                            <td class="py-2 px-4">
+                                {{ implode(', ', $teacher->subject_names) ?? 'N/A' }}
+                            </td>
                             <td class="py-2 px-4">{{ ucfirst($teacher->gender) }}</td>
                             <td class="py-2 px-4 text-right">
                                 <!-- Edit Button -->

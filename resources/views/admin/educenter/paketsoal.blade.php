@@ -96,7 +96,7 @@
                                 <td class="py-2 px-4 text-right">
                                     <div class="flex flex-col space-y-2">
                                         <div class="flex space-x-2">
-                                            <a href="{{ route('admin.addsoal') }}">
+                                            <a href="{{ route('admin.soals.index') }}">
                                                 <button
                                                     class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-md w-24">Add
                                                     Soal</button>

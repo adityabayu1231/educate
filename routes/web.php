@@ -2,6 +2,7 @@
 
 use App\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SoalController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\KelasController;
@@ -15,9 +16,9 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TingkatController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\AuthAdminController;
+use App\Http\Controllers\EduCenterController;
 use App\Http\Controllers\SubProgramController;
 use App\Http\Controllers\AuthTeacherController;
-use App\Http\Controllers\EduCenterController;
 use App\Http\Controllers\TahunajaranController;
 
 Route::get('/', function () {
@@ -68,8 +69,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::patch('/paket-soal/update/{id}', [EduCenterController::class, 'update'])->name('paket-soal.update');
             Route::delete('/paket-soal/{id}', [EduCenterController::class, 'destroy'])->name('paket-soal.destroy');
             Route::get('/assign-paket-soal', [EduCenterController::class, 'assignPaketSoal'])->name('assign-paket-soal');
-            Route::get('/add-soal', [EduCenterController::class, 'addSoal'])->name('addsoal');
             Route::get('/add-paket', [EduCenterController::class, 'addPaket'])->name('addpaket');
+            Route::resource('soals', SoalController::class);
         });
 
         Route::prefix('schedule')->group(function () {

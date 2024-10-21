@@ -1,6 +1,9 @@
 @section('title', 'Educate - Assesment')
 <x-app-layout>
     <div class="py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a href="{{ route('user.ec') }}"><button class="font-bold text-blue-500">&larr; back</button></a>
+        </div>
         <!-- Page Title -->
         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <p class="text-2xl font-semibold">Assesment ✨</p>
@@ -20,7 +23,8 @@
                     <!-- Title -->
                     <h2 class="text-left text-lg font-semibold mt-2">Academic Assesment</h2>
                     <!-- Description -->
-                    <p class="text-justify text-gray-500 text-sm mb-2">Lorem ipsum dolor sit amet consectetur adipisicing
+                    <p class="text-justify text-gray-500 text-sm mb-2">Lorem ipsum dolor sit amet consectetur
+                        adipisicing
                         elit. Modi, illo iste. Neque error assumenda voluptatum odit aperiam officiis.
                     </p>
                     <!-- Date and Time -->
@@ -31,7 +35,8 @@
                             <!-- Time -->
                             <p class="text-gray-400 text-xs">07:50 -> 09:00 </p>
                             <!-- View Link -->
-                            <a href="#" class="text-blue-500 font-semibold text-sm">View -></a>
+                            <a href="{{ route('user.jadwalsiswa') }}" class="text-blue-500 font-semibold text-sm">View
+                                -></a>
                         </div>
                     </div>
                 </div>

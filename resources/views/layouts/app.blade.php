@@ -29,7 +29,7 @@
     @include('partials.admin.preloader')
     <div class="flex h-[100dvh] overflow-hidden bg-gray-100">
 
-        @unless (request()->is('edu-centers/ujian'))
+        @unless (request()->is('edu-centers/assesment/soal'))
             @include('partials.user.sidebar')
         @endunless
 

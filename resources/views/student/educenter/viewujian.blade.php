@@ -1,12 +1,15 @@
 @section('title', 'Educate - Ujian')
 <x-app-layout>
-    <div class="min-h-screen bg-gray-100 p-4 sm:p-8">
+    <div class="min-h-screen bg-gray-100 p-1 sm:p-2">
         <!-- Header Section -->
         <div class="mb-6 flex h-16 items-center justify-between rounded-md bg-white px-4 py-2 shadow-md">
             <div class="flex items-center">
-                <button class="font-bold text-gray-500">&larr; Back</button>
+                <a href="{{ route('user.jadwalsiswa') }}"><button
+                        class="font-bold text-xs lg:text-lg text-gray-500">&larr; Back</button></a>
             </div>
-            <h1 class="text-lg font-bold text-gray-800">Assessment Page - Academic Assessment</h1>
+            <!-- Default (desktop): text-lg | Tablet (md): text-base | Mobile (sm): text-sm -->
+            <h1 class="text-xs lg:text-lg font-bold text-gray-800">Assessment Page - Academic Assessment
+            </h1>
             <div></div>
         </div>
 

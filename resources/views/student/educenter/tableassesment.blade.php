@@ -5,7 +5,7 @@
             <!-- Back Button -->
             <div class="w-2/3">
                 <div class="mb-6">
-                    <button class="font-bold text-blue-500">&larr; back</button>
+                    <a href="{{ route('user.asmn') }}"><button class="font-bold text-blue-500">&larr; back</button></a>
                 </div>
 
                 <!-- Table -->
@@ -26,8 +26,8 @@
                                 <td class="px-4 py-2 text-gray-700">Matematika</td>
                                 <td class="px-4 py-2 text-gray-700">16-08-2023</td>
                                 <td class="px-4 py-2">
-                                    <button
-                                        class="rounded-md bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">Start</button>
+                                    <a href="{{ route('user.soal') }}"><button
+                                            class="rounded-md bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">Start</button></a>
                                 </td>
                             </tr>
 
@@ -37,8 +37,8 @@
                                 <td class="px-4 py-2 text-gray-700">Bahasa Indonesia</td>
                                 <td class="px-4 py-2 text-gray-700">16-08-2023</td>
                                 <td class="px-4 py-2">
-                                    <button
-                                        class="rounded-md bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">Start</button>
+                                    <a href="{{ route('user.soal') }}"><button
+                                            class="rounded-md bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">Start</button></a>
                                 </td>
                             </tr>
                         </tbody>
