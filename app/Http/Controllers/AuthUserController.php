@@ -76,4 +76,19 @@ class AuthUserController extends Controller
     {
         return view('student/educenter/index');
     }
+
+    public function eduassesment()
+    {
+        return view('student/educenter/assesment');
+    }
+
+    public function edujadwalsiswa()
+    {
+        return view('student/educenter/tableassesment');
+    }
+
+    public function edusoalsiswa()
+    {
+        return view('student/educenter/viewujian');
+    }
 }

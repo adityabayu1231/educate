@@ -114,6 +114,9 @@ Route::middleware([
         Route::get('/user-target', [AuthUserController::class, 'usertarget'])->name('user.target');
         Route::prefix('edu-centers')->group(function () {
             Route::get('/', [AuthUserController::class, 'educenter'])->name('user.ec');
+            Route::get('/assesment', [AuthUserController::class, 'eduassesment'])->name('user.asmn');
+            Route::get('/assesment/jadwal', [AuthUserController::class, 'edujadwalsiswa'])->name('user.jadwalsiswa');
+            Route::get('/assesment/soal', [AuthUserController::class, 'edusoalsiswa'])->name('user.soal');
         });
         Route::get('/edu-schedule', [AuthUserController::class, 'eduschedule'])->name('user.schd');
         Route::get('/edu-teacher', [AuthUserController::class, 'eduteacher'])->name('user.teach');

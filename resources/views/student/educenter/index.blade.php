@@ -8,7 +8,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 gap-4">
                 <!-- Box 1: Assessment -->
-                <div class="border rounded-lg shadow-md overflow-hidden bg-white">
+                <a href="{{ route('user.asmn') }}"
+                    class="border rounded-lg shadow-md overflow-hidden bg-white transition duration-200 hover:shadow-lg">
                     <div class="border-t-4 border-blue-500 p-4">
                         <div class="flex items-center">
                             <i class="fas fa-check-circle fa-lg text-blue-500"></i>
@@ -19,10 +20,11 @@
                         <img src="{{ asset('frontend/images/ilustrasi/sample.jpg') }}" alt="Assessment"
                             class="h-32 w-auto object-cover"> <!-- Gambar di bawah judul -->
                     </div>
-                </div>
+                </a>
 
                 <!-- Box 2: Drilling Soal -->
-                <div class="border rounded-lg shadow-md overflow-hidden bg-white">
+                <a href="#"
+                    class="border rounded-lg shadow-md overflow-hidden bg-white transition duration-200 hover:shadow-lg">
                     <div class="border-t-4 border-green-500 p-4">
                         <div class="flex items-center">
                             <i class="fas fa-pencil-alt fa-lg text-green-500"></i>
@@ -33,10 +35,11 @@
                         <img src="{{ asset('frontend/images/ilustrasi/sample.jpg') }}" alt="Drilling Soal"
                             class="h-32 w-auto object-cover"> <!-- Gambar di bawah judul -->
                     </div>
-                </div>
+                </a>
 
                 <!-- Box 3: E-Modul -->
-                <div class="border rounded-lg shadow-md overflow-hidden bg-white">
+                <a href="#"
+                    class="border rounded-lg shadow-md overflow-hidden bg-white transition duration-200 hover:shadow-lg">
                     <div class="border-t-4 border-yellow-500 p-4">
                         <div class="flex items-center">
                             <i class="fas fa-book fa-lg text-yellow-500"></i>
@@ -47,10 +50,11 @@
                         <img src="{{ asset('frontend/images/ilustrasi/sample.jpg') }}" alt="E-Modul"
                             class="h-32 w-auto object-cover"> <!-- Gambar di bawah judul -->
                     </div>
-                </div>
+                </a>
 
                 <!-- Box 4: Tryout -->
-                <div class="border rounded-lg shadow-md overflow-hidden bg-white">
+                <a href="#"
+                    class="border rounded-lg shadow-md overflow-hidden bg-white transition duration-200 hover:shadow-lg">
                     <div class="border-t-4 border-red-500 p-4">
                         <div class="flex items-center">
                             <i class="fas fa-clipboard-check fa-lg text-red-500"></i>
@@ -61,7 +65,7 @@
                         <img src="{{ asset('frontend/images/ilustrasi/sample.jpg') }}" alt="Tryout"
                             class="h-32 w-auto object-cover"> <!-- Gambar di bawah judul -->
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

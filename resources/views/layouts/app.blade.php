@@ -29,7 +29,9 @@
     @include('partials.admin.preloader')
     <div class="flex h-[100dvh] overflow-hidden bg-gray-100">
 
-        @include('partials.user.sidebar')
+        @unless (request()->is('edu-centers/ujian'))
+            @include('partials.user.sidebar')
+        @endunless
 
         <!-- Content area -->
         <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden" x-ref="contentarea">
