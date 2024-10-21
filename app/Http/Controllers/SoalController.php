@@ -25,7 +25,7 @@ class SoalController extends Controller
     {
         // Ambil paket soal untuk pilihan dropdown
         $pakets = Paket::all();
-        return view('admin.soals.create', compact('pakets'));
+        return view('admin.educenter.soal.addsoal', compact('pakets'));
     }
 
     /**
@@ -37,12 +37,39 @@ class SoalController extends Controller
         $request->validate([
             'paket_soal_id' => 'required|exists:pakets,id',
             'soal' => 'required|string',
+            'soal_gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:12048', // Validasi gambar soal
             'pil_a' => 'required|string',
+            'skor_a' => 'nullable|integer',
+            'pil_b' => 'required|string',
+            'skor_b' => 'nullable|integer',
+            'pil_c' => 'required|string',
+            'skor_c' => 'nullable|integer',
+            'pil_d' => 'required|string',
+            'skor_d' => 'nullable|integer',
+            'pil_e' => 'required|string',
+            'skor_e' => 'nullable|integer',
             'jawaban' => 'required|string',
+            'pembahasan' => 'nullable|string',
+            'gambar_pembahasan' => 'nullable|image|mimes:jpg,jpeg,png|max:12048', // Validasi gambar pembahasan
+            'video_penjelasan' => 'nullable|url',
+            'bab' => 'nullable|string',
         ]);
 
+        // Siapkan data untuk disimpan
+        $data = $request->all();
+
+        // Proses upload gambar soal jika ada
+        if ($request->hasFile('soal_gambar')) {
+            $data['soal_gambar'] = $request->file('soal_gambar')->store('admin/uploads/educenter/soal', 'public');
+        }
+
+        // Proses upload gambar pembahasan jika ada
+        if ($request->hasFile('gambar_pembahasan')) {
+            $data['gambar_pembahasan'] = $request->file('gambar_pembahasan')->store('admin/uploads/educenter/pembahasan', 'public');
+        }
+
         // Simpan data soal baru ke database
-        Soal::create($request->all());
+        Soal::create($data);
 
         // Redirect dengan pesan sukses
         return redirect()->route('soals.index')->with('status', 'Soal berhasil ditambahkan!');

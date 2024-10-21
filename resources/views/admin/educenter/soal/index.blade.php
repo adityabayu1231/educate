@@ -21,10 +21,10 @@
         </div>
 
         <div class="flex justify-end items-center mb-6">
-            <button id="createSoalBtn"
-                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center">
-                <i class="fas fa-plus mr-2"></i> Tambah Soal
-            </button>
+            <a href="{{ route('admin.soals.create') }}"><button id="createSoalBtn"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Tambah Soal
+                </button></a>
         </div>
 
         @if (session('status'))

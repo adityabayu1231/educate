@@ -17,7 +17,7 @@
         </div>
 
         <!-- Tombol Back -->
-        <button class="mb-6 text-blue-500 font-medium">&larr; back</button>
+        <a href="{{ route('admin.paket-soal') }}"><button class="mb-6 text-blue-500 font-medium">&larr; back</button></a>
 
         <!-- Form Container -->
         <form action="{{ route('admin.paket-soal.store') }}" method="POST">

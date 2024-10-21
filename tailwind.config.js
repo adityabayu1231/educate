@@ -157,6 +157,7 @@ export default {
     plugins: [
         require("flowbite/plugin")({
             wysiwyg: true,
+            datatables: true,
         }),
         forms,
         typography,

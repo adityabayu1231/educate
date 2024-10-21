@@ -32,11 +32,6 @@ class EduCenterController extends Controller
         return view('admin.educenter.assign');
     }
 
-    public function addSoal()
-    {
-        return view('admin.educenter.addsoal');
-    }
-
     public function addPaket()
     {
         $mapel = Subject::all(); // Ambil semua data mapel

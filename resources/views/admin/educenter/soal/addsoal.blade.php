@@ -18,12 +18,29 @@
 
         <!-- Tombol Back -->
         <a href="{{ route('admin.paket-soal') }}"><button
-                class="mb-6 text-blue-500 hover:bg-blue-500 font-medium px-4 py-2 rounded-md hover:text-white">&larr;
+                class="mb-2 text-blue-500 hover:bg-blue-500 font-medium px-4 py-2 rounded-md hover:text-white">&larr;
                 back</button></a>
 
         <div class="p-4 bg-gray-100">
             <div class="w-full md:w-1/2 space-y-6 mx-auto md:ml-0">
-                <!-- Setengah layar di desktop, full di mobile, di pojok kiri -->
+                <!-- Paket Soal -->
+                <div class="flex flex-col">
+                    <label for="paket_soal_id" class="mb-2 text-blue-600">Paket Soal</label>
+                    <select id="paket_soal_id" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
+                        <option value="">Pilih Paket Soal</option>
+                        @foreach ($pakets as $paket)
+                            <option value="{{ $paket->id }}">{{ $paket->nama_paket_soal }}</option>
+                            <!-- Sesuaikan dengan field yang ada di paket -->
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Bab -->
+                <div class="flex flex-col">
+                    <label for="bab" class="mb-2 text-blue-600">Bab</label>
+                    <input type="text" id="bab" class="p-3 border border-gray-300 rounded-lg shadow-sm w-full">
+                </div>
+
                 <!-- Soal Text -->
                 <div class="flex flex-col">
                     <label for="soal" class="mb-2 text-blue-600">Soal</label>
@@ -45,60 +62,55 @@
                     <div class="flex flex-col col-span-5">
                         <label for="pil_a" class="mb-2 text-blue-600">Pilihan A</label>
                         <input type="text" id="pil_a" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
-                        <!-- Panjang -->
                     </div>
                     <div class="flex flex-col col-span-1">
                         <label for="skor_a" class="mb-2 text-blue-600">Skor A</label>
                         <input type="number" id="skor_a"
-                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center">
                     </div>
 
                     <!-- Pilihan B -->
                     <div class="flex flex-col col-span-5">
                         <label for="pil_b" class="mb-2 text-blue-600">Pilihan B</label>
                         <input type="text" id="pil_b" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
-                        <!-- Panjang -->
                     </div>
                     <div class="flex flex-col col-span-1">
                         <label for="skor_b" class="mb-2 text-blue-600">Skor B</label>
                         <input type="number" id="skor_b"
-                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center">
                     </div>
 
                     <!-- Pilihan C -->
                     <div class="flex flex-col col-span-5">
                         <label for="pil_c" class="mb-2 text-blue-600">Pilihan C</label>
                         <input type="text" id="pil_c" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
-                        <!-- Panjang -->
                     </div>
                     <div class="flex flex-col col-span-1">
                         <label for="skor_c" class="mb-2 text-blue-600">Skor C</label>
                         <input type="number" id="skor_c"
-                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center">
                     </div>
 
                     <!-- Pilihan D -->
                     <div class="flex flex-col col-span-5">
                         <label for="pil_d" class="mb-2 text-blue-600">Pilihan D</label>
                         <input type="text" id="pil_d" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
-                        <!-- Panjang -->
                     </div>
                     <div class="flex flex-col col-span-1">
                         <label for="skor_d" class="mb-2 text-blue-600">Skor D</label>
                         <input type="number" id="skor_d"
-                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center">
                     </div>
 
                     <!-- Pilihan E -->
                     <div class="flex flex-col col-span-5">
                         <label for="pil_e" class="mb-2 text-blue-600">Pilihan E</label>
                         <input type="text" id="pil_e" class="p-2 border border-gray-300 rounded-lg shadow-sm w-full">
-                        <!-- Panjang -->
                     </div>
                     <div class="flex flex-col col-span-1">
                         <label for="skor_e" class="mb-2 text-blue-600">Skor E</label>
                         <input type="number" id="skor_e"
-                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center"> <!-- Kotak kecil -->
+                            class="p-2 border border-gray-300 rounded-lg shadow-sm w-16 text-center">
                     </div>
                 </div>
 
