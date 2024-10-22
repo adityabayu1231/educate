@@ -66,8 +66,8 @@
                     <select id="jenisPenilaian" name="penilaian"
                         class="w-11/12 p-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                         required>
-                        <option value="ABS">ABS</option>
-                        <option value="XYZ">XYZ</option>
+                        <option value="SKOR">SKOR</option>
+                        <option value="TES">TES</option>
                     </select>
                 </div>
 

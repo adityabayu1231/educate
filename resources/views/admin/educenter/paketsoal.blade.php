@@ -109,7 +109,7 @@
                                                 data-urutan="{{ $paket->urutan }}"
                                                 data-video="{{ $paket->video_pembahasan }}"
                                                 data-video-free="{{ $paket->video_pembahasan_free }}"
-                                                data-subject-id="{{ $paket->subject_id }}">Lihat/Edit</button>
+                                                data-subject-id="{{ $paket->mapel_id }}">Lihat/Edit</button>
                                         </div>
                                         <div class="flex space-x-2">
                                             <button
@@ -152,8 +152,12 @@
                     <!-- Mapel (Subject) -->
                     <div class="mb-4">
                         <label for="editSubjectId" class="block text-sm text-gray-700">Mapel</label>
-                        <input type="number" id="editSubjectId" name="subject_id"
-                            class="w-full p-2 border border-gray-300 rounded" required>
+                        <select id="editSubjectId" name="mapel_id" class="w-full p-2 border border-gray-300 rounded"
+                            required>
+                            @foreach ($mapel as $subject)
+                                <option value="{{ $subject->id }}">{{ $subject->nama_mapel }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <!-- Durasi -->
@@ -220,7 +224,7 @@
                 const urutan = this.getAttribute('data-urutan');
                 const video = this.getAttribute('data-video');
                 const videoFree = this.getAttribute('data-video-free');
-                const subjectId = this.getAttribute('data-subject-id');
+                const mapelId = this.getAttribute('data-subject-id');
 
                 // Isi nilai ke form
                 document.getElementById('editPaketId').value = id;
@@ -230,19 +234,25 @@
                 document.getElementById('editUrutan').value = urutan;
                 document.getElementById('editVideoPembahasan').value = video;
                 document.getElementById('editVideoPembahasanFree').value = videoFree;
-                document.getElementById('editSubjectId').value = subjectId;
+
+                // Set selected mapel_id
+                const selectMapel = document.getElementById('editSubjectId');
+                selectMapel.value = mapelId;
 
                 // Set form action URL dynamically
-                document.getElementById('editPaketForm').action = `/admin/paket-soal/${id}`;
+                document.getElementById('editPaketForm').action =
+                    `/admin/edu-center/paket-soal/update/${id}`;
 
                 // Tampilkan modal
                 document.getElementById('editModal').classList.remove('hidden');
+                document.getElementById('editModal').classList.add('flex');
             });
         });
 
         // Tombol Tutup Modal
         document.getElementById('closeModalBtn').addEventListener('click', function() {
             document.getElementById('editModal').classList.add('hidden');
+            document.getElementById('editModal').classList.remove('flex');
         });
     </script>
 @endsection

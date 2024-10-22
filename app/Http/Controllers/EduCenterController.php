@@ -81,7 +81,7 @@ class EduCenterController extends Controller
         // Validasi input untuk semua field
         $request->validate([
             'nama_paket_soal' => 'required|string|max:255',
-            'subject_id' => 'required|integer',
+            'mapel_id' => 'required|integer', // Mengubah subject_id menjadi mapel_id
             'durasi' => 'required|integer|min:1',
             'penilaian' => 'required|string|max:255',
             'urutan' => 'nullable|integer',
@@ -96,7 +96,7 @@ class EduCenterController extends Controller
             // Update data paket soal
             $paket->update([
                 'nama_paket_soal' => $request->nama_paket_soal,
-                'subject_id' => $request->subject_id,
+                'mapel_id' => $request->mapel_id, // Ubah ke mapel_id
                 'durasi' => $request->durasi,
                 'penilaian' => $request->penilaian,
                 'urutan' => $request->urutan,
