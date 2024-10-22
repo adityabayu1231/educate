@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subtest', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sesi_to_id')->constrained('sesi')->onDelete('cascade');
-            $table->foreignId('paket_soal_id')->constrained('paket_soal')->onDelete('cascade');
+            $table->foreignId('paket_soal_id')->constrained('pakets')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('moduls', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_paket_soal')->constrained('paket_soal')->onDelete('cascade');
+            $table->foreignId('id_paket_soal')->constrained('pakets')->onDelete('cascade');
             $table->string('modulpdf');
             $table->string('videolinkpembelajaran');
             $table->softDeletes();

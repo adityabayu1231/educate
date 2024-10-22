@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
             $table->foreignId('test_kelas_id')->constrained('test_kelas')->onDelete('cascade');
-            $table->foreignId('paket_soal_id')->constrained('paket_soal')->onDelete('cascade');
+            $table->foreignId('paket_soal_id')->constrained('pakets')->onDelete('cascade');
             $table->integer('sisa_waktu');
             $table->boolean('is_selesai')->default(false);
             $table->softDeletes();
