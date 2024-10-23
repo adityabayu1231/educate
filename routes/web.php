@@ -71,6 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/assign-paket-soal', [EduCenterController::class, 'assignPaketSoal'])->name('assign-paket-soal');
             Route::get('/add-paket', [EduCenterController::class, 'addPaket'])->name('addpaket');
             Route::resource('soals', SoalController::class);
+            Route::get('/paket-soal/{id_paket}/soals', [SoalController::class, 'index'])->name('paket.soals.index');
         });
 
         Route::prefix('schedule')->group(function () {

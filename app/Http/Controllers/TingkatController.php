@@ -17,7 +17,7 @@ class TingkatController extends Controller
     {
         try {
             // Menggunakan paginate untuk membatasi jumlah data per halaman
-            $tingkats = Tingkat::with('level')->paginate(10);
+            $tingkats = Tingkat::all();
             $levels = Level::all();
             return view('admin.master.tingkat', compact('tingkats', 'levels'));
         } catch (\Exception $e) {

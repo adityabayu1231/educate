@@ -22,5 +22,8 @@
         "@tiptap/starter-kit": "^2.8.0",
         "alpinejs": "^3.14.1",
         "simple-datatables": "^9.2.1"
+    },
+    "overrides": {
+        "prosemirror-model": "1.19.3"
     }
 }

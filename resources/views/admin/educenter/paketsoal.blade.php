@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Manage Soal')
+@section('title', 'Manage Paket Soal')
 
 @section('content')
     <div class="px-4 sm:px-6 lg:px-8 py-1 w-full max-w-7xl mx-auto">
@@ -96,11 +96,12 @@
                                 <td class="py-2 px-4 text-right">
                                     <div class="flex flex-col space-y-2">
                                         <div class="flex space-x-2">
-                                            <a href="{{ route('admin.soals.index') }}">
+                                            <a href="{{ route('admin.paket.soals.index', $paket->id) }}">
                                                 <button
                                                     class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-md w-24">Add
                                                     Soal</button>
                                             </a>
+
                                             <button
                                                 class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md w-24 editPaketBtn"
                                                 data-id="{{ $paket->id }}" data-nama="{{ $paket->nama_paket_soal }}"

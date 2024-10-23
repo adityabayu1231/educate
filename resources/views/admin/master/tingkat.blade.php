@@ -39,7 +39,7 @@
         @endif
 
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <table id="data-table" class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                 <thead>
                     <tr class="bg-gradient-to-r from-gray-200 to-gray-300 text-gray-800 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">No</th>
@@ -84,9 +84,9 @@
             </table>
 
             <!-- Pagination -->
-            <div class="py-4">
+            {{-- <div class="py-4">
                 {{ $tingkats->links() }}
-            </div>
+            </div> --}}
         </div>
 
         <!-- Create Modal -->

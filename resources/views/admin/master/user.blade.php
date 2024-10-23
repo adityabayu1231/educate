@@ -38,14 +38,59 @@
         @endif
 
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <table id="data-table" class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                 <thead>
                     <tr class="bg-gradient-to-r from-gray-200 to-gray-300 text-gray-800 uppercase text-xs leading-tight">
-                        <th class="py-2 px-4 text-left">No</th>
-                        <th class="py-2 px-4 text-left">Full Name</th>
-                        <th class="py-2 px-4 text-left">Email</th>
-                        <th class="py-2 px-4 text-left">Role</th>
-                        <th class="py-2 px-4 text-left">Status</th>
+                        <th>
+                            <span class="flex items-center">
+                                No
+                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                </svg>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                FullName
+                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                </svg>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                Email
+                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                </svg>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                Role
+                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                </svg>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                Status
+                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                </svg>
+                            </span>
+                        </th>
                         <th class="py-2 px-4 text-right">Actions</th>
                     </tr>
                 </thead>
@@ -76,7 +121,8 @@
                                         class="editUserBtn text-blue-500 hover:text-blue-700">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline">
+                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST"
+                                        class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:text-red-700">
