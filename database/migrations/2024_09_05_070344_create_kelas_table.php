@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('status');
             $table->string('jenis_pembelajaran');
             $table->foreignId('program_id')->constrained('programs');
-            $table->foreignId('subprogram_id')->constrained('sub_programs');
+            $table->foreignId('sub_program_id')->constrained('sub_programs');
             $table->foreignId('brand_id')->constrained('brands');
             $table->softDeletes();
             $table->timestamps();

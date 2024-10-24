@@ -63,7 +63,7 @@ class StudentController extends Controller
             'grade' => 'required|string|max:255',
             'instagram' => 'nullable|string|max:255',
             'hobby' => 'nullable|string|max:255',
-            'your_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'your_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:12048',
             'address_coordinate' => 'nullable|string|max:255',
             'father_name' => 'required|string|max:255',
             'father_occupation' => 'required|string|max:255',

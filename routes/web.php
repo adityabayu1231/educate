@@ -56,6 +56,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('kelas', KelasController::class);
             Route::get('materi', [MateriController::class, 'index'])->name('materi');
             Route::resource('tahun-ajaran', TahunajaranController::class);
+            Route::get('/kelas/{kelasId}/students', [KelasController::class, 'getStudentsView'])->name('kelas.students');
+            Route::delete('/kelas/students/{id}/remove-class', [KelasController::class, 'removeClassFromStudent'])->name('students.removeClass');
+            Route::get('/kelas/{kelas}/get-students', [KelasController::class, 'getStudents'])->name('getStudents');
+            Route::patch('/kelas/{kelas}/add-students', [KelasController::class, 'addStudents'])->name('admin.kelas.addStudents');
         });
         Route::prefix('teaching-report')->group(function () {
             Route::get('/laporan', [TeacherController::class, 'gurureport'])->name('reportguru');

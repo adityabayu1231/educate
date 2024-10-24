@@ -21,7 +21,7 @@ class AuthTeacherController extends Controller
 
     public function biodata()
     {
-        $subjects = Subject::all();
+        $subjects = Subject::where('is_active', 1)->get();
         return view('auth.teacher.biodata', compact('subjects'));
     }
 

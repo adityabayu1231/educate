@@ -21,11 +21,11 @@
                 class="mb-2 text-blue-500 hover:bg-blue-500 font-medium px-4 py-2 rounded-md hover:text-white">&larr;
                 back</button></a>
 
-
         <form action="{{ route('admin.soals.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="p-4 bg-gray-100">
-                <div class="w-full md:w-1/2 space-y-6 mx-auto md:ml-0">
+                <!-- Menyesuaikan ukuran form -->
+                <div class="w-full md:w-1/2 lg:w-3/4 xl:w-2/3 space-y-6 mx-auto md:ml-0">
                     <!-- Paket Soal -->
                     <div class="flex flex-col">
                         <label for="paket_soal_id" class="mb-2 text-blue-600">Paket Soal</label>
@@ -131,7 +131,6 @@
                     </div>
 
                     <!-- Jawaban -->
-                    <!-- Jawaban -->
                     <div class="flex flex-col">
                         <label for="jawaban" class="mb-2 text-blue-600">Jawaban</label>
                         <select name="jawaban" id="jawaban"
@@ -158,36 +157,43 @@
                             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
-                    <!-- Video Penjelasan -->
-                    <div class="flex flex-col">
-                        <label for="video_penjelasan" class="mb-2 text-blue-600">Link Video Penjelasan (Opsional)</label>
-                        <input type="url" name="video_penjelasan" id="video_penjelasan"
-                            placeholder="https://www.youtube.com/watch?v=..."
-                            class="p-3 border border-gray-300 rounded-lg shadow-sm w-full">
-                    </div>
-
-                    <!-- Tombol Submit -->
-                    <button type="submit" class="mt-4 bg-blue-500 text-white p-3 rounded-lg">Simpan Soal</button>
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-full">
+                        Simpan Soal
+                    </button>
                 </div>
             </div>
         </form>
-
-        <script>
-            function previewImage(event) {
-                const imagePreview = document.getElementById('image_preview');
-                const file = event.target.files[0];
-
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.classList.remove('hidden');
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    imagePreview.classList.add('hidden');
-                }
-            }
-        </script>
     </div>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            const imagePreview = document.getElementById('image_preview');
+            reader.onload = function() {
+                imagePreview.src = reader.result;
+                imagePreview.classList.remove('hidden');
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+    <script src="https://cdn.tiny.cloud/1/vodsxc16gkv4tycfr5bpo5v8hzfdwi9eiaud09iuqoqkrqy6/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            height: 400,
+            menubar: 'file edit insert view format table tools', // Urutkan sesuai menu pada gambar
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media table paste help'
+            ],
+            toolbar: 'undo redo | formats | bold italic underline | alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist outdent indent | link image media | table | print preview | upload | fullscreen',
+            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            branding: false,
+        });
+    </script>
 @endsection

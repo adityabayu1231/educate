@@ -86,7 +86,7 @@
                                 <td class="py-2 px-4 text-left">
                                     @if ($soal->soal_gambar)
                                         <img src="{{ Storage::url($soal->soal_gambar) }}" alt="Soal Gambar"
-                                            class="h-8 w-8 object-cover">
+                                            class="h-32 w-32 object-cover">
                                     @endif
                                 </td>
                                 <td class="py-2 px-4 text-left">{{ $soal->pil_a }}</td>

@@ -131,11 +131,6 @@
                     @endif
                 </tbody>
             </table>
-
-            <!-- Pagination -->
-            <div class="py-4">
-                {{ $subPrograms->links() }}
-            </div>
         </div>
 
         <!-- Create Modal -->

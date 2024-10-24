@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Kelas;
+use App\Models\Student;
 use App\Models\SubProgram;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -41,5 +43,18 @@ class SubProgramController extends Controller
 
         // Kembalikan data dalam format JSON
         return response()->json($subprograms);
+    }
+
+    public function getStudents(Kelas $kelas): JsonResponse
+    {
+        // Ambil siswa yang memiliki program_id, sub_program_id, dan brand_id yang sama dengan kelas
+        $students = Student::where('program_id', $kelas->program_id)
+            ->where('sub_program_id', $kelas->sub_program_id) // Menggunakan sub_program_id, bukan subprogram_id
+            ->where('brand_id', $kelas->brand_id)
+            ->whereNull('class_id') // Pastikan siswa belum memiliki class_id
+            ->with('user') // Menyertakan relasi user jika diperlukan
+            ->get();
+
+        return response()->json($students);
     }
 }

@@ -46,99 +46,18 @@
         </div>
 
         <div class="overflow-x-auto">
-            <table id="data-table" class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                 <thead>
                     <tr class="bg-gradient-to-r from-gray-200 to-gray-300 text-gray-800 uppercase text-xs leading-normal">
-                        <th>
-                            <span class="flex items-center">
-                                No
-                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center whitespace-nowrap">
-                                Nama Kelas
-                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center whitespace-nowrap">
-                                Tahun Ajaran
-                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Kapasitas
-                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Status
-                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center whitespace-nowrap">
-                                Jenis Pembelajaran
-                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Program
-                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center whitespace-nowrap">
-                                Sub Program
-                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Brand
-                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                </svg>
-                            </span>
-                        </th>
+                        <th class="py-2 px-4 text-left">No</th>
+                        <th class="py-2 px-4 text-left">Nama Kelas</th>
+                        <th class="py-2 px-4 text-left">Tahun Ajaran</th>
+                        <th class="py-2 px-4 text-left">Kapasitas</th>
+                        <th class="py-2 px-4 text-left">Status</th>
+                        <th class="py-2 px-4 text-left">Jenis Pembelajaran</th>
+                        <th class="py-2 px-4 text-left">Program</th>
+                        <th class="py-2 px-4 text-left">Sub Program</th>
+                        <th class="py-2 px-4 text-left">Brand</th>
                         <th class="py-3 px-6 text-right">Actions</th>
                     </tr>
                 </thead>
@@ -159,8 +78,10 @@
                                 <td class="py-3 px-6 text-left">{{ $kelas->program->name_program }}</td>
                                 <td class="py-3 px-6 text-left">{{ $kelas->subprogram->name_sub_program }}</td>
                                 <td class="py-3 px-6 text-left">{{ $kelas->brand->name_brand }}</td>
-                                <td class="py-3 px-6 text-right">
-                                    <button class="bg-yellow-500 text-white px-4 py-1 rounded btn-edit"
+                                <td class="py-3 px-6 text-right flex gap-2">
+                                    <!-- Button Edit (Icon only) -->
+                                    <button
+                                        class="bg-yellow-500 text-white text-sm font-semibold px-4 py-2 min-w-[40px] max-w-[40px] rounded focus:outline-none btn-edit flex items-center justify-center"
                                         data-id="{{ $kelas->id }}" data-name-class="{{ $kelas->name_class }}"
                                         data-tahun-ajar="{{ $kelas->tahun_ajar }}"
                                         data-jenis-pembelajaran="{{ $kelas->jenis_pembelajaran }}"
@@ -168,18 +89,29 @@
                                         data-program-id="{{ $kelas->program_id }}"
                                         data-subprogram-id="{{ $kelas->subprogram_id }}"
                                         data-brand-id="{{ $kelas->brand_id }}">
-                                        <i class="fas fa-edit"></i> Edit
+                                        <i class="fas fa-edit"></i>
                                     </button>
+
+                                    <!-- Button Delete (Icon only) -->
                                     <form action="{{ route('admin.kelas.destroy', $kelas->id) }}" method="POST"
                                         class="inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="bg-red-500 text-white px-4 py-1 rounded"
+                                        <button type="submit"
+                                            class="bg-red-500 text-white text-sm font-semibold px-4 py-2 min-w-[40px] max-w-[40px] rounded focus:outline-none flex items-center justify-center"
                                             onclick="return confirm('Are you sure you want to delete this subject?');">
-                                            <i class="fas fa-trash"></i> Delete
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
+
+                                    <!-- Button Tambah Siswa (Icon only) -->
+                                    <button
+                                        class="bg-blue-500 text-white text-sm font-semibold px-4 py-2 min-w-[40px] max-w-[40px] rounded focus:outline-none btn-tambah-siswa flex items-center justify-center"
+                                        data-id="{{ $kelas->id }}">
+                                        <i class="fas fa-user-plus"></i>
+                                    </button>
                                 </td>
+
                             </tr>
                         @endforeach
                     @endif
@@ -260,7 +192,7 @@
                         <!-- Sub Program -->
                         <div class="w-full md:w-1/2 px-2 mb-4">
                             <label for="create_subprogram_id" class="block text-gray-700 text-sm">Sub Program</label>
-                            <select id="create_subprogram_id" name="subprogram_id"
+                            <select id="create_subprogram_id" name="sub_program_id"
                                 class="mt-1 block w-full border border-gray-300 p-2 rounded text-sm" required disabled>
                                 <option value="" disabled selected>Pilih Sub Program</option>
                             </select>
@@ -494,6 +426,21 @@
                         createSubprogramSelect.disabled = true;
                     }
                 }
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+                // Ambil semua tombol dengan class 'btn-tambah-siswa'
+                const buttons = document.querySelectorAll('.btn-tambah-siswa');
+
+                // Tambahkan event listener pada setiap tombol
+                buttons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Ambil nilai data-id dari tombol yang diklik
+                        const kelasId = this.getAttribute('data-id');
+
+                        // Redirect ke halaman tambah siswa dengan ID kelas
+                        window.location.href = `kelas/${kelasId}/students`;
+                    });
+                });
             });
         </script>
     @endpush

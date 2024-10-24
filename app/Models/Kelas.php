@@ -24,7 +24,7 @@ class Kelas extends Model
         'status',
         'jenis_pembelajaran',
         'program_id',
-        'subprogram_id',
+        'sub_program_id',
         'brand_id',
     ];
 
@@ -43,7 +43,7 @@ class Kelas extends Model
      */
     public function subprogram()
     {
-        return $this->belongsTo(SubProgram::class, 'subprogram_id', 'id');
+        return $this->belongsTo(SubProgram::class, 'sub_program_id', 'id');
     }
 
 

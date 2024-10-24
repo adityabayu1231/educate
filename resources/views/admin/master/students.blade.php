@@ -22,14 +22,14 @@
             </div>
         </div>
 
-        <div class="flex justify-end items-center mb-6">
+        {{-- <div class="flex justify-end items-center mb-6">
             <form method="GET" action="{{ route('admin.students.index') }}">
                 <input type="text" name="search" placeholder="Search siswa..."
                     class="border border-gray-300 rounded-md px-4 py-2">
                 <button type="submit"
                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md ml-2">Search</button>
             </form>
-        </div>
+        </div> --}}
 
         @if (session('status'))
             <div class="mb-4 p-4 bg-green-100 text-green-800 rounded-lg">

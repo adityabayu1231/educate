@@ -194,5 +194,23 @@
                 }
             }
         </script>
+        <script src="https://cdn.tiny.cloud/1/vodsxc16gkv4tycfr5bpo5v8hzfdwi9eiaud09iuqoqkrqy6/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                height: 400,
+                menubar: 'file edit insert view format table tools', // Urutkan sesuai menu pada gambar
+                plugins: [
+                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen',
+                    'insertdatetime media table paste help'
+                ],
+                toolbar: 'undo redo | formats | bold italic underline | alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist outdent indent | link image media | table | print preview | upload | fullscreen',
+                content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                branding: false,
+            });
+        </script>
     </div>
 @endsection

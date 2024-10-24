@@ -17,7 +17,7 @@ class SubProgramController extends Controller
     public function index()
     {
         try {
-            $subPrograms = SubProgram::paginate(10);
+            $subPrograms = SubProgram::all();
             $programs = Program::all();
             $brands = Brand::all();
             return view('admin.master.subprogram', compact('subPrograms', 'programs', 'brands'));

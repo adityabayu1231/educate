@@ -100,7 +100,9 @@
                 </tbody>
             </table>
         </div>
-        {{ $subjects->links() }}
+        <div class="py-3">
+            {{ $subjects->links() }}
+        </div>
 
         <!-- Create Subject Modal -->
         <div id="createModal" class="fixed inset-0 hidden items-center justify-center bg-gray-900 bg-opacity-50 z-50 p-4">

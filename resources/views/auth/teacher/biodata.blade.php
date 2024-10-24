@@ -79,6 +79,8 @@
                                 <x-label for="date_of_birth" value="{{ __('Tanggal Lahir') }}" />
                                 <x-input id="date_of_birth" class="block mt-1 w-full required-field" type="date"
                                     name="date_of_birth" :value="old('date_of_birth')" required />
+                                <!-- Keterangan format tanggal -->
+                                <small class="text-gray-500 text-xs">Format: Bulan/Tanggal/Tahun</small>
                             </div>
 
                             <!-- Jenis Kelamin -->
