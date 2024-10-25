@@ -52,22 +52,62 @@
                 </a>
 
                 <!-- Box 3: Assign Paket Soal -->
-                <a href="{{ route('admin.assign-paket-soal') }}">
-                    <div class="border rounded-lg shadow-md overflow-hidden bg-white h-96 hover:shadow-lg transition">
-                        <div class="border-t-4 border-yellow-500 p-6">
-                            <div class="flex items-center">
-                                <i class="fas fa-calendar-alt fa-lg text-yellow-500"></i>
-                                <h2 class="text-lg font-semibold ml-2">Assign Paket Soal</h2>
-                            </div>
-                        </div>
-                        <div class="flex justify-end p-4">
-                            <img src="{{ asset('frontend/images/ilustrasi/sample.jpg') }}" alt="Assign Paket Soal"
-                                class="h-52 w-auto object-cover">
+                <div id="assignPaketSoalBox"
+                    class="border rounded-lg shadow-md overflow-hidden bg-white h-96 hover:shadow-lg transition relative group cursor-pointer">
+                    <!-- Konten Utama (Ikon & Teks) -->
+                    <div class="border-t-4 border-yellow-500 p-6 relative z-10">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-alt fa-lg text-yellow-500"></i>
+                            <h2 class="text-lg font-semibold ml-2">Assign Paket Soal</h2>
                         </div>
                     </div>
-                </a>
+                    <!-- Gambar -->
+                    <div class="flex justify-end p-4 relative z-10">
+                        <img src="{{ asset('frontend/images/ilustrasi/sample.jpg') }}" alt="Assign Paket Soal"
+                            class="h-52 w-auto object-cover">
+                    </div>
+
+                    <!-- Sub-Menu (disembunyikan secara default) -->
+                    <div id="assignPaketSoalMenu"
+                        class="absolute inset-0 bg-gray-900 bg-opacity-70  flex-col items-center justify-center opacity-0 transition-opacity duration-300 z-20 hidden">
+                        <a href="{{ route('admin.assign-soal.index') }}"><button
+                                class="bg-yellow-500 text-white px-4 py-2 rounded-lg mb-2 hover:bg-yellow-600 transition">Menu
+                                Assign Paket Soal</button></a>
+                        <a href="{{ route('admin.test-kelas.index') }}"><button
+                                class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition">Menu
+                                Test Kelas</button></a>
+                    </div>
+                </div>
 
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const box = document.getElementById('assignPaketSoalBox');
+                const menu = document.getElementById('assignPaketSoalMenu');
+
+                box.addEventListener('click', function() {
+                    if (menu.classList.contains('hidden')) {
+                        // Tampilkan menu
+                        menu.classList.remove('hidden');
+                        menu.classList.add('flex');
+                        setTimeout(() => {
+                            menu.classList.add('opacity-100'); // Tambahkan opacity agar smooth
+                            menu.classList.remove('opacity-0');
+                        }, 10);
+                    } else {
+                        // Sembunyikan menu
+                        menu.classList.add('opacity-0');
+                        menu.classList.remove('opacity-100');
+                        setTimeout(() => {
+                            menu.classList.add('hidden');
+                        }, 300);
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection

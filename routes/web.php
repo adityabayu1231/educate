@@ -17,8 +17,10 @@ use App\Http\Controllers\TingkatController;
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\EduCenterController;
+use App\Http\Controllers\TestKelasController;
 use App\Http\Controllers\SubProgramController;
 use App\Http\Controllers\AuthTeacherController;
+use App\Http\Controllers\IkutTestController;
 use App\Http\Controllers\TahunajaranController;
 
 Route::get('/', function () {
@@ -72,10 +74,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/paket-soal/store', [EduCenterController::class, 'storePaketSoal'])->name('paket-soal.store');
             Route::patch('/paket-soal/update/{id}', [EduCenterController::class, 'update'])->name('paket-soal.update');
             Route::delete('/paket-soal/{id}', [EduCenterController::class, 'destroy'])->name('paket-soal.destroy');
-            Route::get('/assign-paket-soal', [EduCenterController::class, 'assignPaketSoal'])->name('assign-paket-soal');
             Route::get('/add-paket', [EduCenterController::class, 'addPaket'])->name('addpaket');
             Route::resource('soals', SoalController::class);
+            Route::resource('assign-soal', IkutTestController::class);
             Route::get('/paket-soal/{id_paket}/soals', [SoalController::class, 'index'])->name('paket.soals.index');
+            Route::get('/test-kelas/create', [TestKelasController::class, 'create'])->name('test-kelas.create');
+            Route::post('/test-kelas/store', [TestKelasController::class, 'store'])->name('test-kelas.store');
+            Route::get('/test-kelas', [TestKelasController::class, 'index'])->name('test-kelas.index');
+            Route::get('/test-kelas/{id}/edit', [TestKelasController::class, 'edit'])->name('test-kelas.edit');
+            Route::put('/test-kelas/{id}', [TestKelasController::class, 'update'])->name('test-kelas.update');
+            Route::delete('/test-kelas/{id}', [TestKelasController::class, 'destroy'])->name('test-kelas.destroy');
         });
 
         Route::prefix('schedule')->group(function () {

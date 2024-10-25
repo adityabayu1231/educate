@@ -27,7 +27,8 @@
                                 <td class="px-4 py-2 text-gray-700">16-08-2023</td>
                                 <td class="px-4 py-2">
                                     <a href="{{ route('user.soal') }}"><button
-                                            class="rounded-md bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">Start</button></a>
+                                            class="rounded-md bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">Start
+                                            Ujian Assesment</button></a>
                                 </td>
                             </tr>
 
@@ -38,7 +39,8 @@
                                 <td class="px-4 py-2 text-gray-700">16-08-2023</td>
                                 <td class="px-4 py-2">
                                     <a href="{{ route('user.soal') }}"><button
-                                            class="rounded-md bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">Start</button></a>
+                                            class="rounded-md bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">Start
+                                            Ujian Assesment</button></a>
                                 </td>
                             </tr>
                         </tbody>

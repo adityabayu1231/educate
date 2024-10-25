@@ -13,6 +13,8 @@ class IkutTest extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'ikut_test';
+
     protected $fillable = ['student_id', 'test_kelas_id', 'paket_soal_id', 'sisa_waktu', 'is_selesai'];
 
     public function student()

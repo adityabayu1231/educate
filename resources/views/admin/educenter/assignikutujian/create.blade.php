@@ -21,23 +21,24 @@
             </div>
         </div>
         <!-- Header Row (Back button and Dropdowns) -->
-        <div class="grid grid-cols-12 gap-4 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
             <!-- Back Button di Pojok Kiri -->
-            <div class="col-span-6 flex">
-                <a href="{{ route('admin.edu-center') }}" class="text-blue-500 text-sm flex items-center">
+            <div class="col-span-12 md:col-span-6 flex justify-start md:justify-start">
+                <a href="{{ route('admin.assign-soal.index') }}" class="text-blue-500 text-sm flex items-center">
                     <i class="fas fa-arrow-left"></i>
                     <span class="ml-2">Back</span>
                 </a>
             </div>
+
             <!-- Dropdowns di Pojok Kanan -->
-            <div class="col-span-6 flex justify-end space-x-2">
+            <div class="col-span-12 md:col-span-6 flex justify-end space-x-2 mt-4 md:mt-0">
                 <!-- Dropdown ALL STUDENT -->
-                <div class="relative inline-block text-left">
+                <div class="relative inline-block text-left w-full md:w-auto">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <i class="fas fa-users text-gray-500"></i> <!-- Icon for All Students -->
                     </div>
-                    <select class="inline-flex items-center pl-10 pr-3 py-1 bg-gray-200 text-sm rounded-md">
-                        <!-- Tambahkan pl-10 pada select agar tidak bertabrakan dengan icon -->
+                    <select
+                        class="inline-flex items-center w-full md:w-auto pl-10 pr-3 py-1 bg-gray-200 text-sm rounded-md">
                         <option value="all_students">ALL STUDENT</option>
                         <option value="student_1">Student 1</option>
                         <option value="student_2">Student 2</option>
@@ -46,12 +47,12 @@
                 </div>
 
                 <!-- Dropdown ALL BRAND -->
-                <div class="relative inline-block text-left">
+                <div class="relative inline-block text-left w-full md:w-auto">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <i class="fas fa-briefcase text-gray-500"></i> <!-- Icon for All Brands -->
                     </div>
-                    <select class="inline-flex items-center pl-10 pr-3 py-1 bg-gray-200 text-sm rounded-md">
-                        <!-- Tambahkan pl-10 pada select agar tidak bertabrakan dengan icon -->
+                    <select
+                        class="inline-flex items-center w-full md:w-auto pl-10 pr-3 py-1 bg-gray-200 text-sm rounded-md">
                         <option value="all_brands">ALL BRAND</option>
                         <option value="brand_1">Brand 1</option>
                         <option value="brand_2">Brand 2</option>
@@ -101,8 +102,8 @@
                         </div>
                         <div>
                             <label for="nama_paket" class="block text-sm font-medium text-gray-700">Nama Paket Soal</label>
-                            <input type="text" id="nama_paket"
-                                class="mt-1 block w-full border border-gray-300 rounded-md">
+                            <input type="text" id="nama_paket" readonly
+                                class="mt-1 block w-full border border-gray-300 rounded-md cursor-pointer">
                         </div>
                     </div>
 
@@ -121,6 +122,83 @@
                     </div>
                 </form>
             </div>
+            <!-- Modal Popup -->
+            <div id="modalPaketSoal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden justify-center items-center">
+                <div class="bg-white p-6 rounded-md w-full max-w-3xl">
+                    <h2 class="text-lg font-bold mb-4">Pilih Paket Soal</h2>
+
+                    <table id="paketTable" class="min-w-full border-collapse block md:table">
+                        <thead class="block md:table-header-group">
+                            <tr class="border border-gray-300 md:border-none md:table-row">
+                                <th class="block md:table-cell">Pilih</th>
+                                <th class="block md:table-cell">ID Paket</th>
+                                <th class="block md:table-cell">Nama Paket</th>
+                            </tr>
+                        </thead>
+                        <tbody class="block md:table-row-group">
+                            <tr class="border border-gray-300 md:border-none md:table-row">
+                                <td class="block md:table-cell"><input type="checkbox" value="1" class="select-paket">
+                                </td>
+                                <td class="block md:table-cell">1</td>
+                                <td class="block md:table-cell">Drilling Soal</td>
+                            </tr>
+                            <tr class="border border-gray-300 md:border-none md:table-row">
+                                <td class="block md:table-cell"><input type="checkbox" value="2" class="select-paket">
+                                </td>
+                                <td class="block md:table-cell">2</td>
+                                <td class="block md:table-cell">Try Out</td>
+                            </tr>
+                            <tr class="border border-gray-300 md:border-none md:table-row">
+                                <td class="block md:table-cell"><input type="checkbox" value="3"
+                                        class="select-paket"></td>
+                                <td class="block md:table-cell">3</td>
+                                <td class="block md:table-cell">Assessment</td>
+                            </tr>
+                            <!-- Tambahkan baris lebih banyak sesuai data -->
+                        </tbody>
+                    </table>
+
+                    <div class="mt-4">
+                        <button id="confirmPaket" class="bg-blue-500 text-white px-4 py-2 rounded-md">Pilih</button>
+                        <button id="closeModal" class="bg-red-500 text-white px-4 py-2 rounded-md">Tutup</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Open modal when input is clicked
+                const namaPaketInput = document.getElementById('nama_paket');
+                const modal = document.getElementById('modalPaketSoal');
+                const closeModalButton = document.getElementById('closeModal');
+                const confirmPaketButton = document.getElementById('confirmPaket');
+
+                namaPaketInput.addEventListener('click', function() {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                });
+
+                // Close modal
+                closeModalButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+
+                // Confirm and select paket
+                confirmPaketButton.addEventListener('click', function() {
+                    let selectedPaket = '';
+                    document.querySelectorAll('.select-paket:checked').forEach(function(checkbox) {
+                        selectedPaket += checkbox.closest('tr').querySelector('td:nth-child(3)')
+                            .textContent + ', ';
+                    });
+                    selectedPaket = selectedPaket.slice(0, -2); // Remove trailing comma and space
+
+                    namaPaketInput.value = selectedPaket;
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>
+    @endpush
 @endsection
