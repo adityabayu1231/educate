@@ -57,4 +57,32 @@ class SubProgramController extends Controller
 
         return response()->json($students);
     }
+
+    public function dataSiswa(Request $request)
+    {
+        // Mendapatkan parameter filter dari request
+        $brandId = $request->query('brand_id');
+        $programId = $request->query('program_id');
+        $subProgramId = $request->query('sub_program_id');
+
+        // Mengambil data siswa dengan filter
+        $students = Student::with('user') // Memuat relasi user
+            ->when($brandId, function ($query) use ($brandId) {
+                return $query->where('brand_id', $brandId);
+            })
+            ->when($programId, function ($query) use ($programId) {
+                return $query->where('program_id', $programId);
+            })
+            ->when($subProgramId, function ($query) use ($subProgramId) {
+                return $query->where('sub_program_id', $subProgramId);
+            })
+            ->get();
+
+        // Memeriksa apakah data siswa ditemukan
+        if ($students->isEmpty()) {
+            return response()->json(['message' => 'No students found'], 404); // Mengembalikan pesan not found
+        }
+
+        return response()->json($students);
+    }
 }

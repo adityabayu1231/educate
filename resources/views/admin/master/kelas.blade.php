@@ -427,6 +427,7 @@
                     }
                 }
             });
+
             document.addEventListener('DOMContentLoaded', function() {
                 // Ambil semua tombol dengan class 'btn-tambah-siswa'
                 const buttons = document.querySelectorAll('.btn-tambah-siswa');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\IkutTest;
+use App\Models\Program;
 use Illuminate\Http\Request;
 
 class IkutTestController extends Controller
@@ -15,6 +17,8 @@ class IkutTestController extends Controller
 
     public function create()
     {
-        return view('admin.educenter.assignikutujian.create');
+        $brands = Brand::all();
+        $programs = Program::all();
+        return view('admin.educenter.assignikutujian.create', compact('brands', 'programs'));
     }
 }

@@ -15,4 +15,6 @@ Route::get('/subprograms', [SubProgramController::class, 'index']);
 // Route untuk mencari subprogram berdasarkan brand_id dan program_id
 Route::get('/subprograms/search', [SubProgramController::class, 'search']);
 
+Route::get('/datasiswa', [SubProgramController::class, 'dataSiswa']);
+
 Route::get('/kelas/{kelas}/students', [SubProgramController::class, 'getStudents']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use App\Models\TestKelas;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class TestKelasController extends Controller
 
     public function create()
     {
-        return view('admin.educenter.assignujian.create'); // Membuat tampilan untuk formulir
+        $kelass = Kelas::all();
+        return view('admin.educenter.assignujian.create', compact('kelass'));
     }
 
     public function store(Request $request)
@@ -33,7 +35,7 @@ class TestKelasController extends Controller
             'selesai_test' => 'required|date|after:mulai_test',
             'jadwal_webinar' => 'nullable|string|max:255',
             'id_jadwal_learning' => 'nullable|string|max:255',
-            'passing_grade' => 'required|numeric|min:0|max:100',
+            'passing_grade' => 'nullable|numeric|min:0|max:100',
         ]);
 
         try {

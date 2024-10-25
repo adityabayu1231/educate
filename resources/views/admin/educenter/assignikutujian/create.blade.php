@@ -20,6 +20,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Header Row (Back button and Dropdowns) -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
             <!-- Back Button di Pojok Kiri -->
@@ -62,7 +63,6 @@
             </div>
         </div>
 
-
         <!-- Form Section (6 dari 12 kolom) -->
         <div class="grid grid-cols-12 gap-4 mt-6">
             <div class="col-span-12 lg:col-span-6 mx-auto">
@@ -70,26 +70,38 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label for="brand" class="block text-sm font-medium text-gray-700">Brand</label>
-                            <input type="text" id="brand"
-                                class="mt-1 block w-full border border-gray-300 rounded-md">
+                            <select id="brand" class="mt-1 block w-full border border-gray-300 rounded-md">
+                                <option value="">Pilih Brand</option>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name_brand }}</option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <div>
-                            <label for="nama_siswa" class="block text-sm font-medium text-gray-700">Nama Siswa</label>
-                            <input type="text" id="nama_siswa"
-                                class="mt-1 block w-full border border-gray-300 rounded-md">
+                            <label for="program" class="block text-sm font-medium text-gray-700">Program</label>
+                            <select id="program" class="mt-1 block w-full border border-gray-300 rounded-md">
+                                <option value="">Pilih Program</option>
+                                @foreach ($programs as $program)
+                                    <option value="{{ $program->id }}">{{ $program->name_program }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label for="program" class="block text-sm font-medium text-gray-700">Program</label>
-                            <input type="text" id="program"
-                                class="mt-1 block w-full border border-gray-300 rounded-md">
-                        </div>
-                        <div>
                             <label for="sub_program" class="block text-sm font-medium text-gray-700">Sub Program</label>
-                            <input type="text" id="sub_program"
-                                class="mt-1 block w-full border border-gray-300 rounded-md">
+                            <select id="sub_program" class="mt-1 block w-full border border-gray-300 rounded-md" disabled>
+                                <option value="" disabled selected>Pilih Sub Program</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="nama_siswa" class="block text-sm font-medium text-gray-700">Nama Siswa</label>
+                            <select id="nama_siswa" class="mt-1 block w-full border border-gray-300 rounded-md">
+                                <option value="" disabled selected>Pilih Siswa</option>
+                            </select>
                         </div>
                     </div>
 
@@ -143,7 +155,8 @@
                                 <td class="block md:table-cell">Drilling Soal</td>
                             </tr>
                             <tr class="border border-gray-300 md:border-none md:table-row">
-                                <td class="block md:table-cell"><input type="checkbox" value="2" class="select-paket">
+                                <td class="block md:table-cell"><input type="checkbox" value="2"
+                                        class="select-paket">
                                 </td>
                                 <td class="block md:table-cell">2</td>
                                 <td class="block md:table-cell">Try Out</td>
@@ -169,6 +182,90 @@
 
     @push('scripts')
         <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const brandSelect = document.getElementById("brand");
+                const programSelect = document.getElementById("program");
+                const subProgramSelect = document.getElementById("sub_program");
+                const namaSiswaSelect = document.getElementById("nama_siswa");
+
+                // Event listeners untuk mencari subprogram terlebih dahulu
+                brandSelect.addEventListener("change", fetchSubprograms);
+                programSelect.addEventListener("change", fetchSubprograms);
+
+                async function fetchSubprograms() {
+                    const brandId = brandSelect.value;
+                    const programId = programSelect.value;
+
+                    if (!brandId || !programId) {
+                        subProgramSelect.innerHTML =
+                            '<option value="" disabled selected>Pilih Sub Program</option>';
+                        subProgramSelect.disabled = true;
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(
+                            `/api/subprograms/search?brand_id=${brandId}&program_id=${programId}`, {
+                                headers: {
+                                    'Accept': 'application/json'
+                                }
+                            }
+                        );
+
+                        if (!response.ok) {
+                            console.error("Failed to fetch subprograms. Status:", response.status);
+                            subProgramSelect.innerHTML =
+                                '<option value="" disabled selected>Pilih Sub Program</option>';
+                            subProgramSelect.disabled = true;
+                            return;
+                        }
+
+                        const subprograms = await response.json();
+                        subProgramSelect.innerHTML =
+                            '<option value="" disabled selected>Pilih Sub Program</option>';
+                        subProgramSelect.disabled = false;
+
+                        subprograms.forEach(subprogram => {
+                            subProgramSelect.innerHTML +=
+                                `<option value="${subprogram.id}">${subprogram.name_sub_program}</option>`;
+                        });
+
+                        // Tambahkan event listener untuk pencarian data siswa setelah subprogram dipilih
+                        subProgramSelect.addEventListener("change", fetchStudents);
+                    } catch (error) {
+                        console.error("Error fetching subprograms:", error);
+                        subProgramSelect.innerHTML =
+                            '<option value="" disabled selected>Pilih Sub Program</option>';
+                        subProgramSelect.disabled = true;
+                    }
+                }
+
+                async function fetchStudents() {
+                    const brandId = brandSelect.value;
+                    const programId = programSelect.value;
+                    const subProgramId = subProgramSelect.value;
+
+                    if (!brandId || !programId || !subProgramId) return;
+
+                    try {
+                        const response = await fetch(
+                            `http://educate_to.test/api/datasiswa?brand_id=${brandId}&program_id=${programId}&sub_program_id=${subProgramId}`
+                            );
+                        const students = await response.json();
+
+                        namaSiswaSelect.innerHTML = '<option value="" disabled selected>Pilih Siswa</option>';
+
+                        students.forEach(student => {
+                            const fullname = student.user ? student.user.fullname : "Nama tidak tersedia";
+                            namaSiswaSelect.innerHTML +=
+                                `<option value="${student.id}">${fullname}</option>`;
+                        });
+                    } catch (error) {
+                        console.error("Error fetching students:", error);
+                    }
+                }
+            });
+
             document.addEventListener('DOMContentLoaded', function() {
                 // Open modal when input is clicked
                 const namaPaketInput = document.getElementById('nama_paket');

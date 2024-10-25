@@ -26,6 +26,13 @@
             </div>
         </div>
 
+        <!-- Pesan error -->
+        @if (session('error'))
+            <div class="bg-red-500 text-white p-4 rounded mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="grid grid-cols-12 gap-4 mt-6">
             <div class="col-span-12 lg:col-span-6 mx-auto">
                 <form action="{{ route('admin.test-kelas.store') }}" method="POST" class="space-y-4">
@@ -33,11 +40,16 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label for="id_sesi" class="block text-sm font-medium text-gray-700">ID Sesi</label>
-                            <input type="text" name="id_sesi" id="id_sesi" required
+                            <select type="text" name="id_sesi" id="id_sesi" required
                                 class="mt-1 block w-full border border-gray-300 rounded-md">
+                                <option value="" disabled selected>Pilih Kelas</option>
+                                @foreach ($kelass as $kelas)
+                                    <option value="{{ $kelas->id }}">{{ $kelas->name_class }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div>
-                            <label for="nama_test" class="block text-sm font-medium text-gray-700">Nama Test</label>
+                            <label for="nama_test" class="block text-sm font-medium text-gray-700">Nama Ujian/Test</label>
                             <input type="text" name="nama_test" id="nama_test" required
                                 class="mt-1 block w-full border border-gray-300 rounded-md">
                         </div>
@@ -85,7 +97,7 @@
                         </div>
                         <div>
                             <label for="passing_grade" class="block text-sm font-medium text-gray-700">Passing Grade</label>
-                            <input type="number" name="passing_grade" id="passing_grade" required
+                            <input type="number" name="passing_grade" id="passing_grade"
                                 class="mt-1 block w-full border border-gray-300 rounded-md">
                         </div>
                     </div>

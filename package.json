@@ -21,6 +21,8 @@
         "@tiptap/pm": "^2.8.0",
         "@tiptap/starter-kit": "^2.8.0",
         "alpinejs": "^3.14.1",
+        "datatables.net": "^2.1.8",
+        "datatables.net-dt": "^2.1.8",
         "simple-datatables": "^9.2.1"
     },
     "overrides": {
