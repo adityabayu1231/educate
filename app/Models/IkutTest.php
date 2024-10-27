@@ -29,6 +29,12 @@ class IkutTest extends Model
 
     public function paketSoal()
     {
-        return $this->belongsTo(Paket::class);
+        return $this->belongsTo(Paket::class, 'paket_soal_id', 'id'); // Pastikan nama model dan foreign key benar
+    }
+
+    public function getPaketSoalNamesAttribute()
+    {
+        $ids = json_decode($this->paket_soal_id); // Mengubah string JSON menjadi array
+        return Paket::whereIn('id', $ids)->pluck('nama_paket_soal')->join(', ');
     }
 }

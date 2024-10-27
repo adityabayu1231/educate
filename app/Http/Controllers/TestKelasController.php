@@ -63,8 +63,8 @@ class TestKelasController extends Controller
     public function edit($id)
     {
         $testKelas = TestKelas::findOrFail($id);
-
-        return view('admin.test-kelas.edit', compact('testKelas'));
+        $kelass = Kelas::all();
+        return view('admin.educenter.assignujian.edit', compact('testKelas', 'kelass'));
     }
 
     public function update(Request $request, $id)
@@ -78,7 +78,7 @@ class TestKelasController extends Controller
             'selesai_test' => 'required|date|after:mulai_test',
             'jadwal_webinar' => 'nullable|string|max:255',
             'id_jadwal_learning' => 'nullable|string|max:255',
-            'passing_grade' => 'required|numeric|min:0|max:100',
+            'passing_grade' => 'nullable|numeric|min:0|max:100',
         ]);
 
         try {

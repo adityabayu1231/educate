@@ -44,51 +44,55 @@
         </div>
 
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full bg-white">
-                <thead class="bg-gray-200 text-gray-600 uppercase text-sm">
-                    <tr>
-                        <th class="py-3 px-6 text-left">#</th>
-                        <th class="py-3 px-6 text-left">Nama Siswa</th>
-                        <th class="py-3 px-6 text-left">Id Test Kelas</th>
-                        <th class="py-3 px-6 text-left">Id Paket Kelas</th>
-                        <th class="py-3 px-6 text-left">Sisa Waktu</th>
-                        <th class="py-3 px-6 text-left">Is Selesai</th>
-                        <th class="py-3 px-6 text-left">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-700">
-                    @if ($ikuttests->isEmpty())
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-200 text-gray-600 uppercase text-sm">
                         <tr>
-                            <td colspan="7" class="py-3 px-6 text-center text-gray-500">
-                                Data Not Found
-                            </td>
+                            <th class="py-3 px-6 text-left">#</th>
+                            <th class="py-3 px-6 text-left whitespace-nowrap">Nama Siswa</th>
+                            <th class="py-3 px-6 text-left whitespace-nowrap">Test Kelas</th>
+                            <th class="py-3 px-6 text-left whitespace-nowrap">Paket Kelas</th>
+                            <th class="py-3 px-6 text-left whitespace-nowrap">Sisa Waktu</th>
+                            <th class="py-3 px-6 text-left whitespace-nowrap">Is Selesai</th>
+                            <th class="py-3 px-6 text-left">Aksi</th>
                         </tr>
-                    @else
-                        @foreach ($ikuttests as $test)
-                            <tr class="border-b">
-                                <td class="py-3 px-6">{{ $loop->iteration }}</td>
-                                <td class="py-3 px-6">{{ $test->student_id }}</td>
-                                <td class="py-3 px-6">{{ $test->test_kelas_id }}</td>
-                                <td class="py-3 px-6">{{ $test->paket_soal_id }}</td>
-                                <td class="py-3 px-6">{{ $test->sisa_waktu }}</td>
-                                <td class="py-3 px-6">{{ $test->is_selesai }}</td>
-                                <td class="py-3 px-6">
-                                    <a href="{{ route('admin.test-kelas.edit', $test->id) }}"
-                                        class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('admin.test-kelas.destroy', $test->id) }}" method="POST"
-                                        style="display:inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
-                                    </form>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        @if ($ikuttests->isEmpty())
+                            <tr>
+                                <td colspan="7" class="py-3 px-6 text-center text-gray-500">
+                                    Data Not Found
                                 </td>
                             </tr>
-                        @endforeach
-                    @endif
-                </tbody>
-
-            </table>
+                        @else
+                            @foreach ($ikuttests as $test)
+                                <tr class="border-b">
+                                    <td class="py-3 px-6">{{ $loop->iteration }}</td>
+                                    <td class="py-3 px-6">{{ $test->student->user->fullname ?? 'Tidak ada data' }}</td>
+                                    <td class="py-3 px-6">{{ $test->testKelas->nama_test ?? 'Tidak ada data' }}</td>
+                                    <td class="py-3 px-6">{{ $test->paket_soal_names ?? 'Tidak ada data' }}</td>
+                                    <td class="py-3 px-6">{{ $test->sisa_waktu ?? 'Tidak ada data' }}</td>
+                                    <td class="py-3 px-6">
+                                        {{ $test->is_selesai ? 'Selesai' : 'Belum Selesai' }}
+                                    </td>
+                                    <td class="py-3 px-6 flex space-x-2">
+                                        <a href="{{ route('admin.test-kelas.edit', $test->id) }}"
+                                            class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition duration-200">Edit</a>
+                                        <form action="{{ route('admin.test-kelas.destroy', $test->id) }}" method="POST"
+                                            style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-200"
+                                                onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

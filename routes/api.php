@@ -18,3 +18,5 @@ Route::get('/subprograms/search', [SubProgramController::class, 'search']);
 Route::get('/datasiswa', [SubProgramController::class, 'dataSiswa']);
 
 Route::get('/kelas/{kelas}/students', [SubProgramController::class, 'getStudents']);
+
+Route::get('test-kelas/{id}', [SubProgramController::class, 'show']);

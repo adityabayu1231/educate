@@ -12,12 +12,11 @@ class TestKelas extends Model
 {
     use HasFactory, SoftDeletes;
 
-
     protected $fillable = ['id_sesi', 'nama_test', 'jenis', 'teknis_ujian', 'mulai_test', 'selesai_test', 'jadwal_webinar', 'id_jadwal_learning', 'passing_grade'];
 
-    public function sesi()
+    public function kelas()
     {
-        return $this->belongsTo(Sesi::class);
+        return $this->belongsTo(Kelas::class, 'id_sesi');
     }
 
     public function ikutTest()

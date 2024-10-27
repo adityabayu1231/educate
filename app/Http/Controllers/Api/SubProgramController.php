@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Kelas;
 use App\Models\Student;
+use App\Models\TestKelas;
 use App\Models\SubProgram;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -84,5 +85,11 @@ class SubProgramController extends Controller
         }
 
         return response()->json($students);
+    }
+
+    public function show($id)
+    {
+        $testKelas = TestKelas::with('paketSoal')->findOrFail($id);
+        return response()->json($testKelas);
     }
 }

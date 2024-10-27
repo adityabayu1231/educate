@@ -20,8 +20,8 @@ return new class extends Migration
             $table->timestamp('mulai_test');
             $table->timestamp('selesai_test');
             $table->timestamp('jadwal_webinar')->nullable();
-            $table->string('id_jadwal_learning');
-            $table->integer('passing_grade');
+            $table->string('id_jadwal_learning')->nullable();
+            $table->integer('passing_grade')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -43,23 +43,24 @@
             </a>
         </div>
 
-        <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full bg-white">
+        <div class="overflow-x-auto"> <!-- Tambahkan div pembungkus ini -->
+            <table id="data-table" class="min-w-full bg-white">
                 <thead class="bg-gray-200 text-gray-600 uppercase text-sm">
                     <tr>
-                        <th class="py-3 px-6 text-left">#</th>
+                        <th class="py-3 px-6 text-left">No.</th>
                         <th class="py-3 px-6 text-left">Nama Test</th>
                         <th class="py-3 px-6 text-left">Jenis</th>
                         <th class="py-3 px-6 text-left">Teknis Ujian</th>
                         <th class="py-3 px-6 text-left">Mulai Test</th>
                         <th class="py-3 px-6 text-left">Selesai Test</th>
-                        <th class="py-3 px-6 text-left">Aksi</th>
+                        <th class="py-3 px-6 text-left">Nama Sesi</th> <!-- Tambahkan kolom ini -->
+                        <th class="py-3 px-6 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
                     @if ($testKelas->isEmpty())
                         <tr>
-                            <td colspan="7" class="py-3 px-6 text-center text-gray-500">
+                            <td colspan="8" class="py-3 px-6 text-center text-gray-500">
                                 Data Not Found
                             </td>
                         </tr>
@@ -67,20 +68,25 @@
                         @foreach ($testKelas as $test)
                             <tr class="border-b">
                                 <td class="py-3 px-6">{{ $loop->iteration }}</td>
-                                <td class="py-3 px-6">{{ $test->nama_test }}</td>
+                                <td class="py-3 px-6 whitespace-nowrap">{{ $test->nama_test }}</td>
                                 <td class="py-3 px-6">{{ $test->jenis }}</td>
                                 <td class="py-3 px-6">{{ $test->teknis_ujian }}</td>
-                                <td class="py-3 px-6">{{ $test->mulai_test }}</td>
-                                <td class="py-3 px-6">{{ $test->selesai_test }}</td>
-                                <td class="py-3 px-6">
+                                <td class="py-3 px-6 whitespace-nowrap">{{ $test->mulai_test }}</td>
+                                <td class="py-3 px-6 whitespace-nowrap">{{ $test->selesai_test }}</td>
+                                <td class="py-3 px-6 whitespace-nowrap">{{ $test->kelas->name_class ?? 'N/A' }}</td>
+                                <!-- Ambil nama sesi -->
+                                <td class="py-3 px-6 flex space-x-2">
                                     <a href="{{ route('admin.test-kelas.edit', $test->id) }}"
-                                        class="btn btn-primary">Edit</a>
+                                        class="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-200">Edit</a>
                                     <form action="{{ route('admin.test-kelas.destroy', $test->id) }}" method="POST"
                                         style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                        <button type="submit"
+                                            class="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-200"
+                                            onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                            Hapus
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -88,6 +94,7 @@
                     @endif
                 </tbody>
             </table>
+
         </div>
     </div>
 @endsection
