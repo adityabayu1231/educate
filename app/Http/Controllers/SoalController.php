@@ -37,7 +37,6 @@ class SoalController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input form
         $request->validate([
             'paket_soal_id' => 'required|exists:pakets,id',
             'soal' => 'required|string',

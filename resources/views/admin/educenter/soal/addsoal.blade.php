@@ -188,12 +188,16 @@
             plugins: [
                 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
                 'searchreplace wordcount visualblocks visualchars code fullscreen',
-                'insertdatetime media table paste help'
+                'insertdatetime media table paste help tiny_mce_wiris' // Tambahkan plugin WIRIS
             ],
             toolbar: 'undo redo | formats | bold italic underline | alignleft aligncenter alignright alignjustify | ' +
-                'bullist numlist outdent indent | link image media | table | print preview | upload | fullscreen',
+                'bullist numlist outdent indent | link image media | table | print preview | upload | fullscreen | ' +
+                'tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry', // Tombol editor matematika
             content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             branding: false,
+            external_plugins: {
+                'tiny_mce_wiris': 'https://www.wiris.net/demo/plugins/tiny_mce/plugin.js' // URL plugin MathType
+            }
         });
     </script>
 @endsection

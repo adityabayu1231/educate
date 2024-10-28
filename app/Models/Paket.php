@@ -44,4 +44,9 @@ class Paket extends Model
     {
         return $this->hasMany(Subtest::class);
     }
+
+    public function ikutTests()
+    {
+        return $this->hasMany(IkutTest::class, 'paket_soal_id', 'id');
+    }
 }

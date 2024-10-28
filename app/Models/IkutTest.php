@@ -37,4 +37,9 @@ class IkutTest extends Model
         $ids = json_decode($this->paket_soal_id); // Mengubah string JSON menjadi array
         return Paket::whereIn('id', $ids)->pluck('nama_paket_soal')->join(', ');
     }
+
+    public function testResults()
+    {
+        return $this->hasMany(TestResult::class);
+    }
 }
