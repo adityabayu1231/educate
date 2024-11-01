@@ -182,21 +182,18 @@
         referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-            selector: 'textarea',
-            height: 400,
-            menubar: 'file edit insert view format table tools', // Urutkan sesuai menu pada gambar
+            selector: "textarea",
             plugins: [
-                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                'searchreplace wordcount visualblocks visualchars code fullscreen',
-                'insertdatetime media table paste help tiny_mce_wiris' // Tambahkan plugin WIRIS
+                "math", "advlist", "anchor", "autolink", "charmap", "code", "codesample", "fullscreen",
+                "help", "image", "insertdatetime", "link", "lists", "media",
+                "preview", "searchreplace", "table", "visualblocks",
             ],
-            toolbar: 'undo redo | formats | bold italic underline | alignleft aligncenter alignright alignjustify | ' +
-                'bullist numlist outdent indent | link image media | table | print preview | upload | fullscreen | ' +
-                'tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry', // Tombol editor matematika
+            toolbar: "math | codesample | undo redo | styles | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
             content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             branding: false,
+            // Jika Anda menggunakan plugin tambahan yang tidak ada dalam CDN default
             external_plugins: {
-                'tiny_mce_wiris': 'https://www.wiris.net/demo/plugins/tiny_mce/plugin.js' // URL plugin MathType
+                'math': 'https://www.wiris.net/demo/plugins/tiny_mce/plugin.js' // URL untuk plugin matematika
             }
         });
     </script>

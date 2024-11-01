@@ -68,11 +68,14 @@
                             @foreach ($ikuttests as $test)
                                 <tr class="border-b">
                                     <td class="py-3 px-6">{{ $loop->iteration }}</td>
-                                    <td class="py-3 px-6">{{ $test->student->user->fullname ?? 'Tidak ada data' }}</td>
-                                    <td class="py-3 px-6">{{ $test->testKelas->nama_test ?? 'Tidak ada data' }}</td>
-                                    <td class="py-3 px-6">{{ $test->paket_soal_names ?? 'Tidak ada data' }}</td>
-                                    <td class="py-3 px-6">{{ $test->sisa_waktu ?? 'Tidak ada data' }}</td>
-                                    <td class="py-3 px-6">
+                                    <td class="py-3 px-6 whitespace-nowrap">
+                                        {{ $test->student->user->fullname ?? 'Tidak ada data' }}</td>
+                                    <td class="py-3 px-6 whitespace-nowrap">
+                                        {{ $test->testKelas->nama_test ?? 'Tidak ada data' }}</td>
+                                    <td class="py-3 px-6 whitespace-nowrap">
+                                        {{ $test->paket_soal_names ?? 'Tidak ada data' }}</td>
+                                    <td class="py-3 px-6 whitespace-nowrap">{{ $test->sisa_waktu ?? 'Tidak ada data' }}</td>
+                                    <td class="py-3 px-6 whitespace-nowrap">
                                         {{ $test->is_selesai ? 'Selesai' : 'Belum Selesai' }}
                                     </td>
                                     <td class="py-3 px-6 flex space-x-2">

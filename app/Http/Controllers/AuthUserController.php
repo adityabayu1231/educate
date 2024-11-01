@@ -7,6 +7,7 @@ use App\Models\Program;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
+use App\Models\IkutTest;
 use App\Models\SubProgram;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,8 +85,17 @@ class AuthUserController extends Controller
 
     public function edujadwalsiswa()
     {
-        return view('student/educenter/tableassesment');
+        $user = Auth::user();
+        $student = $user->student;
+
+        // Cari data ujian terkait student yang login
+        $ikutTests = IkutTest::with(['student.user', 'testKelas', 'paketSoal'])
+            ->where('student_id', $student->id)
+            ->get();
+
+        return view('student.educenter.tableassesment', compact('ikutTests'));
     }
+
 
     public function edusoalsiswa()
     {
